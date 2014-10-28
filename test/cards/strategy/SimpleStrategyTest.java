@@ -25,6 +25,9 @@ public class SimpleStrategyTest {
 
     @Before
     public void setUp() {
+        // Important! It is necessary Ace to be the highest rank
+        // in order to properly test DumbGame strategies!
+        Rank.setAceHigh();
         strategy = new SimpleStrategy();
         strategy.setPlayer(new PlayerMock());
     }
