@@ -1,7 +1,6 @@
 package cards;
 
-import cards.strategy.MemoryStrategyTest;
-import cards.strategy.SimpleStrategyTest;
+import cards.strategy.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

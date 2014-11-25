@@ -9,6 +9,6 @@ package cards.strategy;
  *
  * @author Kus
  */
-abstract class AbstractStrategy_ implements Strategy_ {
+public abstract class AbstractStrategy_ implements Strategy_ {
     
 }

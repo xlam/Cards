@@ -1,14 +1,12 @@
 package cards;
 
-import cards.strategy.AbstractStrategy;
-import cards.strategy.SimpleStrategy;
-import cards.strategy.Strategy;
+import cards.strategy.*;
 import java.util.List;
 
 public class Player {
     private String name;
     private DumbHand hand;
-    private Strategy strategy;
+    private Strategy_ strategy;
     private DumbGame game;
 
     public Player() {
@@ -17,8 +15,7 @@ public class Player {
         hand = new DumbHand();
     }
 
-    public Player(String name, AbstractStrategy strategy, DumbGame game) {
-        strategy.setPlayer(this);
+    public Player(String name, AbstractStrategy_ strategy, DumbGame game) {
         this.name = name;
         this.strategy = strategy;
         if (null != game) this.game = game;
@@ -80,7 +77,7 @@ public class Player {
     }
 
     public Card move() {
-        Card card = strategy.move();
+        Card card = strategy.move(hand, getCardsInAction(), getTrumpSuit());
         if (card != null) {
             hand.remove(card);
             return card;
@@ -89,7 +86,7 @@ public class Player {
     }
 
     public Card beat(Card card) {
-        Card beatCard = strategy.beat(card);
+        Card beatCard = strategy.beat(card, hand, getTrumpSuit());
         if (beatCard != null) {
             hand.remove(beatCard);
             return beatCard;

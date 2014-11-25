@@ -1,9 +1,6 @@
 package cards.strategy;
 
-import cards.Card;
-import cards.DumbDeck;
-import cards.DumbHand;
-import cards.Rank;
+import cards.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +8,7 @@ import java.util.List;
  *
  * @author Sergey Sokolov <xlamserg@gmail.com>
  */
-public class MemoryStrategy extends AbstractStrategy {
+public class MemoryStrategy extends AbstractStrategy_ {
 
     List<Card> knownEnemyCards = new ArrayList<Card>();
     List<Card> knownOutCards = new ArrayList<Card>();
@@ -33,22 +30,20 @@ public class MemoryStrategy extends AbstractStrategy {
         }
     }
 
-
     @Override
-    public Card move() {
-        updateKnownCards("move");
-        DumbHand hand = (DumbHand) player.getHand();
-        if (hand.isEmpty()) return null;
+    public Card move(Hand hand, List<Card> cardsInAction, Suit trump) {
+        updateKnownCards("move", hand);
+        DumbHand dumbHand = (DumbHand) hand;
+        if (dumbHand.isEmpty()) return null;
         Card moveCard = null;
-        List<Card> cardsInAction = player.getCardsInAction();
         if (cardsInAction.isEmpty()) {
-            moveCard = hand.getLowest(player.getTrumpSuit());
+            moveCard = dumbHand.getLowest(trump);
         } else {
             for (Card card : cardsInAction) {
-                for (int i = 0; i < hand.size(); i++) {
-                    Card c = (Card) hand.getCard(i);
+                for (int i = 0; i < dumbHand.size(); i++) {
+                    Card c = (Card) dumbHand.getCard(i);
                     if (c.getRank().equals(card.getRank())
-                            && !(c.getSuit().equals(player.getTrumpSuit()))
+                            && !(c.getSuit().equals(trump))
                             && c.getRank().compareTo(Rank.JACK) < 0) moveCard = c;
                 }
             }
@@ -60,21 +55,20 @@ public class MemoryStrategy extends AbstractStrategy {
     }
 
     @Override
-    public Card beat(Card card) {
-        updateKnownCards("beat");
-        //TODO: optimize
-        DumbHand hand = (DumbHand) player.getHand();
+    public Card beat(Card card, Hand hand, Suit trump) {
+        updateKnownCards("beat", hand);
+        DumbHand dumbHand = (DumbHand) hand;
         Card beatCard = null;
 
-        List<Card> cards = hand.getAllBySuit(card.getSuit());
+        List<Card> cards = dumbHand.getAllBySuit(card.getSuit());
         if (!cards.isEmpty()) {
             for (Card c : cards) {
                 if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
             }
         } else {
-            cards = hand.getAllBySuit(player.getTrumpSuit());
+            cards = dumbHand.getAllBySuit(trump);
             if (!cards.isEmpty()) {
-                if (card.getSuit().equals(player.getTrumpSuit())) {
+                if (card.getSuit().equals(trump)) {
                     for (Card c : cards) {
                         if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
                     }
@@ -90,7 +84,7 @@ public class MemoryStrategy extends AbstractStrategy {
     }
 
 
-    protected void updateKnownCards(String action) {
+    protected void updateKnownCards(String action, Hand hand) {
         if (action.equals("move") && lastAction.equals("move")) {
             for (Card card : lastCardsInAction) {
                 knownEnemyCards.add(card);
@@ -100,15 +94,15 @@ public class MemoryStrategy extends AbstractStrategy {
                 knownOutCards.add(card);
             }
         }
-        calculatePossibleDeckCards();
+        calculatePossibleDeckCards(hand);
     }
 
-    protected void calculatePossibleDeckCards() {
+    protected void calculatePossibleDeckCards(Hand playerHand) {
         possibleDeckCards.clear();
         possibleDeckCards = new ArrayList<Card>(defaultDeck);
         List<Card> temp = new ArrayList<Card>();
 
-        DumbHand hand = (DumbHand) player.getHand();
+        DumbHand hand = (DumbHand) playerHand;
         List<Card> playerCards = hand.toList();
 
         for (Card c : possibleDeckCards) {

@@ -18,6 +18,8 @@ import static org.junit.Assert.*;
  */
 public class SimpleStrategyTest {
 
+    private Suit trump;
+    
     public SimpleStrategyTest() {
     }
 
@@ -29,7 +31,7 @@ public class SimpleStrategyTest {
         // in order to properly test DumbGame strategies!
         Rank.setAceHigh();
         strategy = new SimpleStrategy();
-        strategy.setPlayer(new PlayerMock());
+        trump = Suit.CLUBS;
     }
 
     @After
@@ -43,13 +45,13 @@ public class SimpleStrategyTest {
     @Test
     public void testMoveLowestCard() {
         DumbHand hand = new DumbHand();
+        List<Card> cardsInAction = new ArrayList<Card>();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
-        strategy.getPlayer().setHand(hand);
-        assertEquals(hand.getCard(2), strategy.move());
+        assertEquals(hand.getCard(2), strategy.move(hand, cardsInAction, trump));
         hand.remove(2);
-        assertEquals(hand.getCard(1), strategy.move());
+        assertEquals(hand.getCard(1), strategy.move(hand, cardsInAction, trump));
     }
 
     @Test
@@ -58,30 +60,12 @@ public class SimpleStrategyTest {
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
-        strategy.getPlayer().setHand(hand);
         Card card = new Card(Suit.DIAMONDS, Rank.TWO);
-        assertEquals(hand.getCard(2), strategy.beat(card));
+        assertEquals(hand.getCard(2), strategy.beat(card, hand, trump));
         card = new Card(Suit.CLUBS, Rank.THREE);
-        assertEquals(hand.getCard(0), strategy.beat(card));
+        assertEquals(hand.getCard(0), strategy.beat(card, hand, trump));
         hand.remove(2);
         card = new Card(Suit.DIAMONDS, Rank.TWO);
-        assertEquals(hand.getCard(1), strategy.beat(card));
-    }
-}
-
-class PlayerMock extends Player {
-
-    public PlayerMock() {
-        super("Vasya", new SimpleStrategy(), null);
-    }
-    
-    @Override
-    public List<Card> getCardsInAction() {
-        return new ArrayList<Card>();
-    }
-
-    @Override
-    public Suit getTrumpSuit() {
-        return Suit.CLUBS;
+        assertEquals(hand.getCard(1), strategy.beat(card, hand, trump));
     }
 }

@@ -1,7 +1,6 @@
 package cards;
 
-import cards.strategy.AdvancedStrategy;
-import cards.strategy.SimpleStrategy;
+import cards.strategy.*;
 import java.util.ArrayList;
 import java.util.List;
 
