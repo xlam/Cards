@@ -1,19 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cards.strategy;
-
-import cards.Player;
 
 /**
  *
- * @author Sergey Sokolov <xlamserg@gmail.com>
+ * @author Kus
  */
-abstract public class AbstractStrategy implements Strategy {
-    protected Player player;
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+public abstract class AbstractStrategy implements Strategy {
+    
 }

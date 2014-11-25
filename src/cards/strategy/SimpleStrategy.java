@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Sergey Sokolov <xlamserg@gmail.com>
  */
-public class SimpleStrategy extends AbstractStrategy_ {
+public class SimpleStrategy extends AbstractStrategy {
 
     @Override
     public Card move(Hand hand, List<Card> cardsInAction, Suit trump) {

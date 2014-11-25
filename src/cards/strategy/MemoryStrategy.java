@@ -8,20 +8,20 @@ import java.util.List;
  *
  * @author Sergey Sokolov <xlamserg@gmail.com>
  */
-public class MemoryStrategy extends AbstractStrategy_ {
+public class MemoryStrategy extends AbstractStrategy {
 
     List<Card> knownEnemyCards = new ArrayList<Card>();
     List<Card> knownOutCards = new ArrayList<Card>();
     List<Card> possibleDeckCards = new ArrayList<Card>();
 
+    private DumbGame game;
     private List<Card> lastCardsInAction = new ArrayList<Card>();
-
     private static List<Card> defaultDeck = new ArrayList<Card>();
-
     private static String lastAction = "";
 
 
-    public MemoryStrategy() {
+    public MemoryStrategy(DumbGame game) {
+        this.game = game;
         DumbDeck fullDeck = new DumbDeck();
         int i = fullDeck.getCardsRemaining();
         defaultDeck.clear();
@@ -78,7 +78,7 @@ public class MemoryStrategy extends AbstractStrategy_ {
             }
         }
         lastCardsInAction.clear();
-        lastCardsInAction = player.getCardsInAction();
+        lastCardsInAction = game.getCardsInAction();
         lastAction = "beat";
         return beatCard;
     }

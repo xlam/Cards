@@ -12,7 +12,7 @@ public class MemoryStrategyTest {
 
     @Test
     public void testPossibleDeckCards() {
-        MemoryStrategy strategy = new MemoryStrategy();
+        MemoryStrategy strategy = new MemoryStrategy(new DumbGame());
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.NINE));
         hand.add(new Card(Suit.CLUBS, Rank.TEN));

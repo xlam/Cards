@@ -6,7 +6,7 @@ import java.util.List;
 public class Player {
     private String name;
     private DumbHand hand;
-    private Strategy_ strategy;
+    private Strategy strategy;
     private DumbGame game;
 
     public Player() {
@@ -15,7 +15,7 @@ public class Player {
         hand = new DumbHand();
     }
 
-    public Player(String name, AbstractStrategy_ strategy, DumbGame game) {
+    public Player(String name, AbstractStrategy strategy, DumbGame game) {
         this.name = name;
         this.strategy = strategy;
         if (null != game) this.game = game;
