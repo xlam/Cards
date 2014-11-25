@@ -16,7 +16,7 @@ public interface Strategy {
 
     /**
      * Searches hand for higher rank card or trump card suitable to beat card
-     * @param lowerCard Card to beat
+     * @param card Card to beat
      * @return Card if one is found, null otherwise
      */
     Card beat(Card card);
