@@ -21,7 +21,7 @@ public class SimpleStrategyTest_ {
     public SimpleStrategyTest_() {
     }
 
-    private SimpleStrategy strategy;
+    private SimpleStrategy_ strategy;
 
     @Before
     public void setUp() {
@@ -42,11 +42,13 @@ public class SimpleStrategyTest_ {
     @Test
     public void testMoveLowestCard() {
         DumbHand hand = new DumbHand();
+        List<Card> cardsInAction = new ArrayList<Card>();
+        Suit trump = Suit.CLUBS;
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
-        assertEquals(hand.getCard(2), strategy.move(hand));
+        assertEquals(hand.getCard(2), strategy.move(hand, cardsInAction, trump));
         hand.remove(2);
-        assertEquals(hand.getCard(1), strategy.move(hand));
+        assertEquals(hand.getCard(1), strategy.move(hand, cardsInAction, trump));
     }
 }
