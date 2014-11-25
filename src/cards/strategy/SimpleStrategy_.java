@@ -33,9 +33,26 @@ public class SimpleStrategy_ extends AbstractStrategy_ {
     }
 
     @Override
-    public Card beat(Card card) {
-        // TODO to be implemented
-        return null;
+    public Card beat(Card card, Hand hand, Suit trump) {
+        Card beatCard = null;
+        List<Card> cards = hand.getAllBySuit(card.getSuit());
+        if (!cards.isEmpty()) {
+            for (Card c : cards) {
+                if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
+            }
+        } else {
+            cards = hand.getAllBySuit(trump);
+            System.out.println(cards);
+            if (!cards.isEmpty()) {
+                if (card.getSuit().equals(trump)) {
+                    for (Card c : cards) {
+                        if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
+                    }
+                } else {
+                    beatCard = cards.get(0);
+                }            }
+        }
+        return beatCard;
     }
 
 }

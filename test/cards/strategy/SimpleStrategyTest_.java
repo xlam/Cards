@@ -53,4 +53,19 @@ public class SimpleStrategyTest_ {
         hand.remove(2);
         assertEquals(hand.getCard(1), strategy.move(hand, cardsInAction, trump));
     }
+
+    @Test
+    public void testBeat() {
+        DumbHand hand = new DumbHand();
+        hand.add(new Card(Suit.CLUBS, Rank.ACE));
+        hand.add(new Card(Suit.CLUBS, Rank.TWO));
+        hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
+        Card card = new Card(Suit.DIAMONDS, Rank.TWO);
+        assertEquals(hand.getCard(2), strategy.beat(card, hand, trump));
+        card = new Card(Suit.CLUBS, Rank.THREE);
+        assertEquals(hand.getCard(0), strategy.beat(card, hand, trump));
+        hand.remove(2);
+        card = new Card(Suit.DIAMONDS, Rank.TWO);
+        assertEquals(hand.getCard(1), strategy.beat(card, hand, trump));
+    }
 }
