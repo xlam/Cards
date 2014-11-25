@@ -3,6 +3,7 @@ package cards;
 public class DumbDeck extends Deck {
 
     public DumbDeck() {
+        Rank.setAceHigh();
         for (Object s : Suit.VALUES) {
             for (Object r : Rank.VALUES_ACE_HIGH) {
                 Rank rank = (Rank) r;
