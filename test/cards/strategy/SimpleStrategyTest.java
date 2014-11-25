@@ -43,7 +43,7 @@ public class SimpleStrategyTest {
      * Test of move method, of class SimpleStrategy.
      */
     @Test
-    public void testMoveLowestCard() {
+    public void testSimpleStrategyMoveLowestCard() {
         DumbHand hand = new DumbHand();
         List<Card> cardsInAction = new ArrayList<Card>();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
@@ -55,7 +55,7 @@ public class SimpleStrategyTest {
     }
 
     @Test
-    public void testBeat() {
+    public void testSimpleStrategyBeat() {
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));

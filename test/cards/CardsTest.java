@@ -22,7 +22,7 @@ public class CardsTest {
 
 
     @Test
-    public void testSuit() {
+    public void testCardsSuit() {
         Suit s = Suit.SPADES;
         Suit c = Suit.DIAMONDS;
         assertEquals("Spades", s.getName());
@@ -32,7 +32,7 @@ public class CardsTest {
     }
 
     @Test
-    public void testRank() {
+    public void testCardsRank() {
         Rank a = Rank.ACE;
         Rank k = Rank.KING;
         assertEquals("Ace", a.getName());
@@ -45,14 +45,14 @@ public class CardsTest {
 
 
     @Test
-    public void testCard() {
+    public void testCardsCard() {
         Card card = new Card(Suit.CLUBS, Rank.FIVE);
         assertEquals("Five of Clubs", card.toString());
         assertEquals("5c", card.getSymbol());
     }
 
     @Test
-    public void testCardCompare() {
+    public void testCardsCompareCards() {
         Card card_5d = new Card(Suit.DIAMONDS, Rank.FIVE);
         Card card_5c = new Card(Suit.CLUBS, Rank.FIVE);
         Card card_6c = new Card(Suit.CLUBS, Rank.SIX);
@@ -65,7 +65,7 @@ public class CardsTest {
       
    
     @Test
-    public void testDeck() {
+    public void testCardsDeck() {
         Deck deck = Deck.defaultDeck();
         assertEquals(52, deck.size());
         assertEquals(52, deck.getCardsRemaining());
@@ -77,7 +77,7 @@ public class CardsTest {
     }
 
     //@Test
-    public void testDeckSortAndShuffle() {
+    public void testCardsDeckSortAndShuffle() {
         Deck deck = Deck.defaultDeck();
         System.out.println(deck);
         System.out.println(deck.shuffle());
@@ -85,7 +85,7 @@ public class CardsTest {
     }
 
     @Test
-    public void testHandAddAndRemove() {
+    public void testCardsHandAddAndRemove() {
         Hand hand = new HandMock();
         Card card = new Card(Suit.CLUBS, Rank.TWO);
         assertEquals(0, hand.size());
@@ -100,14 +100,14 @@ public class CardsTest {
     }
 
     @Test
-    public void testHandGetAndContainsCard() {
+    public void testCardsHandGetAndContainsCard() {
         Hand hand = new HandMock();
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         assertTrue(hand.containsCard(hand.getCard(0)));
     }
 
     @Test
-    public void testDumbHandGetAllBySuit() {
+    public void testCardsDumbHandGetAllBySuit() {
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));

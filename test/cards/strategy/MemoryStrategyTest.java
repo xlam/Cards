@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class MemoryStrategyTest {
 
     @Test
-    public void testPossibleDeckCards() {
+    public void testMemoryStrategyPossibleDeckCards() {
         MemoryStrategy strategy = new MemoryStrategy(new DumbGame());
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.NINE));
