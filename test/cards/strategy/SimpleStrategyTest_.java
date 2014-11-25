@@ -18,6 +18,8 @@ import static org.junit.Assert.*;
  */
 public class SimpleStrategyTest_ {
 
+    private Suit trump;
+    
     public SimpleStrategyTest_() {
     }
 
@@ -29,6 +31,7 @@ public class SimpleStrategyTest_ {
         // in order to properly test DumbGame strategies!
         Rank.setAceHigh();
         strategy = new SimpleStrategy_();
+        trump = Suit.CLUBS;
     }
 
     @After
@@ -43,7 +46,6 @@ public class SimpleStrategyTest_ {
     public void testMoveLowestCard() {
         DumbHand hand = new DumbHand();
         List<Card> cardsInAction = new ArrayList<Card>();
-        Suit trump = Suit.CLUBS;
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
