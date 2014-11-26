@@ -1,5 +1,6 @@
-package cards;
+package cards.game;
 
+import cards.*;
 import cards.strategy.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package cards;
+package cards.game;
 
 public class CardsTestStrategy {
 
