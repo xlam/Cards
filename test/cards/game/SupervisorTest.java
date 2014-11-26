@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cards.game;
 
 import org.junit.Test;
@@ -12,7 +6,7 @@ import org.junit.BeforeClass;
 
 /**
  *
- * @author Admin
+ * @author Sergey
  */
 public class SupervisorTest {
     
@@ -28,7 +22,7 @@ public class SupervisorTest {
 
     @Test
     public void testSupervisorGetPlayersCount() {
-    assertEquals(2, supervisor.getPlayersCount());
+        assertEquals(2, supervisor.getPlayersCount());
     }
     
     
