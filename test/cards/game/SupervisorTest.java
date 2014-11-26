@@ -1,8 +1,9 @@
 package cards.game;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
@@ -15,6 +16,12 @@ public class SupervisorTest {
     @BeforeClass
     public static void beforeClass() {
         supervisor = Supervisor.getInstance();
+    }
+    
+    @Before
+    public void setUp() {
+        DumbGame game = new DumbGameForSupervisor();
+        supervisor.setGame(game);
     }
     
     public SupervisorTest() {

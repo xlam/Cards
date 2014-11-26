@@ -20,6 +20,8 @@ public class Supervisor {
         return 2;
     }
     
-    
+    public void setGame(DumbGame game) {
+        
+    }
     
 }
