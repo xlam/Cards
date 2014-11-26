@@ -1,10 +1,11 @@
 package cards;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -119,6 +120,17 @@ public class CardsTest {
         cards = hand.getAllBySuit(Suit.DIAMONDS);
         assertEquals(1, cards.size());
         assertTrue(((Card) cards.get(0)).getSuit().equals(Suit.DIAMONDS));
+    }
+    
+    @Test
+    public void testCardsDumbHandAddAll() {
+        List<Card> cards = new ArrayList<Card>();
+        cards.add(new Card(Suit.CLUBS, Rank.ACE));
+        cards.add(new Card(Suit.CLUBS, Rank.TWO));
+        cards.add(new Card(Suit.DIAMONDS, Rank.THREE));
+        DumbHand hand = new DumbHand();
+        hand.addAll(cards);
+        assertEquals(3, hand.size());
     }
 
 }

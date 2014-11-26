@@ -21,7 +21,7 @@ public class DumbHand extends Hand {
     public DumbHand addAll(List cards) {
         for (Object c : cards) {
             Card card = (Card) c;
-            if (!hand.contains(card)) super.add(card);
+            add(card);
         }
         return this;
     }
