@@ -7,7 +7,7 @@ package cards.game;
 public class Supervisor {
     
     public static Supervisor instance = null;
-    
+    private DumbGame game;
     private Supervisor() {};
     
     public static Supervisor getInstance() {
@@ -17,11 +17,11 @@ public class Supervisor {
     }
     
     public int getPlayersCount() {
-        return 2;
+        return game.getPlayersCount();
     }
     
     public void setGame(DumbGame game) {
-        
+        this.game = game;
     }
     
 }

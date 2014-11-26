@@ -131,4 +131,8 @@ public class DumbGame {
         return trumpSuit;
     }
 
+    public int getPlayersCount() {
+        // TODO Implement getPlayersCount()
+        return 2;
+    }
 }
