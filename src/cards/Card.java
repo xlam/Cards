@@ -2,8 +2,8 @@ package cards;
 
 public class Card implements Comparable<Card> {
 
-    private Suit suit;
-    private Rank rank;
+    private final Suit suit;
+    private final Rank rank;
     private static boolean sortRankFirst = true;
 
     public Card(Suit suit, Rank rank) {

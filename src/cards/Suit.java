@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Suit implements Comparable {
 
-    private String name;
-    private String symbol;
+    private final String name;
+    private final String symbol;
 
     public static final Suit CLUBS = new Suit("Clubs", "c");        // "♣"
     public static final Suit DIAMONDS = new Suit("Diamonds", "d");  // "♦"

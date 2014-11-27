@@ -14,8 +14,8 @@ public class MemoryStrategy extends AbstractStrategy {
     List<Card> knownOutCards = new ArrayList<Card>();
     List<Card> possibleDeckCards = new ArrayList<Card>();
 
+    private static final List<Card> defaultDeck = new ArrayList<Card>();
     private List<Card> lastCardsInAction = new ArrayList<Card>();
-    private static List<Card> defaultDeck = new ArrayList<Card>();
     private static String lastAction = "";
 
 

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DumbGame implements Game {
-    private Deck deck;
+
+    private final Deck deck;
+    private final Player player1;
+    private final Player player2;
+    private final List<Card> cardsInAction = new ArrayList<Card>();
     private Card trumpCard;
     private Suit trumpSuit;
-    private Player player1;
-    private Player player2;
-    private List<Card> cardsInAction = new ArrayList<Card>();
 
     public static String lastWinner = "";
 

@@ -5,9 +5,11 @@ import cards.strategy.*;
 import java.util.List;
 
 public class Player {
+    
+    // as we set strategy at initialisation it may be final
+    private final Strategy strategy;
     private String name;
     private DumbHand hand;
-    private Strategy strategy;
     private Supervisor supervisor;
 
     public Player() {

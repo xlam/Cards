@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Rank implements Comparable {
 
-    private String name;
-    private String symbol;
+    private final String name;
+    private final String symbol;
     private static boolean aceHigh = true;
 
     public static final Rank TWO    = new Rank("Two",   "2");
