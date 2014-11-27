@@ -1,6 +1,5 @@
 package cards.strategy;
 
-import cards.game.DumbGame;
 import cards.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,7 +12,7 @@ public class MemoryStrategyTest {
 
     @Test
     public void testMemoryStrategyPossibleDeckCards() {
-        MemoryStrategy strategy = new MemoryStrategy(new DumbGame());
+        MemoryStrategy strategy = new MemoryStrategy();
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.NINE));
         hand.add(new Card(Suit.CLUBS, Rank.TEN));

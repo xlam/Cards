@@ -1,6 +1,5 @@
 package cards.strategy;
 
-import cards.game.DumbGame;
 import cards.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +14,12 @@ public class MemoryStrategy extends AbstractStrategy {
     List<Card> knownOutCards = new ArrayList<Card>();
     List<Card> possibleDeckCards = new ArrayList<Card>();
 
-    // TODO get rid of DumbGame object
-    
-    private DumbGame game;
     private List<Card> lastCardsInAction = new ArrayList<Card>();
     private static List<Card> defaultDeck = new ArrayList<Card>();
     private static String lastAction = "";
 
 
-    public MemoryStrategy(DumbGame game) {
-        this.game = game;
+    public MemoryStrategy() {
         DumbDeck fullDeck = new DumbDeck();
         int i = fullDeck.getCardsRemaining();
         defaultDeck.clear();
