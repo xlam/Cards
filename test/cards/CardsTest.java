@@ -144,9 +144,15 @@ public class CardsTest {
         hand2.add(new Card(Suit.CLUBS, Rank.KING));
         hand2.add(new Card(Suit.DIAMONDS, Rank.TEN));
         Suit trump = Suit.HEARTS;
-        assertTrue(0 < hand1.compare(hand2, trump));
-        assertTrue(0 > hand2.compare(hand1, trump));
-        fail(); // finish comparsion DumbHand.getHighest()
+        assertTrue(hand1.compareTo(hand2, trump) < 0);
+        assertTrue(hand2.compareTo(hand1, trump) > 0);
+        hand1.clear();
+        hand1.add(new Card(Suit.SPADES, Rank.SIX));
+        hand2.clear();
+        hand2.add(new Card(Suit.CLUBS, Rank.SIX));
+        assertEquals(0, hand1.compareTo(hand2, trump));
+        assertEquals(0, hand2.compareTo(hand1, trump));
+        fail(); // TODO comparing not finished (check all cases)
     }
     
 }

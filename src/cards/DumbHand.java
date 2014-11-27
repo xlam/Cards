@@ -48,21 +48,29 @@ public class DumbHand extends Hand {
         Rank.setAceHigh();
         Card.setSortRankFirst();
         Collections.sort(hand);
-        Collections.reverse(hand);
-        if (allSuit(trumpSuit)) return (Card) hand.get(0);
+        if (allSuit(trumpSuit)) return (Card) hand.get(hand.size()-1);
+        Card result = null;
+        Card card;
         for (Object c : hand) {
-            Card card = (Card) c;
-            if (!(card.getSuit().equals(trumpSuit))) return card;
+            card = (Card) c;
+            if (card.getSuit().equals(trumpSuit))
+                return card;
+            else
+                result = card;
         }
-        return null;
+        return result;
     }
     
-    public int compare(DumbHand hand, Suit trump) {
+    public int compareTo(DumbHand hand, Suit trump) {
         Card highestCardHand1 = getHighest(trump);
         Card highestCardHand2 = hand.getHighest(trump);
-        System.out.println("Highest card of hand " + this + " is " + highestCardHand1 + ". Trump is " + trump);
-        System.out.println("Highest card of hand " + hand + " is " + highestCardHand2 + ". Trump is " + trump);
-        return highestCardHand1.compareTo(highestCardHand2);
+        System.out.println("Highest card of hand1 " + this + " is " + highestCardHand1 + ". Trump is " + trump);
+        System.out.println("Highest card of hand2 " + hand + " is " + highestCardHand2 + ". Trump is " + trump);
+        Suit suit1 = highestCardHand1.getSuit();
+        Suit suit2 = highestCardHand2.getSuit();
+        if ((suit1.compareTo(suit2) == 0) && (suit1.compareTo(trump) == 0))
+            return highestCardHand1.compareTo(highestCardHand2);
+        return 0;
     }
 
 }
