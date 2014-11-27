@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class Supervisor {
     
+    // TODO need check if game is not null before using it
+    
     private static Supervisor instance = null;
     private DumbGame game;
     private Supervisor() {};

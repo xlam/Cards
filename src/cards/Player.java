@@ -5,6 +5,7 @@ import cards.game.Supervisor;
 import cards.strategy.*;
 import java.util.List;
 
+// TODO get rid of DumbGame object
 public class Player {
     private String name;
     private DumbHand hand;
