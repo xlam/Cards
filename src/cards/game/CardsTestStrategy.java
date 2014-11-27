@@ -7,6 +7,8 @@ public class CardsTestStrategy {
         int petyaWins = 0;
         
         DumbGame game = new DumbGame();
+        Supervisor supervisor = Supervisor.getInstance();
+        supervisor.setGame(game);
         for (int i = 0; i < 100; i++) {
             game.play();
             if (DumbGame.lastWinner.equals("Vasya")) {
