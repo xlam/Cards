@@ -15,6 +15,8 @@ public class MemoryStrategy extends AbstractStrategy {
     List<Card> knownOutCards = new ArrayList<Card>();
     List<Card> possibleDeckCards = new ArrayList<Card>();
 
+    // TODO get rid of DumbGame object
+    
     private DumbGame game;
     private List<Card> lastCardsInAction = new ArrayList<Card>();
     private static List<Card> defaultDeck = new ArrayList<Card>();
@@ -79,7 +81,7 @@ public class MemoryStrategy extends AbstractStrategy {
             }
         }
         lastCardsInAction.clear();
-        lastCardsInAction = game.getCardsInAction();
+        lastCardsInAction = getSupervisor().getCardsInAction();
         lastAction = "beat";
         return beatCard;
     }
