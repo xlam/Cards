@@ -18,8 +18,8 @@ public class DumbGame implements Game {
     public DumbGame() {
         deck = new DumbDeck();
         deck.shuffle();
-        player1 = new Player("Vasya", new SimpleStrategy(), this);
-        player2 = new Player("Petya", new AdvancedStrategy(), this);
+        player1 = new Player("Vasya", new SimpleStrategy());
+        player2 = new Player("Petya", new AdvancedStrategy());
         init();
     }
 

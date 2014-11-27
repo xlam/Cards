@@ -1,16 +1,13 @@
 package cards;
 
-import cards.game.DumbGame;
 import cards.game.Supervisor;
 import cards.strategy.*;
 import java.util.List;
 
-// TODO get rid of DumbGame object
 public class Player {
     private String name;
     private DumbHand hand;
     private Strategy strategy;
-    private DumbGame game;
     private Supervisor supervisor;
 
     public Player() {
@@ -19,10 +16,9 @@ public class Player {
         hand = new DumbHand();
     }
 
-    public Player(String name, AbstractStrategy strategy, DumbGame game) {
+    public Player(String name, AbstractStrategy strategy) {
         this.name = name;
         this.strategy = strategy;
-        if (null != game) this.game = game;
         hand = new DumbHand();
     }
 
@@ -50,18 +46,11 @@ public class Player {
         return hand;
     }
 
-    public Player setGame(DumbGame game) {
-        this.game = game;
-        return this;
-    }
-
     public List<Card> getCardsInAction() {
-        //return game.getCardsInAction();
         return getSupervisor().getCardsInAction();
     }
 
     public Suit getTrumpSuit() {
-        //return game.getTrumpSuit();
         return getSupervisor().getTrumpSuit();
     }
 

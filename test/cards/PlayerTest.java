@@ -29,7 +29,7 @@ public class PlayerTest {
 
     @Test
     public void testPlayer() {
-        Player player = new Player("Ivanov", new SimpleStrategy(), null);
+        Player player = new Player("Ivanov", new SimpleStrategy());
         assertEquals(player.getName(), "Ivanov");
     }
 }
