@@ -5,7 +5,7 @@ import cards.strategy.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DumbGame {
+public class DumbGame implements Game {
     private Deck deck;
     private Card trumpCard;
     private Suit trumpSuit;
@@ -23,6 +23,11 @@ public class DumbGame {
         init();
     }
 
+    @Override
+    public void addPlayer(Player player) {
+        
+    }
+    
     private void init() {
         for (int i = 0; i < 6; i++) {
             player1.addCard(deck.deal());
@@ -32,7 +37,8 @@ public class DumbGame {
         trumpSuit = trumpCard.getSuit();
     }
 
-    void reset() {
+    @Override
+    public void reset() {
         player1.clearHand();
         player2.clearHand();
         cardsInAction.clear();
@@ -41,6 +47,7 @@ public class DumbGame {
         init();
     }
 
+    @Override
     public void play() {
         System.out.println("New Game Started!");
         System.out.println("Deck:" + deck);
