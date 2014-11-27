@@ -1,6 +1,6 @@
 package cards.game;
 
-public class CardsTestStrategy {
+public class CardsStrategyTester {
 
     public static void main(String[] args) {
         int vasyaWins = 0;
