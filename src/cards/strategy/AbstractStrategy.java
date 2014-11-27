@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cards.strategy;
+
+import cards.game.Supervisor;
 
 /**
  *
- * @author Kus
+ * @author Sergey
  */
 public abstract class AbstractStrategy implements Strategy {
     
+    protected Supervisor supervisor;
+    
+    protected Supervisor getSupervisor() {
+        if (null == supervisor)
+            supervisor = Supervisor.getInstance();
+        return supervisor;
+    }
 }
