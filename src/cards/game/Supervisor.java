@@ -28,17 +28,25 @@ public class Supervisor {
         this.game = game;
     }
     
-    // TODO eliminate code duplication for getters
-    public List<Card> getCardsInAction() throws Exception {
-        if (null == game)
-            throw new Exception("Game object not set");
+    public List<Card> getCardsInAction() {
+        checkGameNotNull();
         return game.getCardsInAction();
     }
     
-    public Suit getTrumpSuit() throws Exception {
-        if (null == game)
-            throw new Exception("Game object not set");
+    public Suit getTrumpSuit() {
+        checkGameNotNull();
         return game.getTrumpSuit();
     }
 
+    private void checkGameNotNull() {
+        try {
+            if (null == game)
+                throw new Exception("Game object is not set in Supervisor");
+        } catch (Exception e) {
+            System.err.println("ERROR: " + e.getMessage());
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+    
 }
