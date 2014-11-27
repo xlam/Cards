@@ -1,5 +1,8 @@
 package cards.game;
 
+import cards.Player;
+import cards.strategy.*;
+
 public class CardsStrategyTester {
 
     public static void main(String[] args) {
@@ -7,6 +10,8 @@ public class CardsStrategyTester {
         int petyaWins = 0;
         
         DumbGame game = new DumbGame();
+        game.addPlayer(new Player("Vasya", new SimpleStrategy()));
+        game.addPlayer(new Player("Petya", new AdvancedStrategy()));
         Supervisor supervisor = Supervisor.getInstance();
         supervisor.setGame(game);
         for (int i = 0; i < 100; i++) {
