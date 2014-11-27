@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class Supervisor {
     
-    // TODO need check if game is not null before using it
-    
     private static Supervisor instance = null;
     private DumbGame game;
     private Supervisor() {};
@@ -30,11 +28,16 @@ public class Supervisor {
         this.game = game;
     }
     
-    public List<Card> getCardsInAction() {
+    // TODO eliminate code duplication for getters
+    public List<Card> getCardsInAction() throws Exception {
+        if (null == game)
+            throw new Exception("Game object not set");
         return game.getCardsInAction();
     }
     
-    public Suit getTrumpSuit() {
+    public Suit getTrumpSuit() throws Exception {
+        if (null == game)
+            throw new Exception("Game object not set");
         return game.getTrumpSuit();
     }
 
