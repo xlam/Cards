@@ -131,6 +131,22 @@ public class CardsTest {
         DumbHand hand = new DumbHand();
         hand.addAll(cards);
         assertEquals(3, hand.size());
-    }
+    }    
 
+    @Test
+    public void testCardsDumbHandCompare() {
+        DumbHand hand1 = new DumbHand();
+        hand1.add(new Card(Suit.HEARTS, Rank.SIX));
+        hand1.add(new Card(Suit.CLUBS, Rank.ACE));
+        hand1.add(new Card(Suit.DIAMONDS, Rank.JACK));
+        DumbHand hand2 = new DumbHand();
+        hand2.add(new Card(Suit.HEARTS, Rank.ACE));
+        hand2.add(new Card(Suit.CLUBS, Rank.KING));
+        hand2.add(new Card(Suit.DIAMONDS, Rank.TEN));
+        Suit trump = Suit.HEARTS;
+        assertTrue(0 < hand1.compare(hand2, trump));
+        assertTrue(0 > hand2.compare(hand1, trump));
+        fail(); // finish comparsion DumbHand.getHighest()
+    }
+    
 }
