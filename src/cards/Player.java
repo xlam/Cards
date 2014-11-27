@@ -1,6 +1,7 @@
 package cards;
 
 import cards.game.DumbGame;
+import cards.game.Supervisor;
 import cards.strategy.*;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class Player {
     private DumbHand hand;
     private Strategy strategy;
     private DumbGame game;
+    private Supervisor supervisor;
 
     public Player() {
         name = super.toString();
@@ -23,6 +25,12 @@ public class Player {
         hand = new DumbHand();
     }
 
+    private Supervisor getSupervisor() {
+        if (null == supervisor)
+            supervisor = Supervisor.getInstance();
+        return supervisor;
+    }
+    
     public Player setName(String name) {
         this.name = name;
         return this;
@@ -47,11 +55,13 @@ public class Player {
     }
 
     public List<Card> getCardsInAction() {
-        return game.getCardsInAction();
+        //return game.getCardsInAction();
+        return getSupervisor().getCardsInAction();
     }
 
     public Suit getTrumpSuit() {
-        return game.getTrumpSuit();
+        //return game.getTrumpSuit();
+        return getSupervisor().getTrumpSuit();
     }
 
     public boolean isEmpty() {
