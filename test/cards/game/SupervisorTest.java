@@ -20,7 +20,7 @@ public class SupervisorTest {
     
     @Before
     public void setUp() {
-        DumbGame game = new DumbGameForSupervisor();
+        DumbGame game = new DumbGame();
         supervisor.setGame(game);
     }
     
