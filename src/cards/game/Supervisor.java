@@ -1,12 +1,16 @@
 package cards.game;
 
+import cards.Card;
+import cards.Suit;
+import java.util.List;
+
 /**
  *
  * @author Sergey
  */
 public class Supervisor {
     
-    public static Supervisor instance = null;
+    private static Supervisor instance = null;
     private DumbGame game;
     private Supervisor() {};
     
@@ -24,4 +28,12 @@ public class Supervisor {
         this.game = game;
     }
     
+    public List<Card> getCardsInAction() {
+        return game.getCardsInAction();
+    }
+    
+    public Suit getTrumpSuit() {
+        return game.getTrumpSuit();
+    }
+
 }
