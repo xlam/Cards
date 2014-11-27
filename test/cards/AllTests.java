@@ -1,6 +1,7 @@
 package cards;
 
 import cards.strategy.*;
+import cards.game.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -9,7 +10,8 @@ import org.junit.runners.Suite;
     CardsTest.class,
     PlayerTest.class,
     SimpleStrategyTest.class,
-    MemoryStrategyTest.class
+    MemoryStrategyTest.class,
+    SupervisorTest.class
 })
 public class AllTests {
 
