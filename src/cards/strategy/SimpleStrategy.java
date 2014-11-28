@@ -42,7 +42,6 @@ public class SimpleStrategy extends AbstractStrategy {
             }
         } else {
             cards = hand.getAllBySuit(trump);
-            System.out.println(cards);
             if (!cards.isEmpty()) {
                 if (card.getSuit().equals(trump)) {
                     for (Card c : cards) {

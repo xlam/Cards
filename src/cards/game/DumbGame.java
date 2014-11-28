@@ -66,6 +66,8 @@ public class DumbGame implements Game {
             shaker = player1;
         }
         
+        System.out.println(mover + " moves first");
+        
         while (true) {
         System.out.println("Round begins!");
             boolean swapPlayers = true;
