@@ -135,7 +135,9 @@ public class CardsTest {
 
     @Test
     public void testCardsDumbHandCompare() {
+        Suit trump = Suit.HEARTS;
         DumbHand hand1 = new DumbHand();
+        // pass 1
         hand1.add(new Card(Suit.HEARTS, Rank.SIX));
         hand1.add(new Card(Suit.CLUBS, Rank.ACE));
         hand1.add(new Card(Suit.DIAMONDS, Rank.JACK));
@@ -143,16 +145,29 @@ public class CardsTest {
         hand2.add(new Card(Suit.HEARTS, Rank.ACE));
         hand2.add(new Card(Suit.CLUBS, Rank.KING));
         hand2.add(new Card(Suit.DIAMONDS, Rank.TEN));
-        Suit trump = Suit.HEARTS;
         assertTrue(hand1.compareTo(hand2, trump) < 0);
         assertTrue(hand2.compareTo(hand1, trump) > 0);
+        // pass 2
         hand1.clear();
         hand1.add(new Card(Suit.SPADES, Rank.SIX));
         hand2.clear();
         hand2.add(new Card(Suit.CLUBS, Rank.SIX));
         assertEquals(0, hand1.compareTo(hand2, trump));
         assertEquals(0, hand2.compareTo(hand1, trump));
-        fail(); // TODO comparing not finished (check all cases)
+        // pass 3
+        hand1.clear();
+        hand1.add(new Card(Suit.SPADES, Rank.SEVEN));
+        hand2.clear();
+        hand2.add(new Card(Suit.CLUBS, Rank.SIX));
+        assertTrue(hand1.compareTo(hand2, trump) > 0);
+        assertTrue(hand2.compareTo(hand1, trump) < 0);
+        // pass 4
+        hand1.clear();
+        hand1.add(new Card(Suit.HEARTS, Rank.SIX));
+        hand2.clear();
+        hand2.add(new Card(Suit.CLUBS, Rank.SIX));
+        assertTrue(hand1.compareTo(hand2, trump) > 0);
+        assertTrue(hand2.compareTo(hand1, trump) < 0);
     }
     
 }

@@ -44,6 +44,7 @@ public class DumbHand extends Hand {
         return null;
     }
 
+    // TODO method seems ugly, try to refactor
     public Card getHighest(Suit trumpSuit) {
         Rank.setAceHigh();
         Card.setSortRankFirst();
@@ -64,13 +65,13 @@ public class DumbHand extends Hand {
     public int compareTo(DumbHand hand, Suit trump) {
         Card highestCardHand1 = getHighest(trump);
         Card highestCardHand2 = hand.getHighest(trump);
-        System.out.println("Highest card of hand1 " + this + " is " + highestCardHand1 + ". Trump is " + trump);
-        System.out.println("Highest card of hand2 " + hand + " is " + highestCardHand2 + ". Trump is " + trump);
         Suit suit1 = highestCardHand1.getSuit();
         Suit suit2 = highestCardHand2.getSuit();
-        if ((suit1.compareTo(suit2) == 0) && (suit1.compareTo(trump) == 0))
-            return highestCardHand1.compareTo(highestCardHand2);
-        return 0;
+        if (suit1.equals(trump) && !(suit2.equals(trump)) ||
+            suit2.equals(trump) && !(suit1.equals(trump))) {
+                return suit1.equals(trump) ? 1 : -1;
+        }
+        return highestCardHand1.getRank().compareTo(highestCardHand2.getRank());
     }
 
 }
