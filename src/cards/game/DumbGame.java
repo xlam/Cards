@@ -84,6 +84,7 @@ public class DumbGame implements Game {
                     System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ")");
                     shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2
                     swapPlayers = false; // ходит снова 1
+                    break;
                 } else { // иначе
                     System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "(" + shakerCard + ")");
                     cardsInAction.add(shakerCard); // и положить ее на стол (покрыть)
