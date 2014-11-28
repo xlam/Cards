@@ -1,16 +1,15 @@
 package cards.game;
 
 import cards.*;
-import cards.strategy.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DumbGame implements Game {
 
     private final Deck deck;
-    private final Player player1;
-    private final Player player2;
     private final List<Card> cardsInAction = new ArrayList<Card>();
+    private Player player1;
+    private Player player2;
     private Card trumpCard;
     private Suit trumpSuit;
 
@@ -19,14 +18,14 @@ public class DumbGame implements Game {
     public DumbGame() {
         deck = new DumbDeck();
         deck.shuffle();
-        player1 = new Player("Vasya", new SimpleStrategy());
-        player2 = new Player("Petya", new AdvancedStrategy());
-        init();
     }
 
     @Override
     public void addPlayer(Player player) {
-        
+        if (null == player1)
+            player1 = player;
+        else if (null == player2)
+            player2 = player;
     }
     
     private void init() {
@@ -45,11 +44,11 @@ public class DumbGame implements Game {
         cardsInAction.clear();
         deck.restore();
         deck.shuffle();
-        init();
     }
 
     @Override
     public void play() {
+        init();
         System.out.println("New Game Started!");
         System.out.println("Deck:" + deck);
         System.out.println("Cards left in deck: " + deck.getCardsRemaining());
@@ -57,8 +56,16 @@ public class DumbGame implements Game {
         System.out.println(player2 + " hand:" + player2.getHand());
         System.out.println("Trump: " + trumpCard);
 
-        Player mover = player1;
-        Player shaker = player2;
+        Player mover, shaker;
+        if (player1.getHand().compareTo(player2.getHand(), trumpSuit) > 0) {
+            mover = player1;
+            shaker = player2;
+        } else {
+            mover = player2;
+            shaker = player1;
+        }
+        
+        System.out.println(mover + " moves first");
         
         while (true) {
         System.out.println("Round begins!");
@@ -77,7 +84,6 @@ public class DumbGame implements Game {
                     System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ")");
                     shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2
                     swapPlayers = false; // ходит снова 1
-                    break;
                 } else { // иначе
                     System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "(" + shakerCard + ")");
                     cardsInAction.add(shakerCard); // и положить ее на стол (покрыть)

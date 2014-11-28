@@ -44,7 +44,7 @@ public class Player {
         return this;
     }
 
-    public Hand getHand() {
+    public DumbHand getHand() {
         return hand;
     }
 

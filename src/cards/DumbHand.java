@@ -44,4 +44,34 @@ public class DumbHand extends Hand {
         return null;
     }
 
+    // TODO method seems ugly, try to refactor
+    public Card getHighest(Suit trumpSuit) {
+        Rank.setAceHigh();
+        Card.setSortRankFirst();
+        Collections.sort(hand);
+        if (allSuit(trumpSuit)) return (Card) hand.get(hand.size()-1);
+        Card result = null;
+        Card card;
+        for (Object c : hand) {
+            card = (Card) c;
+            if (card.getSuit().equals(trumpSuit))
+                return card;
+            else
+                result = card;
+        }
+        return result;
+    }
+    
+    public int compareTo(DumbHand hand, Suit trump) {
+        Card highestCardHand1 = getHighest(trump);
+        Card highestCardHand2 = hand.getHighest(trump);
+        Suit suit1 = highestCardHand1.getSuit();
+        Suit suit2 = highestCardHand2.getSuit();
+        if (suit1.equals(trump) && !(suit2.equals(trump)) ||
+            suit2.equals(trump) && !(suit1.equals(trump))) {
+                return suit1.equals(trump) ? 1 : -1;
+        }
+        return highestCardHand1.getRank().compareTo(highestCardHand2.getRank());
+    }
+
 }
