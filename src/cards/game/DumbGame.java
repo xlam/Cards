@@ -44,7 +44,6 @@ public class DumbGame implements Game {
         cardsInAction.clear();
         deck.restore();
         deck.shuffle();
-        init();
     }
 
     @Override
