@@ -57,8 +57,14 @@ public class DumbGame implements Game {
         System.out.println(player2 + " hand:" + player2.getHand());
         System.out.println("Trump: " + trumpCard);
 
-        Player mover = player1;
-        Player shaker = player2;
+        Player mover, shaker;
+        if (player1.getHand().compareTo(player2.getHand(), trumpSuit) > 0) {
+            mover = player1;
+            shaker = player2;
+        } else {
+            mover = player2;
+            shaker = player1;
+        }
         
         while (true) {
         System.out.println("Round begins!");
