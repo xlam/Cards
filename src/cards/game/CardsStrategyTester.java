@@ -1,11 +1,12 @@
 package cards.game;
 
-import cards.Player;
+import cards.*;
 import cards.strategy.*;
 
 public class CardsStrategyTester {
 
     public static void main(String[] args) {
+        System.out.println("Cards v" + Version.getVersion());
         int vasyaWins = 0;
         int petyaWins = 0;
         
