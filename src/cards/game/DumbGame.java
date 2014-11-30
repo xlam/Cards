@@ -7,7 +7,7 @@ import java.util.List;
 public class DumbGame implements Game {
 
     private final Deck deck;
-    private final List<Card> cardsInAction = new ArrayList<Card>();
+    private final List<Card> cardsInAction = new ArrayList<>();
     private Player player1;
     private Player player2;
     private Card trumpCard;
@@ -139,7 +139,7 @@ public class DumbGame implements Game {
     }
 
     public List<Card> getCardsInAction() {
-        List<Card> cards = new ArrayList<Card>(cardsInAction);
+        List<Card> cards = new ArrayList<>(cardsInAction);
         return cards;
     }
 

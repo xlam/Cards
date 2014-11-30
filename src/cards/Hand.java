@@ -69,7 +69,7 @@ public class Hand {
     /**
      * Returns sorted list of cards which suit is same as parameter.
      * If hand have no cards of that suit, empty list returned.
-     * @param Suit to compare to
+     * @param suit Suit to compare to
      * @return Sorted list of cards of Suit presented in hand
      */
     public List getAllBySuit(Suit suit) {
@@ -105,6 +105,6 @@ public class Hand {
     }
 
     public List<Card> toList() {
-        return new ArrayList<Card>(hand);
+        return new ArrayList<>(hand);
     }
 }

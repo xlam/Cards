@@ -10,12 +10,12 @@ import java.util.List;
  */
 public class MemoryStrategy extends AbstractStrategy {
 
-    List<Card> knownEnemyCards = new ArrayList<Card>();
-    List<Card> knownOutCards = new ArrayList<Card>();
-    List<Card> possibleDeckCards = new ArrayList<Card>();
+    List<Card> knownEnemyCards = new ArrayList<>();
+    List<Card> knownOutCards = new ArrayList<>();
+    List<Card> possibleDeckCards = new ArrayList<>();
 
-    private static final List<Card> defaultDeck = new ArrayList<Card>();
-    private List<Card> lastCardsInAction = new ArrayList<Card>();
+    private static final List<Card> defaultDeck = new ArrayList<>();
+    private List<Card> lastCardsInAction = new ArrayList<>();
     private static String lastAction = "";
 
 
@@ -97,8 +97,8 @@ public class MemoryStrategy extends AbstractStrategy {
 
     protected void calculatePossibleDeckCards(Hand playerHand) {
         possibleDeckCards.clear();
-        possibleDeckCards = new ArrayList<Card>(defaultDeck);
-        List<Card> temp = new ArrayList<Card>();
+        possibleDeckCards = new ArrayList<>(defaultDeck);
+        List<Card> temp = new ArrayList<>();
 
         DumbHand hand = (DumbHand) playerHand;
         List<Card> playerCards = hand.toList();
