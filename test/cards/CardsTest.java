@@ -124,7 +124,7 @@ public class CardsTest {
     
     @Test
     public void testCardsDumbHandAddAll() {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new ArrayList<>();
         cards.add(new Card(Suit.CLUBS, Rank.ACE));
         cards.add(new Card(Suit.CLUBS, Rank.TWO));
         cards.add(new Card(Suit.DIAMONDS, Rank.THREE));

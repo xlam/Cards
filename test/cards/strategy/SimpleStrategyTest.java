@@ -45,7 +45,7 @@ public class SimpleStrategyTest {
     @Test
     public void testSimpleStrategyMoveLowestCard() {
         DumbHand hand = new DumbHand();
-        List<Card> cardsInAction = new ArrayList<Card>();
+        List<Card> cardsInAction = new ArrayList<>();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
