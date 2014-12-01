@@ -1,4 +1,4 @@
-package cards;
+package cards.common;
 
 import java.util.ArrayList;
 import java.util.Collections;

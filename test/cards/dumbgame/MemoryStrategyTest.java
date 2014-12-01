@@ -1,6 +1,6 @@
 package cards.dumbgame;
 
-import cards.*;
+import cards.common.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

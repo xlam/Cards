@@ -1,4 +1,4 @@
-package cards.main;
+package cards;
 
 import cards.dumbgame.*;
 

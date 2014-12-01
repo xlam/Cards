@@ -1,7 +1,7 @@
 package cards.dumbgame;
 
-import cards.Card;
-import cards.Suit;
+import cards.common.Card;
+import cards.common.Suit;
 import java.util.List;
 
 /**

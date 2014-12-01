@@ -4,7 +4,7 @@
  */
 package cards.dumbgame;
 
-import cards.*;
+import cards.common.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

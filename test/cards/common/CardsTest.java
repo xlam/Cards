@@ -1,4 +1,4 @@
-package cards;
+package cards.common;
 
 import cards.dumbgame.DumbHand;
 import java.util.ArrayList;

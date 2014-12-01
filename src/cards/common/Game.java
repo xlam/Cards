@@ -1,5 +1,6 @@
-package cards;
+package cards.common;
 
+// TODO get rid of dumbgame!
 import cards.dumbgame.Player;
 
 /**
