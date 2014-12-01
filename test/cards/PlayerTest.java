@@ -4,6 +4,7 @@
  */
 package cards;
 
+import cards.game.dumbgame.Player;
 import cards.strategy.SimpleStrategy;
 import org.junit.After;
 import org.junit.Before;

@@ -1,6 +1,6 @@
 package cards.game;
 
-import cards.Player;
+import cards.game.dumbgame.Player;
 
 /**
  *

@@ -4,6 +4,8 @@
  */
 package cards;
 
+import cards.game.dumbgame.DumbHand;
+
 /**
  *
  * @author User

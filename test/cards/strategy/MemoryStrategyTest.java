@@ -1,5 +1,6 @@
 package cards.strategy;
 
+import cards.game.dumbgame.DumbHand;
 import cards.*;
 import org.junit.Test;
 import static org.junit.Assert.*;

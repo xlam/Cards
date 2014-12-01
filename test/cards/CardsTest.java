@@ -1,5 +1,6 @@
 package cards;
 
+import cards.game.dumbgame.DumbHand;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

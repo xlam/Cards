@@ -1,5 +1,9 @@
-package cards;
+package cards.game.dumbgame;
 
+import cards.Card;
+import cards.Hand;
+import cards.Suit;
+import cards.game.dumbgame.DumbHand;
 import cards.game.Supervisor;
 import cards.strategy.*;
 import java.util.List;

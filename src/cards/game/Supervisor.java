@@ -1,5 +1,6 @@
 package cards.game;
 
+import cards.game.dumbgame.DumbGame;
 import cards.Card;
 import cards.Suit;
 import java.util.List;

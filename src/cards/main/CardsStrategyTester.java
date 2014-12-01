@@ -1,6 +1,9 @@
-package cards.game;
+package cards.main;
 
+import cards.game.dumbgame.Player;
 import cards.*;
+import cards.game.dumbgame.DumbGame;
+import cards.game.Supervisor;
 import cards.strategy.*;
 
 public class CardsStrategyTester {

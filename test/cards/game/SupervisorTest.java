@@ -1,5 +1,6 @@
 package cards.game;
 
+import cards.game.dumbgame.DumbGame;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;

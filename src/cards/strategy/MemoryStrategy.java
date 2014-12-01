@@ -1,5 +1,7 @@
 package cards.strategy;
 
+import cards.game.dumbgame.DumbDeck;
+import cards.game.dumbgame.DumbHand;
 import cards.*;
 import java.util.ArrayList;
 import java.util.List;
