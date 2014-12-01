@@ -21,8 +21,9 @@ public class AdvancedStrategy extends AbstractStrategy {
                 for (int i = 0; i < dumbHand.size(); i++) {
                     Card c = (Card) dumbHand.getCard(i);
                     if (c.getRank().equals(card.getRank())
-                            && !(c.getSuit().equals(trump))
-                            && c.getRank().compareTo(Rank.JACK) < 0) moveCard = c;
+                        && !(c.getSuit().equals(trump))
+                        && c.getRank().compareTo(Rank.KING) < 0)
+                            moveCard = c;
                 }
             }
         }
