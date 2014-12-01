@@ -1,10 +1,11 @@
 package cards.main;
 
-import cards.game.dumbgame.DumbGame;
-import cards.game.dumbgame.Player;
+import cards.dumbgame.SimpleStrategy;
+import cards.dumbgame.AdvancedStrategy;
+import cards.Supervisor;
+import cards.dumbgame.DumbGame;
+import cards.dumbgame.Player;
 import cards.Version;
-import cards.game.*;
-import cards.strategy.*;
 
 public class Cards {
 

@@ -1,6 +1,6 @@
-package cards.game;
+package cards;
 
-import cards.game.dumbgame.DumbGame;
+import cards.dumbgame.DumbGame;
 import cards.Card;
 import cards.Suit;
 import java.util.List;

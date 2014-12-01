@@ -1,6 +1,7 @@
-package cards.game;
+package cards.dumbgame;
 
-import cards.game.dumbgame.DumbGame;
+import cards.Supervisor;
+import cards.dumbgame.DumbGame;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;

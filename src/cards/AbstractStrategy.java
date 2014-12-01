@@ -1,6 +1,6 @@
-package cards.strategy;
+package cards;
 
-import cards.game.Supervisor;
+import cards.Supervisor;
 
 /**
  *

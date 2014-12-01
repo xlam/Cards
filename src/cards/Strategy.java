@@ -1,4 +1,4 @@
-package cards.strategy;
+package cards;
 
 import cards.*;
 import java.util.List;

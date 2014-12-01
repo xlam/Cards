@@ -1,4 +1,4 @@
-package cards.game.dumbgame;
+package cards.dumbgame;
 
 import cards.Card;
 import cards.Deck;

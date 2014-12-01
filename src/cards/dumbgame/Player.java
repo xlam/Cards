@@ -1,11 +1,12 @@
-package cards.game.dumbgame;
+package cards.dumbgame;
 
+import cards.Strategy;
+import cards.AbstractStrategy;
 import cards.Card;
 import cards.Hand;
 import cards.Suit;
-import cards.game.dumbgame.DumbHand;
-import cards.game.Supervisor;
-import cards.strategy.*;
+import cards.dumbgame.DumbHand;
+import cards.Supervisor;
 import java.util.List;
 
 public class Player {

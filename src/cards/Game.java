@@ -1,6 +1,6 @@
-package cards.game;
+package cards;
 
-import cards.game.dumbgame.Player;
+import cards.dumbgame.Player;
 
 /**
  *

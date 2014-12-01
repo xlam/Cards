@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cards;
+package cards.dumbgame;
 
-import cards.game.dumbgame.Player;
-import cards.strategy.SimpleStrategy;
+import cards.dumbgame.Player;
+import cards.dumbgame.SimpleStrategy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cards.strategy;
+package cards.dumbgame;
 
-import cards.game.dumbgame.DumbHand;
+import cards.dumbgame.SimpleStrategy;
+import cards.dumbgame.DumbHand;
 import cards.*;
 import java.util.ArrayList;
 import java.util.List;
