@@ -8,8 +8,8 @@ public class DumbGame implements Game {
 
     private final Deck deck;
     private final List<Card> cardsInAction = new ArrayList<>();
-    private Player player1;
-    private Player player2;
+    private DumbPlayer player1;
+    private DumbPlayer player2;
     private Card trumpCard;
     private Suit trumpSuit;
 
@@ -23,9 +23,9 @@ public class DumbGame implements Game {
     @Override
     public void addPlayer(Player player) {
         if (null == player1)
-            player1 = player;
+            player1 = (DumbPlayer)player;
         else if (null == player2)
-            player2 = player;
+            player2 = (DumbPlayer)player;
     }
 
     private void init() {
@@ -56,7 +56,7 @@ public class DumbGame implements Game {
         System.out.println(player2 + " hand:" + player2.getHand());
         System.out.println("Trump: " + trumpCard);
 
-        Player mover, shaker;
+        DumbPlayer mover, shaker;
         if (player1.getHand().compareTo(player2.getHand(), trumpSuit) > 0) {
             mover = player1;
             shaker = player2;
@@ -111,14 +111,14 @@ public class DumbGame implements Game {
             }
 
             if (swapPlayers) { // меняем ходящего 2 отбился
-                Player temp = mover;
+                DumbPlayer temp = mover;
                 mover = shaker;
                 shaker = temp;
             }
         }
     }
 
-    private void fillHands(Player mover, Player shaker) {
+    private void fillHands(DumbPlayer mover, DumbPlayer shaker) {
         if (mover.numberOfCards() < 6) {
             while (deck.getCardsRemaining() > 0 && mover.numberOfCards() < 6)
                 mover.addCard(deck.deal());

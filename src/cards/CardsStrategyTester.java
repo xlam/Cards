@@ -10,8 +10,8 @@ public class CardsStrategyTester {
         int petyaWins = 0;
 
         DumbGame game = new DumbGame();
-        game.addPlayer(new Player("Vasya", new SimpleStrategy()));
-        game.addPlayer(new Player("Petya", new AdvancedStrategy()));
+        game.addPlayer(new DumbPlayer("Vasya", new SimpleStrategy()));
+        game.addPlayer(new DumbPlayer("Petya", new AdvancedStrategy()));
         Supervisor supervisor = Supervisor.getInstance();
         supervisor.setGame(game);
         for (int i = 0; i < 100; i++) {

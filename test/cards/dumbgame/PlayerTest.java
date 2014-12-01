@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cards.dumbgame;
 
 import org.junit.After;
@@ -11,7 +7,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author User
+ * @author Sergey
  */
 public class PlayerTest {
 
@@ -28,7 +24,8 @@ public class PlayerTest {
 
     @Test
     public void testPlayer() {
-        Player player = new Player("Ivanov", new SimpleStrategy());
+        DumbPlayer player = new DumbPlayer("Ivanov", new SimpleStrategy());
         assertEquals(player.getName(), "Ivanov");
+        assertTrue((player.getHand()) instanceof DumbHand);
     }
 }
