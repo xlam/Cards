@@ -1,11 +1,6 @@
 package cards.main;
 
-import cards.dumbgame.SimpleStrategy;
-import cards.dumbgame.AdvancedStrategy;
-import cards.dumbgame.Player;
-import cards.*;
-import cards.dumbgame.DumbGame;
-import cards.Supervisor;
+import cards.dumbgame.*;
 
 public class CardsStrategyTester {
 
@@ -13,7 +8,7 @@ public class CardsStrategyTester {
         System.out.println("Cards v" + Version.getVersion());
         int vasyaWins = 0;
         int petyaWins = 0;
-        
+
         DumbGame game = new DumbGame();
         game.addPlayer(new Player("Vasya", new SimpleStrategy()));
         game.addPlayer(new Player("Petya", new AdvancedStrategy()));

@@ -1,15 +1,12 @@
 package cards.dumbgame;
 
-import cards.Card;
-import cards.Hand;
-import cards.Rank;
-import cards.Suit;
+import cards.*;
 import java.util.Collections;
 import java.util.List;
 
 public class DumbHand extends Hand {
 
- 
+
     /**
      * Check if card is not contained within hand and add it
      * @param card Card to add
@@ -65,7 +62,7 @@ public class DumbHand extends Hand {
         }
         return result;
     }
-    
+
     public int compareTo(DumbHand hand, Suit trump) {
         Card highestCardHand1 = getHighest(trump);
         Card highestCardHand2 = hand.getHighest(trump);

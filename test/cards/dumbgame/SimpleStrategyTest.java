@@ -4,8 +4,6 @@
  */
 package cards.dumbgame;
 
-import cards.dumbgame.SimpleStrategy;
-import cards.dumbgame.DumbHand;
 import cards.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,7 @@ import static org.junit.Assert.*;
 public class SimpleStrategyTest {
 
     private Suit trump;
-    
+
     public SimpleStrategyTest() {
     }
 

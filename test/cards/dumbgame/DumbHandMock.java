@@ -6,7 +6,6 @@ package cards.dumbgame;
 
 import cards.Card;
 import cards.Suit;
-import cards.dumbgame.DumbHand;
 
 /**
  *

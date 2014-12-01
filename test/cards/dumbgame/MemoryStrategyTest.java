@@ -1,7 +1,5 @@
 package cards.dumbgame;
 
-import cards.dumbgame.MemoryStrategy;
-import cards.dumbgame.DumbHand;
 import cards.*;
 import org.junit.Test;
 import static org.junit.Assert.*;

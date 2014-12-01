@@ -1,7 +1,6 @@
 package cards.dumbgame;
 
 import cards.*;
-import cards.Game;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class DumbGame implements Game {
         else if (null == player2)
             player2 = player;
     }
-    
+
     private void init() {
         for (int i = 0; i < 6; i++) {
             player1.addCard(deck.deal());
@@ -65,9 +64,9 @@ public class DumbGame implements Game {
             mover = player2;
             shaker = player1;
         }
-        
+
         System.out.println(mover + " moves first");
-        
+
         while (true) {
         System.out.println("Round begins!");
             boolean swapPlayers = true;

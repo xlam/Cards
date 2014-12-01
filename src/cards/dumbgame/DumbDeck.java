@@ -1,9 +1,6 @@
 package cards.dumbgame;
 
-import cards.Card;
-import cards.Deck;
-import cards.Rank;
-import cards.Suit;
+import cards.*;
 
 public class DumbDeck extends Deck {
 

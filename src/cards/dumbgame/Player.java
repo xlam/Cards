@@ -1,16 +1,10 @@
 package cards.dumbgame;
 
-import cards.Strategy;
-import cards.AbstractStrategy;
-import cards.Card;
-import cards.Hand;
-import cards.Suit;
-import cards.dumbgame.DumbHand;
-import cards.Supervisor;
+import cards.*;
 import java.util.List;
 
 public class Player {
-    
+
     // as we set strategy at initialisation it may be final
     private final Strategy strategy;
     private String name;
@@ -34,7 +28,7 @@ public class Player {
             supervisor = Supervisor.getInstance();
         return supervisor;
     }
-    
+
     public Player setName(String name) {
         this.name = name;
         return this;
