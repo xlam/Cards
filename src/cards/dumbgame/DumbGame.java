@@ -13,6 +13,8 @@ public class DumbGame implements Game {
     private Card trumpCard;
     private Suit trumpSuit;
 
+    private final ArrayList<Player> players = new ArrayList<>();
+
     public static String lastWinner = "";
 
     public DumbGame() {
@@ -20,12 +22,24 @@ public class DumbGame implements Game {
         deck.shuffle();
     }
 
+//    @Override
+//    public void addPlayer(Player player) {
+//        if (null == player1)
+//            player1 = (DumbPlayer)player;
+//        else if (null == player2)
+//            player2 = (DumbPlayer)player;
+//    }
     @Override
     public void addPlayer(Player player) {
-        if (null == player1)
-            player1 = (DumbPlayer)player;
-        else if (null == player2)
-            player2 = (DumbPlayer)player;
+        this.players.add(player);
+    }
+
+    public int countPlayersWithCards() {
+        int count = 0;
+        for (Player p: players)
+            if (!(p.isEmpty()))
+                count++;
+        return count;
     }
 
     private void init() {
@@ -148,7 +162,6 @@ public class DumbGame implements Game {
     }
 
     public int getPlayersCount() {
-        // TODO Implement getPlayersCount()
-        return 2;
+        return players.size();
     }
 }
