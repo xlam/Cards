@@ -64,8 +64,8 @@ public class CardsTest {
         assertTrue(card_6c.compareTo(card_5c) > 0 &&
                    card_6c.compareTo(card_5d) < 0);
     }
-      
-   
+
+
     @Test
     public void testCardsDeck() {
         Deck deck = Deck.defaultDeck();
@@ -109,8 +109,16 @@ public class CardsTest {
     }
 
     @Test
+    public void testCardsAllSuit() {
+        Hand hand = new Hand();
+        assertFalse(hand.allSuit(Suit.CLUBS));
+        hand.add(new Card(Suit.CLUBS, Rank.ACE));
+        assertTrue(hand.allSuit(Suit.CLUBS));
+    }
+
+    @Test
     public void testCardsDumbHandGetAllBySuit() {
-        DumbHand hand = new DumbHand();
+        Hand hand = new Hand();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
@@ -121,8 +129,10 @@ public class CardsTest {
         cards = hand.getAllBySuit(Suit.DIAMONDS);
         assertEquals(1, cards.size());
         assertTrue(((Card) cards.get(0)).getSuit().equals(Suit.DIAMONDS));
+        cards = hand.getAllBySuit(Suit.HEARTS);
+        assertTrue(cards.isEmpty());
     }
-    
+
     @Test
     public void testCardsDumbHandAddAll() {
         List<Card> cards = new ArrayList<>();
@@ -132,7 +142,7 @@ public class CardsTest {
         DumbHand hand = new DumbHand();
         hand.addAll(cards);
         assertEquals(3, hand.size());
-    }    
+    }
 
     @Test
     public void testCardsDumbHandCompare() {
@@ -170,5 +180,5 @@ public class CardsTest {
         assertTrue(hand1.compareTo(hand2, trump) > 0);
         assertTrue(hand2.compareTo(hand1, trump) < 0);
     }
-    
+
 }
