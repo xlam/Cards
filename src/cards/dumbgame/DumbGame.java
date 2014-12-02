@@ -22,13 +22,6 @@ public class DumbGame implements Game {
         deck.shuffle();
     }
 
-//    @Override
-//    public void addPlayer(Player player) {
-//        if (null == player1)
-//            player1 = (DumbPlayer)player;
-//        else if (null == player2)
-//            player2 = (DumbPlayer)player;
-//    }
     @Override
     public void addPlayer(Player player) {
         this.players.add((DumbPlayer)player);
@@ -160,6 +153,13 @@ public class DumbGame implements Game {
                 trumpCard = null;
             }
         }
+    }
+
+    protected void fillPlayersHands(DumbPlayer first) {
+        for (DumbPlayer player: players)
+            // TODO implement deck.isEmpty()
+            while (deck.getCardsRemaining() > 0 &&  player.numberOfCards() < 6)
+                player.addCard(deck.deal());
     }
 
     public List<Card> getCardsInAction() {

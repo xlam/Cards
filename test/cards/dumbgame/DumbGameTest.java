@@ -56,4 +56,12 @@ public class DumbGameTest {
         assertEquals(player2, game.findFirstMover(Suit.CLUBS));
     }
 
+    @Test
+    public void testHandsFilled() {
+        game.fillPlayersHands(player1);
+        assertEquals(6, player1.numberOfCards());
+        assertEquals(6, player2.numberOfCards());
+        assertEquals(6, player3.numberOfCards());
+    }
+
 }
