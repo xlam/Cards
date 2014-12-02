@@ -13,7 +13,7 @@ public class DumbGame implements Game {
     private Card trumpCard;
     private Suit trumpSuit;
 
-    private final ArrayList<Player> players = new ArrayList<>();
+    private final ArrayList<DumbPlayer> players = new ArrayList<>();
 
     public static String lastWinner = "";
 
@@ -31,7 +31,7 @@ public class DumbGame implements Game {
 //    }
     @Override
     public void addPlayer(Player player) {
-        this.players.add(player);
+        this.players.add((DumbPlayer)player);
     }
 
     public int countPlayersWithCards() {
@@ -40,6 +40,16 @@ public class DumbGame implements Game {
             if (!(p.isEmpty()))
                 count++;
         return count;
+    }
+
+    public Player findFirstMover(Suit trump) {
+        if (players.isEmpty())
+            return null;
+        DumbPlayer mover = players.get(0);
+        for (DumbPlayer p: players)
+            if (p.getHand().compareTo(mover.getHand(), trump) > 0)
+                mover = p;
+        return mover;
     }
 
     private void init() {

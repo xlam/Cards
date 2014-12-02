@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
 public class DumbGameTest {
 
     private DumbGame game;
-    private final Player player1 = new Player("Player1");
-    private final Player player2 = new Player("Player1");
-    private final Player player3 = new Player("Player1");
+    private final DumbPlayer player1 = new DumbPlayer("Player1");
+    private final DumbPlayer player2 = new DumbPlayer("Player1");
+    private final DumbPlayer player3 = new DumbPlayer("Player1");
 
     public DumbGameTest() {
     }
@@ -49,6 +49,10 @@ public class DumbGameTest {
 
     @Test
     public void testFindWhoMovesFirst() {
+        player1.addCard(new Card(Suit.CLUBS, Rank.SIX));
+        player2.addCard(new Card(Suit.CLUBS, Rank.SEVEN));
+        player3.addCard(new Card(Suit.HEARTS, Rank.ACE));
+        assertEquals(player2, game.findFirstMover(Suit.CLUBS));
     }
 
 }
