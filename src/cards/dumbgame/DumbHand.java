@@ -63,7 +63,14 @@ public class DumbHand extends Hand {
         return result;
     }
 
+    // TODO needs refactoring
     public int compareTo(DumbHand hand, Suit trump) {
+        if (this.hand.isEmpty() && hand.isEmpty())
+            return 0;
+        if (this.hand.isEmpty())
+            return -1;
+        if (hand.isEmpty())
+            return 1;
         Card highestCardHand1 = getHighest(trump);
         Card highestCardHand2 = hand.getHighest(trump);
         Suit suit1 = highestCardHand1.getSuit();
