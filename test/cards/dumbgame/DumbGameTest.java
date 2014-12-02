@@ -49,6 +49,7 @@ public class DumbGameTest {
 
     @Test
     public void testFindWhoMovesFirst() {
+        assertEquals(player1, game.findFirstMover(Suit.CLUBS));
         player1.addCard(new Card(Suit.CLUBS, Rank.SIX));
         player2.addCard(new Card(Suit.CLUBS, Rank.SEVEN));
         player3.addCard(new Card(Suit.HEARTS, Rank.ACE));
