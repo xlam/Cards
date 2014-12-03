@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DumbGame implements Game {
 
-    private final Deck deck;
+    protected final Deck deck;
     private final List<Card> cardsInAction = new ArrayList<>();
     private DumbPlayer player1;
     private DumbPlayer player2;
@@ -156,8 +156,23 @@ public class DumbGame implements Game {
     }
 
     protected void fillPlayersHands(DumbPlayer first) {
-        for (DumbPlayer player: players)
-            // TODO implement deck.isEmpty()
+        // TODO needs refactoring
+        ArrayList<DumbPlayer> p = new ArrayList<>();
+        int index = players.indexOf(first);
+        if (first.equals(players.get(0)))
+            p.addAll(players);
+        else if (first.equals(players.get(players.size()-1))) {
+            p.add(first);
+            p.addAll(players.subList(0, index));
+        }
+        else {
+            p.add(first);
+            p.addAll(players.subList(index+1, players.size()));
+            p.addAll(players.subList(0, index));
+        }
+        System.out.println("Sorted players (first is " + first.toString() + "): " + p.toString());
+        for (DumbPlayer player: p)
+            // TODO implement something like deck.isEmpty()
             while (deck.getCardsRemaining() > 0 &&  player.numberOfCards() < 6)
                 player.addCard(deck.deal());
     }
