@@ -49,11 +49,35 @@ public class DumbGameTest {
 
     @Test
     public void testFindWhoMovesFirst() {
+        // pass 1: empty hand
         assertEquals(player1, game.findFirstMover(Suit.CLUBS));
         player1.addCard(new Card(Suit.CLUBS, Rank.SIX));
         player2.addCard(new Card(Suit.CLUBS, Rank.SEVEN));
         player3.addCard(new Card(Suit.HEARTS, Rank.ACE));
         assertEquals(player2, game.findFirstMover(Suit.CLUBS));
+        // pass 2: full hands from real game
+        player1.getHand().clear();
+        player2.getHand().clear();
+        player3.getHand().clear();
+        player1.addCard(new Card(Suit.SPADES,   Rank.ACE));
+        player1.addCard(new Card(Suit.DIAMONDS, Rank.SIX));
+        player1.addCard(new Card(Suit.HEARTS,   Rank.JACK));
+        player1.addCard(new Card(Suit.SPADES,   Rank.TEN));
+        player1.addCard(new Card(Suit.SPADES,   Rank.SEVEN));
+        player1.addCard(new Card(Suit.SPADES,   Rank.JACK));
+        player2.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
+        player2.addCard(new Card(Suit.HEARTS,   Rank.TEN));
+        player2.addCard(new Card(Suit.CLUBS,    Rank.ACE));
+        player2.addCard(new Card(Suit.DIAMONDS, Rank.KING));
+        player2.addCard(new Card(Suit.SPADES,   Rank.EIGHT));
+        player2.addCard(new Card(Suit.CLUBS,    Rank.EIGHT));
+        player3.addCard(new Card(Suit.HEARTS,   Rank.NINE));
+        player3.addCard(new Card(Suit.HEARTS,   Rank.ACE));
+        player3.addCard(new Card(Suit.CLUBS,    Rank.NINE));
+        player3.addCard(new Card(Suit.CLUBS,    Rank.SIX));
+        player3.addCard(new Card(Suit.CLUBS,    Rank.TEN));
+        player3.addCard(new Card(Suit.DIAMONDS, Rank.JACK));
+        assertEquals(player1, game.findFirstMover(Suit.SPADES));
     }
 
     @Test
