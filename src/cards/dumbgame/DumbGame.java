@@ -150,25 +150,30 @@ public class DumbGame implements Game {
     }
 
     protected void fillPlayersHands(DumbPlayer first) {
-        // TODO needs refactoring
-        ArrayList<DumbPlayer> p = new ArrayList<>();
-        int index = players.indexOf(first);
-        if (first.equals(players.get(0)))
-            p.addAll(players);
-        else if (first.equals(players.get(players.size()-1))) {
-            p.add(first);
-            p.addAll(players.subList(0, index));
-        }
-        else {
-            p.add(first);
-            p.addAll(players.subList(index+1, players.size()));
-            p.addAll(players.subList(0, index));
-        }
-        System.out.println("Sorted players (first is " + first.toString() + "): " + p.toString());
-        for (DumbPlayer player: p)
+        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(first);
+        System.out.println("Sorted players (first is " + first.toString() + "): " + playersSorted.toString());
+        for (DumbPlayer player: playersSorted)
             // TODO implement something like deck.isEmpty()
             while (deck.getCardsRemaining() > 0 &&  player.numberOfCards() < 6)
                 player.addCard(deck.deal());
+    }
+
+    protected ArrayList<DumbPlayer> getPlayersSortedByFirst(DumbPlayer first) {
+        // TODO needs refactoring
+        ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
+        int index = players.indexOf(first);
+        if (first.equals(players.get(0)))
+            playersSorted.addAll(players);
+        else if (first.equals(players.get(players.size()-1))) {
+            playersSorted.add(first);
+            playersSorted.addAll(players.subList(0, index));
+        }
+        else {
+            playersSorted.add(first);
+            playersSorted.addAll(players.subList(index+1, players.size()));
+            playersSorted.addAll(players.subList(0, index));
+        }
+        return playersSorted;
     }
 
     public List<Card> getCardsInAction() {
