@@ -35,7 +35,7 @@ public class DumbGame implements Game {
         return count;
     }
 
-    public Player findFirstMover(Suit trump) {
+    public DumbPlayer findFirstMover(Suit trump) {
         if (players.isEmpty())
             return null;
         DumbPlayer mover = players.get(0);
@@ -46,10 +46,7 @@ public class DumbGame implements Game {
     }
 
     private void init() {
-        for (int i = 0; i < 6; i++) {
-            player1.addCard(deck.deal());
-            player2.addCard(deck.deal());
-        }
+        fillPlayersHands(players.get(0));
         trumpCard = deck.deal();
         trumpSuit = trumpCard.getSuit();
     }
@@ -66,21 +63,18 @@ public class DumbGame implements Game {
     @Override
     public void play() {
         init();
+
+        // TODO extract method
         System.out.println("New Game Started!");
         System.out.println("Deck:" + deck);
         System.out.println("Cards left in deck: " + deck.getCardsRemaining());
-        System.out.println(player1 + " hand:" + player1.getHand());
-        System.out.println(player2 + " hand:" + player2.getHand());
+        for (Player p: players)
+            System.out.println(p + " hand:" + p.getHand());
         System.out.println("Trump: " + trumpCard);
 
         DumbPlayer mover, shaker;
-        if (player1.getHand().compareTo(player2.getHand(), trumpSuit) > 0) {
-            mover = player1;
-            shaker = player2;
-        } else {
-            mover = player2;
-            shaker = player1;
-        }
+        mover = findFirstMover(trumpSuit);
+        shaker = findFirstMover(trumpSuit);
 
         System.out.println(mover + " moves first");
 
