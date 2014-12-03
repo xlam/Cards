@@ -1,4 +1,4 @@
-package cards;
+package cards.common;
 
 import java.util.Arrays;
 import java.util.List;

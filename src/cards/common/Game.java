@@ -1,6 +1,4 @@
-package cards.game;
-
-import cards.Player;
+package cards.common;
 
 /**
  *

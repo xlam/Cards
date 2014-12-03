@@ -1,6 +1,6 @@
-package cards.strategy;
+package cards.dumbgame;
 
-import cards.*;
+import cards.common.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -22,14 +22,14 @@ public class MemoryStrategyTest {
         strategy.knownOutCards.add(new Card(Suit.DIAMONDS, Rank.SIX));
         strategy.knownOutCards.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
         strategy.calculatePossibleDeckCards(hand);
-        System.out.println(strategy.possibleDeckCards.toString());
+        //System.out.println(strategy.possibleDeckCards.toString());
         assertEquals(30, strategy.possibleDeckCards.size());
             // 2 pass
         strategy.knownEnemyCards.add(new Card(Suit.CLUBS, Rank.EIGHT));
         strategy.knownOutCards.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
         hand.add(new Card(Suit.CLUBS, Rank.JACK));
         strategy.calculatePossibleDeckCards(hand);
-        System.out.println(strategy.possibleDeckCards.toString());
+        //System.out.println(strategy.possibleDeckCards.toString());
         assertEquals(27, strategy.possibleDeckCards.size());
     }
 }

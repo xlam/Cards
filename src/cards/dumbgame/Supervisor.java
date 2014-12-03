@@ -1,7 +1,7 @@
-package cards.game;
+package cards.dumbgame;
 
-import cards.Card;
-import cards.Suit;
+import cards.common.Card;
+import cards.common.Suit;
 import java.util.List;
 
 /**
@@ -9,30 +9,30 @@ import java.util.List;
  * @author Sergey
  */
 public class Supervisor {
-    
+
     private static Supervisor instance = null;
     private DumbGame game;
     private Supervisor() {};
-    
+
     public static Supervisor getInstance() {
         if (null == instance)
             instance = new Supervisor();
         return instance;
     }
-    
+
     public int getPlayersCount() {
         return game.getPlayersCount();
     }
-    
+
     public void setGame(DumbGame game) {
         this.game = game;
     }
-    
+
     public List<Card> getCardsInAction() {
         checkGameNotNull();
         return game.getCardsInAction();
     }
-    
+
     public Suit getTrumpSuit() {
         checkGameNotNull();
         return game.getTrumpSuit();
@@ -48,5 +48,5 @@ public class Supervisor {
             System.exit(0);
         }
     }
-    
+
 }

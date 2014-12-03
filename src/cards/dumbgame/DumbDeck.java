@@ -1,4 +1,6 @@
-package cards;
+package cards.dumbgame;
+
+import cards.common.*;
 
 public class DumbDeck extends Deck {
 

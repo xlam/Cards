@@ -1,8 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package cards;
+package cards.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,9 +56,11 @@ public class Hand {
      * @return True if suit of all cards is equal to parameter suit
      */
     public boolean allSuit(Suit suit) {
-        for (Object c : hand) {
-            if (!((Card) c).getSuit().equals(suit)) return false;
-        }
+        if (hand.isEmpty())
+            return false;
+        for (Object c : hand)
+            if (!((Card) c).getSuit().equals(suit))
+                return false;
         return true;
     }
 

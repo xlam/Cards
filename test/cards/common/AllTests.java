@@ -1,12 +1,12 @@
-package cards;
+package cards.common;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    cards.common.AllTests.class,
-    cards.dumbgame.AllTests.class,
+    CardsTest.class,
+    PlayerTest.class,
 })
 public class AllTests {
 

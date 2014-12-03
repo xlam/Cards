@@ -1,6 +1,6 @@
-package cards.strategy;
+package cards.dumbgame;
 
-import cards.*;
+import cards.common.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +81,6 @@ public class MemoryStrategy extends AbstractStrategy {
         return beatCard;
     }
 
-
     protected void updateKnownCards(String action, Hand hand) {
         if (action.equals("move") && lastAction.equals("move")) {
             for (Card card : lastCardsInAction) {
@@ -95,29 +94,19 @@ public class MemoryStrategy extends AbstractStrategy {
         calculatePossibleDeckCards(hand);
     }
 
-    protected void calculatePossibleDeckCards(Hand playerHand) {
+    protected void calculatePossibleDeckCards(Hand hand) {
         possibleDeckCards.clear();
-        possibleDeckCards = new ArrayList<>(defaultDeck);
-        List<Card> temp = new ArrayList<>();
-
-        DumbHand hand = (DumbHand) playerHand;
+        possibleDeckCards.addAll(defaultDeck);
         List<Card> playerCards = hand.toList();
-
+        List<Card> temp = new ArrayList<>();
         for (Card c : possibleDeckCards) {
-            for (Card card : knownEnemyCards) {
+            for (Card card : knownEnemyCards)
                 if (c.isSameAs(card)) temp.add(c);
-            }
-            for (Card card : knownOutCards) {
+            for (Card card : knownOutCards)
                 if (c.isSameAs(card)) temp.add(c);
-            }
-            for (Card card : playerCards) {
+            for (Card card : playerCards)
                 if (c.isSameAs(card)) temp.add(c);
-            }
-
         }
-
-        for (Card card : temp) {
-            possibleDeckCards.remove(card);
-        }
+        possibleDeckCards.removeAll(temp);
     }
 }

@@ -1,24 +1,25 @@
-package cards;
+package cards.dumbgame;
 
-import cards.game.Supervisor;
-import cards.strategy.*;
+import cards.common.*;
 import java.util.List;
 
-public class Player {
-    
-    // as we set strategy at initialisation it may be final
+public class DumbPlayer extends Player {
+
     private final Strategy strategy;
-    private String name;
-    private DumbHand hand;
     private Supervisor supervisor;
 
-    public Player() {
-        name = super.toString();
+    public DumbPlayer() {
+        super();
         strategy = new SimpleStrategy();
         hand = new DumbHand();
     }
 
-    public Player(String name, AbstractStrategy strategy) {
+    public DumbPlayer(String name) {
+        this();
+        this.name = name;
+    }
+
+    public DumbPlayer(String name, AbstractStrategy strategy) {
         this.name = name;
         this.strategy = strategy;
         hand = new DumbHand();
@@ -29,23 +30,10 @@ public class Player {
             supervisor = Supervisor.getInstance();
         return supervisor;
     }
-    
-    public Player setName(String name) {
-        this.name = name;
-        return this;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public Player setHand(Hand hand) {
-        this.hand = (DumbHand)hand;
-        return this;
-    }
-
+    @Override
     public DumbHand getHand() {
-        return hand;
+        return (DumbHand)hand;
     }
 
     public List<Card> getCardsInAction() {
@@ -54,29 +42,6 @@ public class Player {
 
     public Suit getTrumpSuit() {
         return getSupervisor().getTrumpSuit();
-    }
-
-    public boolean isEmpty() {
-        return hand.isEmpty();
-    }
-
-    public Player addCard(Card card) {
-        hand.add(card);
-        return this;
-    }
-
-    public Player addCard(List<Card> cards) {
-        hand.addAll(cards);
-        return this;
-    }
-
-    public int numberOfCards() {
-        return hand.size();
-    }
-
-    public Player clearHand() {
-        hand.clear();
-        return this;
     }
 
     public Card move() {
@@ -97,8 +62,4 @@ public class Player {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
 }
