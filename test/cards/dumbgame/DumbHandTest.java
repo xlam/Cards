@@ -107,8 +107,6 @@ public class DumbHandTest {
         hand.add(new Card(Suit.SPADES,   Rank.JACK));
         expected = new Card(Suit.SPADES, Rank.ACE);
         result = hand.getHighest(trump);
-        System.out.println("Pass1 hand:" + hand);
-        System.out.println("Expected: " + expected + " result: " + result);
         assertEquals(0, result.compareTo(expected));
         hand.clear();
         hand.add(new Card(Suit.SPADES,   Rank.QUEEN));
@@ -119,8 +117,6 @@ public class DumbHandTest {
         hand.add(new Card(Suit.CLUBS,    Rank.EIGHT));
         expected = new Card(Suit.SPADES, Rank.QUEEN);
         result = hand.getHighest(trump);
-        System.out.println("Pass2 hand:" + hand);
-        System.out.println("Expected: " + expected + " result: " + result);
         assertEquals(0, result.compareTo(expected));
         hand.clear();
         hand.add(new Card(Suit.HEARTS,   Rank.NINE));
@@ -131,8 +127,6 @@ public class DumbHandTest {
         hand.add(new Card(Suit.DIAMONDS, Rank.JACK));
         expected = new Card(Suit.HEARTS, Rank.ACE);
         result = hand.getHighest(trump);
-        System.out.println("Pass1 hand:" + hand);
-        System.out.println("Expected: " + expected + " result: " + result);
         assertEquals(0, result.compareTo(expected));
     }
 

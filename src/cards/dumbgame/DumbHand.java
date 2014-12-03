@@ -49,17 +49,21 @@ public class DumbHand extends Hand {
     // TODO method seems ugly, try to refactor
     public Card getHighest(Suit trumpSuit) {
         Rank.setAceHigh();
-        Card.setSortRankFirst();
-        Collections.sort(hand);
-        if (allSuit(trumpSuit)) return (Card) hand.get(hand.size()-1);
-        Card result = null;
-        Card card;
-        for (Object c : hand) {
-            card = (Card) c;
-            if (card.getSuit().equals(trumpSuit))
-                return card;
-            else
-                result = card;
+        Card result = (Card) hand.get(0);
+        ArrayList<Card> trumps = getTrumps(trumpSuit);
+        if (trumps.isEmpty()) {
+            for (Object o: hand) {
+                Card c = (Card) o;
+                if (c.getRank().compareTo(result.getRank()) > 0)
+                    result = c;
+            }
+        }
+        else {
+            result = trumps.get(0);
+            for (Card c: trumps) {
+                if (c.getRank().compareTo(result.getRank()) > 0)
+                    result = c;
+            }
         }
         return result;
     }
