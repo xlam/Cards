@@ -1,6 +1,7 @@
 package cards.dumbgame;
 
 import cards.common.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,6 +62,16 @@ public class DumbHand extends Hand {
                 result = card;
         }
         return result;
+    }
+
+    protected ArrayList<Card> getTrumps(Suit trump) {
+        ArrayList<Card> trumps = new ArrayList<>();
+        for (Object o: hand) {
+            Card c = (Card) o;
+            if (c.getSuit().compareTo(trump) == 0)
+                trumps.add(c);
+        }
+        return trumps;
     }
 
     // TODO needs refactoring
