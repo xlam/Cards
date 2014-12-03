@@ -15,7 +15,7 @@ public class DumbGame implements Game {
     private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
 
     public static String lastWinner = "";
-    public static String lastlooser = "";
+    public static String lastLooser = "";
 
     public DumbGame() {
         deck = new DumbDeck();
@@ -117,18 +117,18 @@ public class DumbGame implements Game {
                 if (p.isEmpty())
                     playersOut.add(p);
 
-            if (deck.getCardsRemaining() == 0 && countPlayersWithCards() < 2) {
+            // if game over, find looser
+            int playersWithCards = countPlayersWithCards();
+            if (deck.getCardsRemaining() == 0 && playersWithCards < 2) {
                 System.out.println("Game Over!");
-                if (mover.numberOfCards() == 0 && shaker.numberOfCards() == 0) {
+                if (playersWithCards == 0) {
                     System.out.println("Game Draw!");
-                } else if (shaker.numberOfCards() == 0) {
-                    lastWinner = shaker.toString();
-                    System.out.println("Winner: " + shaker + " " + shaker.getHand());
-                    System.out.println("Looser: " + mover + " " + mover.getHand());
                 } else {
-                    lastWinner = mover.toString();
-                    System.out.println("Winner: " + mover + " " + mover.getHand());
-                    System.out.println("Looser: " + shaker + " " + shaker.getHand());
+                    for (DumbPlayer p: players)
+                        if (!(playersOut.contains(p))) {
+                            lastLooser = p.toString();
+                            System.out.println("Looser: " + p + " " + p.getHand());
+                        }
                 }
                 return;
             }
