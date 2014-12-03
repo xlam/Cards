@@ -57,6 +57,7 @@ public class DumbGame implements Game {
         fillPlayersHands(players.get(0));
         trumpCard = deck.deal();
         trumpSuit = trumpCard.getSuit();
+        lastLooser = null;
     }
 
     @Override

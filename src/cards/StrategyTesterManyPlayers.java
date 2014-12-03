@@ -26,12 +26,13 @@ public class StrategyTesterManyPlayers {
 
         for (int i = 0; i < 100; i++) {
             game.play();
-            players.put(game.lastLooser, players.get(game.lastLooser) + 1);
+            if (game.lastLooser != null)
+                players.put(game.lastLooser, players.get(game.lastLooser) + 1);
             game.reset();
         }
 
         for (Map.Entry<DumbPlayer, Integer> entry: playersSet) {
-            System.out.println(entry.getValue() + " looses: " + entry.getKey());
+            System.out.println(entry.getKey() + " looses: " + entry.getValue());
         }
     }
 }
