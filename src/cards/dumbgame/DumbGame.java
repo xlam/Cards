@@ -14,6 +14,7 @@ public class DumbGame implements Game {
     private Suit trumpSuit;
 
     private final ArrayList<DumbPlayer> players = new ArrayList<>();
+    private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
 
     public static String lastWinner = "";
 
@@ -45,6 +46,15 @@ public class DumbGame implements Game {
         return mover;
     }
 
+    protected DumbPlayer findShaker(DumbPlayer mover) {
+        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(mover);
+        playersSorted.remove(0);
+        for (DumbPlayer p: playersSorted)
+            if (!(playersOut.contains(p)))
+                return p;
+        return null;
+    }
+
     private void init() {
         fillPlayersHands(players.get(0));
         trumpCard = deck.deal();
@@ -53,6 +63,7 @@ public class DumbGame implements Game {
 
     @Override
     public void reset() {
+        playersOut.clear();
         player1.clearHand();
         player2.clearHand();
         cardsInAction.clear();
@@ -74,7 +85,7 @@ public class DumbGame implements Game {
 
         DumbPlayer mover, shaker;
         mover = findFirstMover(trumpSuit);
-        shaker = findFirstMover(trumpSuit);
+        shaker = findShaker(mover);
 
         System.out.println(mover + " moves first");
 
@@ -151,7 +162,7 @@ public class DumbGame implements Game {
 
     protected void fillPlayersHands(DumbPlayer first) {
         ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(first);
-        System.out.println("Sorted players (first is " + first.toString() + "): " + playersSorted.toString());
+        //System.out.println("Sorted players (first is " + first.toString() + "): " + playersSorted.toString());
         for (DumbPlayer player: playersSorted)
             // TODO implement something like deck.isEmpty()
             while (deck.getCardsRemaining() > 0 &&  player.numberOfCards() < 6)

@@ -57,9 +57,16 @@ public class DumbGameTest {
     }
 
     @Test
+    public void testFindShaker() {
+        assertEquals(player2, game.findShaker(player1));
+        assertEquals(player3, game.findShaker(player2));
+        assertEquals(player1, game.findShaker(player3));
+    }
+
+    @Test
     public void testHandsFilled() {
         game.deck.restore();
-        System.out.println(game.deck.toString());
+        //System.out.println(game.deck.toString());
         // 1 pass
         game.fillPlayersHands(player1);
         assertEquals(6, player1.numberOfCards());
