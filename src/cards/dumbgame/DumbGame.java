@@ -14,8 +14,7 @@ public class DumbGame implements Game {
     private final ArrayList<DumbPlayer> players = new ArrayList<>();
     private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
 
-    public static String lastWinner = "";
-    public static String lastLooser = "";
+    public static DumbPlayer lastLooser;
 
     public DumbGame() {
         deck = new DumbDeck();
@@ -126,7 +125,7 @@ public class DumbGame implements Game {
                 } else {
                     for (DumbPlayer p: players)
                         if (!(playersOut.contains(p))) {
-                            lastLooser = p.toString();
+                            lastLooser = p;
                             System.out.println("Looser: " + p + " " + p.getHand());
                         }
                 }

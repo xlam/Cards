@@ -2,7 +2,7 @@ package cards;
 
 import cards.dumbgame.*;
 
-public class CardsStrategyTester {
+public class StrategyTesterTwoPlayers {
 
     public static void main(String[] args) {
         System.out.println("Cards v" + Version.getVersion());
