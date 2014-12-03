@@ -61,6 +61,57 @@ public class DumbHandTest {
         hand2.add(new Card(Suit.CLUBS, Rank.SIX));
         assertTrue(hand1.compareTo(hand2, trump) > 0);
         assertTrue(hand2.compareTo(hand1, trump) < 0);
+        // pass 5
+        hand1.clear();
+        hand2.clear();
+        hand1.add(new Card(Suit.HEARTS, Rank.SIX));
+        hand1.add(new Card(Suit.HEARTS, Rank.EIGHT));
+        hand2.add(new Card(Suit.HEARTS, Rank.NINE));
+        hand2.add(new Card(Suit.HEARTS, Rank.TEN));
+        assertTrue(hand1.compareTo(hand2, trump) < 0);
+        assertTrue(hand2.compareTo(hand1, trump) > 0);
+    }
+
+    @Test
+    public void testGetHighest() {
+        Card result, expected;
+        Suit trump = Suit.SPADES;
+        DumbHand hand = new DumbHand();
+        hand.add(new Card(Suit.SPADES,   Rank.ACE));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SIX));
+        hand.add(new Card(Suit.HEARTS,   Rank.JACK));
+        hand.add(new Card(Suit.SPADES,   Rank.TEN));
+        hand.add(new Card(Suit.SPADES,   Rank.SEVEN));
+        hand.add(new Card(Suit.SPADES,   Rank.JACK));
+        expected = new Card(Suit.SPADES, Rank.ACE);
+        result = hand.getHighest(trump);
+        System.out.println("Pass1 hand:" + hand);
+        System.out.println("Expected: " + expected + " result: " + result);
+        assertEquals(0, result.compareTo(expected));
+        hand.clear();
+        hand.add(new Card(Suit.SPADES,   Rank.QUEEN));
+        hand.add(new Card(Suit.HEARTS,   Rank.TEN));
+        hand.add(new Card(Suit.CLUBS,    Rank.ACE));
+        hand.add(new Card(Suit.DIAMONDS, Rank.KING));
+        hand.add(new Card(Suit.SPADES,   Rank.EIGHT));
+        hand.add(new Card(Suit.CLUBS,    Rank.EIGHT));
+        expected = new Card(Suit.SPADES, Rank.QUEEN);
+        result = hand.getHighest(trump);
+        System.out.println("Pass2 hand:" + hand);
+        System.out.println("Expected: " + expected + " result: " + result);
+        assertEquals(0, result.compareTo(expected));
+        hand.clear();
+        hand.add(new Card(Suit.HEARTS,   Rank.NINE));
+        hand.add(new Card(Suit.HEARTS,   Rank.ACE));
+        hand.add(new Card(Suit.CLUBS,    Rank.NINE));
+        hand.add(new Card(Suit.CLUBS,    Rank.SIX));
+        hand.add(new Card(Suit.CLUBS,    Rank.TEN));
+        hand.add(new Card(Suit.DIAMONDS, Rank.JACK));
+        expected = new Card(Suit.HEARTS, Rank.ACE);
+        result = hand.getHighest(trump);
+        System.out.println("Pass1 hand:" + hand);
+        System.out.println("Expected: " + expected + " result: " + result);
+        assertEquals(0, result.compareTo(expected));
     }
 
 }
