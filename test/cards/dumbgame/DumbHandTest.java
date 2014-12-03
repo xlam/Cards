@@ -61,6 +61,73 @@ public class DumbHandTest {
         hand2.add(new Card(Suit.CLUBS, Rank.SIX));
         assertTrue(hand1.compareTo(hand2, trump) > 0);
         assertTrue(hand2.compareTo(hand1, trump) < 0);
+        // pass 5
+        hand1.clear();
+        hand2.clear();
+        hand1.add(new Card(Suit.HEARTS, Rank.SIX));
+        hand1.add(new Card(Suit.HEARTS, Rank.EIGHT));
+        hand2.add(new Card(Suit.HEARTS, Rank.NINE));
+        hand2.add(new Card(Suit.HEARTS, Rank.TEN));
+        assertTrue(hand1.compareTo(hand2, trump) < 0);
+        assertTrue(hand2.compareTo(hand1, trump) > 0);
+    }
+
+    @Test
+    public void testGetTrumps() {
+        Suit trump = Suit.SPADES;
+        DumbHand hand = new DumbHand();
+        Card trump1 = new Card(Suit.SPADES,   Rank.ACE);
+        Card trump2 = new Card(Suit.SPADES,   Rank.TEN);
+        Card trump3 = new Card(Suit.SPADES,   Rank.SEVEN);
+        Card trump4 = new Card(Suit.SPADES,   Rank.JACK);
+        hand.add(trump1);
+        hand.add(new Card(Suit.DIAMONDS, Rank.SIX));
+        hand.add(new Card(Suit.HEARTS,   Rank.JACK));
+        hand.add(trump2);
+        hand.add(trump3);
+        hand.add(trump4);
+        ArrayList<Card> trumps = hand.getTrumps(trump);
+        assertEquals(4, trumps.size());
+        assertTrue(trumps.contains(trump1));
+        assertTrue(trumps.contains(trump2));
+        assertTrue(trumps.contains(trump3));
+        assertTrue(trumps.contains(trump4));
+    }
+
+    @Test
+    public void testGetHighest() {
+        Card result, expected;
+        Suit trump = Suit.SPADES;
+        DumbHand hand = new DumbHand();
+        hand.add(new Card(Suit.SPADES,   Rank.ACE));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SIX));
+        hand.add(new Card(Suit.HEARTS,   Rank.JACK));
+        hand.add(new Card(Suit.SPADES,   Rank.TEN));
+        hand.add(new Card(Suit.SPADES,   Rank.SEVEN));
+        hand.add(new Card(Suit.SPADES,   Rank.JACK));
+        expected = new Card(Suit.SPADES, Rank.ACE);
+        result = hand.getHighest(trump);
+        assertEquals(0, result.compareTo(expected));
+        hand.clear();
+        hand.add(new Card(Suit.SPADES,   Rank.QUEEN));
+        hand.add(new Card(Suit.HEARTS,   Rank.TEN));
+        hand.add(new Card(Suit.CLUBS,    Rank.ACE));
+        hand.add(new Card(Suit.DIAMONDS, Rank.KING));
+        hand.add(new Card(Suit.SPADES,   Rank.EIGHT));
+        hand.add(new Card(Suit.CLUBS,    Rank.EIGHT));
+        expected = new Card(Suit.SPADES, Rank.QUEEN);
+        result = hand.getHighest(trump);
+        assertEquals(0, result.compareTo(expected));
+        hand.clear();
+        hand.add(new Card(Suit.HEARTS,   Rank.NINE));
+        hand.add(new Card(Suit.HEARTS,   Rank.ACE));
+        hand.add(new Card(Suit.CLUBS,    Rank.NINE));
+        hand.add(new Card(Suit.CLUBS,    Rank.SIX));
+        hand.add(new Card(Suit.CLUBS,    Rank.TEN));
+        hand.add(new Card(Suit.DIAMONDS, Rank.JACK));
+        expected = new Card(Suit.HEARTS, Rank.ACE);
+        result = hand.getHighest(trump);
+        assertEquals(0, result.compareTo(expected));
     }
 
 }

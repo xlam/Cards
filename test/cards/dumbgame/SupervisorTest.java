@@ -29,7 +29,7 @@ public class SupervisorTest {
 
     @Test
     public void testSupervisorGetPlayersCount() {
-        assertEquals(2, supervisor.getPlayersCount());
+        assertEquals(0, supervisor.getPlayersCount());
     }
 
 

@@ -11,6 +11,12 @@ public class DumbPlayer extends Player {
     public DumbPlayer() {
         super();
         strategy = new SimpleStrategy();
+        hand = new DumbHand();
+    }
+
+    public DumbPlayer(String name) {
+        this();
+        this.name = name;
     }
 
     public DumbPlayer(String name, AbstractStrategy strategy) {
