@@ -78,7 +78,7 @@ public class DumbGame implements Game {
     }
 
     private boolean gameIsOver() {
-        return (deck.getCardsRemaining() == 0 && countPlayersWithCards() < 2);
+        return (!deck.haveCardsToDeal() && countPlayersWithCards() < 2);
     }
 
     private void playRound() {
@@ -86,16 +86,17 @@ public class DumbGame implements Game {
             boolean cardsAreTaken = false; // shaker takes or not
             cardsInAction.clear();
             Card moverCard;
-            DumbPlayer shaker = findShaker(mover);
+            shaker = findShaker(mover);
             while ((moverCard = mover.move()) != null) {
                 cardsInAction.add(moverCard);
                 System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
-                cardsAreTaken = shakerBeat(shaker, moverCard);
+                if (cardsAreTaken = shakerBeat(moverCard))
+                    break;
             }
             System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
             fillPlayersHandsStartingFrom(mover);
             markWinners();
-            mover = nextMover(mover, shaker, cardsAreTaken);
+            mover = nextMover(cardsAreTaken);
     }
 
     protected int countPlayersWithCards() {
@@ -115,7 +116,7 @@ public class DumbGame implements Game {
         return null;
     }
 
-    private boolean shakerBeat(DumbPlayer shaker, Card moverCard) {
+    private boolean shakerBeat(Card moverCard) {
         Card shakerCard = shaker.beat(moverCard);
         if (shakerCard == null) { // если вариантов нет то
             System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());
@@ -160,7 +161,7 @@ public class DumbGame implements Game {
                 playersOut.add(p);
     }
 
-    private DumbPlayer nextMover(DumbPlayer mover, DumbPlayer shaker, boolean cardsTaken) {
+    private DumbPlayer nextMover(boolean cardsTaken) {
         ArrayList<DumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
         sortedPlayers.remove(mover);
         if (cardsTaken)
