@@ -29,7 +29,7 @@ public class DumbGame implements Game {
     }
 
     private void init() {
-        fillPlayersHands(players.get(0));
+        fillPlayersHandsStartingFrom(players.get(0));
         trumpCard = deck.deal();
         trumpSuit = trumpCard.getSuit();
         lastLooser = null;
@@ -55,24 +55,15 @@ public class DumbGame implements Game {
             System.out.println("Round begins!");
             boolean cardsAreTaken = false; // shaker takes or not
             cardsInAction.clear();
-            Card moverCard, shakerCard;
+            Card moverCard;
             DumbPlayer shaker = findShaker(mover);
             while ((moverCard = mover.move()) != null) {
                 cardsInAction.add(moverCard);
                 System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
-                shakerCard = shaker.beat(moverCard);
-                if (shakerCard == null) { // если вариантов нет то
-                    System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());
-                    shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2
-                    cardsAreTaken = true;
-                    break;
-                } else { // иначе
-                    System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "(" + shakerCard + ") Hand:" + shaker.getHand());
-                    cardsInAction.add(shakerCard); // и положить ее на стол (покрыть)
-                }
+                cardsAreTaken = shakerBeat(shaker, moverCard);
             }
             System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
-            fillPlayersHands(mover); // раздать карты из колоды если кому нехватает
+            fillPlayersHandsStartingFrom(mover);
             markWinners();
             mover = nextMover(mover, shaker, cardsAreTaken);
         }
@@ -119,7 +110,21 @@ public class DumbGame implements Game {
         return null;
     }
 
-    protected void fillPlayersHands(DumbPlayer first) {
+    private boolean shakerBeat(DumbPlayer shaker, Card moverCard) {
+        Card shakerCard = shaker.beat(moverCard);
+        if (shakerCard == null) { // если вариантов нет то
+            System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());
+            shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2
+            return true;
+        } else { // иначе
+            System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "(" + shakerCard + ") Hand:" + shaker.getHand());
+            cardsInAction.add(shakerCard); // и положить ее на стол (покрыть)
+            return false;
+        }
+
+    }
+
+    protected void fillPlayersHandsStartingFrom(DumbPlayer first) {
         ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
         for (DumbPlayer player: playersSorted)
             while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
@@ -164,16 +169,18 @@ public class DumbGame implements Game {
     }
 
     private void handleGameOver() {
-            System.out.println("Game Over!");
-            if (countPlayersWithCards() == 0) {
-                System.out.println("Game Draw!");
-            } else {
-                for (DumbPlayer p: players)
-                    if (!(playersOut.contains(p))) {
-                        lastLooser = p;
-                        System.out.println("Looser: " + p + " " + p.getHand());
-                    }
-            }
+        for (DumbPlayer p: players)
+            if (!(playersOut.contains(p)))
+                lastLooser = p;
+        printGameOverInfo();
+    }
+
+    private void printGameOverInfo() {
+        System.out.println("Game Over!");
+        if (lastLooser == null)
+            System.out.println("Game Draw!");
+        else
+            System.out.println("Looser: " + lastLooser + " " + lastLooser.getHand());
     }
 
     protected List<Card> getCardsInAction() {

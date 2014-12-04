@@ -92,14 +92,14 @@ public class DumbGameTest {
         game.deck.restore();
         //System.out.println(game.deck.toString());
         // 1 pass
-        game.fillPlayersHands(player1);
+        game.fillPlayersHandsStartingFrom(player1);
         assertEquals(6, player1.numberOfCards());
         assertEquals(6, player2.numberOfCards());
         assertEquals(6, player3.numberOfCards());
         // 2 pass
         player2.clearHand();
         player3.clearHand();
-        game.fillPlayersHands(player3); // dealing starts from player 3
+        game.fillPlayersHandsStartingFrom(player3); // dealing starts from player 3
         Card[] deck = game.deck.toArray();
         Card cardOf3 = deck[6*3]; // pos of first card to deal to player3
         Card cardOf2 = deck[6*4]; // pos of first card to deal to player2
@@ -108,7 +108,7 @@ public class DumbGameTest {
         // 3 pass
         player2.clearHand();
         player3.clearHand();
-        game.fillPlayersHands(player2); // dealing starts from player 2
+        game.fillPlayersHandsStartingFrom(player2); // dealing starts from player 2
         cardOf2 = deck[6*5]; // pos of first card to deal to player2
         assertEquals(cardOf2, player2.getHand().getCard(0));
     }
