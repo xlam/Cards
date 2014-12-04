@@ -11,7 +11,9 @@ public class DumbGame implements Game {
     private final List<Card> cardsInAction = new ArrayList<>();
     private Card trumpCard;
     private Suit trumpSuit;
-    private DumbPlayer lastLooser;
+    private DumbPlayer mover;
+    private DumbPlayer shaker;
+    private DumbPlayer lastLooser; // TODO handle this later
     protected final Deck deck;
 
     public DumbGame() {
