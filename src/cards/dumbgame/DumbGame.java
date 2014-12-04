@@ -163,22 +163,14 @@ public class DumbGame implements Game {
 
     private DumbPlayer nextMover(DumbPlayer mover, DumbPlayer shaker, boolean cardsTaken) {
         ArrayList<DumbPlayer> sortedPlayers = getPlayersSortedByFirst(mover);
-        sortedPlayers.remove(0);
-        // TODO make one cycle
-        if (cardsTaken) {
-            for (DumbPlayer p: sortedPlayers)
-                if (!(p.equals(shaker)) && !(playersOut.contains(p))) {
-                    mover = p;
-                    break;
-                }
-        }
-        else {
-            for (DumbPlayer p: sortedPlayers)
-                if (!(playersOut.contains(p))) {
-                    mover = p;
-                    break;
-                }
-        }
+        sortedPlayers.remove(mover);
+        if (cardsTaken)
+            sortedPlayers.remove(shaker);
+        for (DumbPlayer p: sortedPlayers)
+            if (!(playersOut.contains(p))) {
+                mover = p;
+                break;
+            }
         return mover;
     }
 
