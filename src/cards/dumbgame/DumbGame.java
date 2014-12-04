@@ -39,6 +39,16 @@ public class DumbGame implements Game {
         printStartGameInfo();
     }
 
+    protected DumbPlayer findFirstMover(Suit trump) {
+        if (players.isEmpty())
+            return null;
+        mover = players.get(0);
+        for (DumbPlayer p: players)
+            if (p.getHand().compareTo(mover.getHand(), trump) > 0)
+                mover = p;
+        return mover;
+    }
+
     private void printStartGameInfo() {
         System.out.println("New Game Started!");
         System.out.println("Deck:" + deck);
@@ -62,7 +72,16 @@ public class DumbGame implements Game {
     @Override
     public void play() {
         init();
-        while (!gameIsOver()) {
+        while (!gameIsOver())
+            playRound();
+        handleGameOver();
+    }
+
+    private boolean gameIsOver() {
+        return (deck.getCardsRemaining() == 0 && countPlayersWithCards() < 2);
+    }
+
+    private void playRound() {
             System.out.println("Round begins!");
             boolean cardsAreTaken = false; // shaker takes or not
             cardsInAction.clear();
@@ -77,22 +96,6 @@ public class DumbGame implements Game {
             fillPlayersHandsStartingFrom(mover);
             markWinners();
             mover = nextMover(mover, shaker, cardsAreTaken);
-        }
-        handleGameOver();
-    }
-
-    protected DumbPlayer findFirstMover(Suit trump) {
-        if (players.isEmpty())
-            return null;
-        DumbPlayer mover = players.get(0);
-        for (DumbPlayer p: players)
-            if (p.getHand().compareTo(mover.getHand(), trump) > 0)
-                mover = p;
-        return mover;
-    }
-
-    private boolean gameIsOver() {
-        return (deck.getCardsRemaining() == 0 && countPlayersWithCards() < 2);
     }
 
     protected int countPlayersWithCards() {
