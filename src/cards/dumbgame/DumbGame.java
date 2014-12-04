@@ -13,7 +13,7 @@ public class DumbGame implements Game {
     private Suit trumpSuit;
     private DumbPlayer mover;
     private DumbPlayer shaker;
-    private DumbPlayer lastLooser; // TODO handle this later
+    private DumbPlayer looser; // TODO handle this later
     protected final Deck deck;
 
     public DumbGame() {
@@ -27,14 +27,14 @@ public class DumbGame implements Game {
     }
 
     public DumbPlayer getLastLooser() {
-        return lastLooser;
+        return looser;
     }
 
     private void init() {
         fillPlayersHandsStartingFrom(players.get(0));
         trumpCard = deck.deal();
         trumpSuit = trumpCard.getSuit();
-        lastLooser = null;
+        looser = null;
         mover = findFirstMover(trumpSuit);
         printStartGameInfo();
     }
@@ -181,16 +181,16 @@ public class DumbGame implements Game {
     private void handleGameOver() {
         for (DumbPlayer p: players)
             if (!(playersOut.contains(p)))
-                lastLooser = p;
+                looser = p;
         printGameOverInfo();
     }
 
     private void printGameOverInfo() {
         System.out.println("Game Over!");
-        if (lastLooser == null)
+        if (looser == null)
             System.out.println("Game Draw!");
         else
-            System.out.println("Looser: " + lastLooser + " " + lastLooser.getHand());
+            System.out.println("Looser: " + looser + " " + looser.getHand());
     }
 
     protected List<Card> getCardsInAction() {
