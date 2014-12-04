@@ -72,7 +72,6 @@ public class DumbHand extends Hand {
 
     // TODO needs refactoring
     public int compareTo(DumbHand hand, Suit trump) {
-        Rank.setAceHigh();
         if (this.hand.isEmpty() && hand.isEmpty())
             return 0;
         if (this.hand.isEmpty())

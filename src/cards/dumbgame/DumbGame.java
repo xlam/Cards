@@ -121,12 +121,10 @@ public class DumbGame implements Game {
 
     protected void fillPlayersHands(DumbPlayer first) {
         ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
-        //System.out.println("Sorted players (first is " + first.toString() + "): " + playersSorted.toString());
         for (DumbPlayer player: playersSorted)
-            // TODO implement something like deck.isEmpty()
-            while (deck.getCardsRemaining() > 0 &&  player.numberOfCards() < 6)
+            while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
                 player.addCard(deck.deal());
-        if (null != trumpCard) {
+        if (null != trumpCard) { // trump card is not yet dealt
             for (DumbPlayer player : playersSorted) {
                 if (player.numberOfCards() < 6) {
                     player.addCard(trumpCard);
