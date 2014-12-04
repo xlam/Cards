@@ -111,7 +111,7 @@ public class DumbGame implements Game {
     }
 
     protected DumbPlayer findShaker(DumbPlayer mover) {
-        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(mover);
+        ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(mover);
         playersSorted.remove(0);
         for (DumbPlayer p: playersSorted)
             if (!(playersOut.contains(p)))
@@ -120,7 +120,7 @@ public class DumbGame implements Game {
     }
 
     protected void fillPlayersHands(DumbPlayer first) {
-        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(first);
+        ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
         //System.out.println("Sorted players (first is " + first.toString() + "): " + playersSorted.toString());
         for (DumbPlayer player: playersSorted)
             // TODO implement something like deck.isEmpty()
@@ -137,21 +137,12 @@ public class DumbGame implements Game {
         }
     }
 
-    private ArrayList<DumbPlayer> getPlayersSortedByFirst(DumbPlayer first) {
-        // TODO needs refactoring
+    private ArrayList<DumbPlayer> getPlayersListStartingFrom(DumbPlayer first) {
         ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
         int index = players.indexOf(first);
-        if (first.equals(players.get(0)))
-            playersSorted.addAll(players);
-        else if (first.equals(players.get(players.size()-1))) {
-            playersSorted.add(first);
-            playersSorted.addAll(players.subList(0, index));
-        }
-        else {
-            playersSorted.add(first);
-            playersSorted.addAll(players.subList(index+1, players.size()));
-            playersSorted.addAll(players.subList(0, index));
-        }
+        playersSorted.add(first);
+        playersSorted.addAll(players.subList(index+1, players.size()));
+        playersSorted.addAll(players.subList(0, index));
         return playersSorted;
     }
 
@@ -162,7 +153,7 @@ public class DumbGame implements Game {
     }
 
     private DumbPlayer nextMover(DumbPlayer mover, DumbPlayer shaker, boolean cardsTaken) {
-        ArrayList<DumbPlayer> sortedPlayers = getPlayersSortedByFirst(mover);
+        ArrayList<DumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
         sortedPlayers.remove(mover);
         if (cardsTaken)
             sortedPlayers.remove(shaker);
