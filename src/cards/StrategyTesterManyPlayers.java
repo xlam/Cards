@@ -15,6 +15,7 @@ public class StrategyTesterManyPlayers {
         players.put(new DumbPlayer("Vasya", new SimpleStrategy()), 0);
         players.put(new DumbPlayer("Jenya", new SimpleStrategy()), 0);
         players.put(new DumbPlayer("Petya", new AdvancedStrategy()), 0);
+        players.put(new DumbPlayer("Gosha", new MemoryStrategy()), 0);
 
         DumbGame game = new DumbGame();
         Supervisor supervisor = Supervisor.getInstance();
@@ -26,13 +27,15 @@ public class StrategyTesterManyPlayers {
 
         for (int i = 0; i < 100; i++) {
             game.play();
-            if (game.lastLooser != null)
-                players.put(game.lastLooser, players.get(game.lastLooser) + 1);
+            DumbPlayer looser = game.getLastLooser();
+            if (looser != null)
+                players.put(looser, players.get(looser) + 1);
             game.reset();
         }
 
         for (Map.Entry<DumbPlayer, Integer> entry: playersSet) {
-            System.out.println(entry.getKey() + " looses: " + entry.getValue());
+            System.out.print(entry.getKey() + " looses: " + entry.getValue());
+            System.out.println(" (" + entry.getKey().getStrategy() + ")");
         }
     }
 }

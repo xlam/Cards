@@ -6,15 +6,13 @@ import java.util.List;
 
 public class DumbGame implements Game {
 
-    protected final Deck deck;
+    private final ArrayList<DumbPlayer> players = new ArrayList<>();
+    private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
     private final List<Card> cardsInAction = new ArrayList<>();
     private Card trumpCard;
     private Suit trumpSuit;
-
-    private final ArrayList<DumbPlayer> players = new ArrayList<>();
-    private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
-
-    public static DumbPlayer lastLooser;
+    private DumbPlayer lastLooser;
+    protected final Deck deck;
 
     public DumbGame() {
         deck = new DumbDeck();
@@ -26,31 +24,8 @@ public class DumbGame implements Game {
         this.players.add((DumbPlayer)player);
     }
 
-    public int countPlayersWithCards() {
-        int count = 0;
-        for (Player p: players)
-            if (!(p.isEmpty()))
-                count++;
-        return count;
-    }
-
-    public DumbPlayer findFirstMover(Suit trump) {
-        if (players.isEmpty())
-            return null;
-        DumbPlayer mover = players.get(0);
-        for (DumbPlayer p: players)
-            if (p.getHand().compareTo(mover.getHand(), trump) > 0)
-                mover = p;
-        return mover;
-    }
-
-    protected DumbPlayer findShaker(DumbPlayer mover) {
-        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(mover);
-        playersSorted.remove(0);
-        for (DumbPlayer p: playersSorted)
-            if (!(playersOut.contains(p)))
-                return p;
-        return null;
+    public DumbPlayer getLastLooser() {
+        return lastLooser;
     }
 
     private void init() {
@@ -153,6 +128,33 @@ public class DumbGame implements Game {
         }
     }
 
+    protected DumbPlayer findFirstMover(Suit trump) {
+        if (players.isEmpty())
+            return null;
+        DumbPlayer mover = players.get(0);
+        for (DumbPlayer p: players)
+            if (p.getHand().compareTo(mover.getHand(), trump) > 0)
+                mover = p;
+        return mover;
+    }
+
+    protected DumbPlayer findShaker(DumbPlayer mover) {
+        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(mover);
+        playersSorted.remove(0);
+        for (DumbPlayer p: playersSorted)
+            if (!(playersOut.contains(p)))
+                return p;
+        return null;
+    }
+
+    protected int countPlayersWithCards() {
+        int count = 0;
+        for (Player p: players)
+            if (!(p.isEmpty()))
+                count++;
+        return count;
+    }
+
     protected void fillPlayersHands(DumbPlayer first) {
         ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(first);
         //System.out.println("Sorted players (first is " + first.toString() + "): " + playersSorted.toString());
@@ -171,7 +173,7 @@ public class DumbGame implements Game {
         }
     }
 
-    protected ArrayList<DumbPlayer> getPlayersSortedByFirst(DumbPlayer first) {
+    private ArrayList<DumbPlayer> getPlayersSortedByFirst(DumbPlayer first) {
         // TODO needs refactoring
         ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
         int index = players.indexOf(first);
@@ -189,16 +191,16 @@ public class DumbGame implements Game {
         return playersSorted;
     }
 
-    public List<Card> getCardsInAction() {
+    protected List<Card> getCardsInAction() {
         List<Card> cards = new ArrayList<>(cardsInAction);
         return cards;
     }
 
-    public Suit getTrumpSuit() {
+    protected Suit getTrumpSuit() {
         return trumpSuit;
     }
 
-    public int getPlayersCount() {
+    protected int getPlayersCount() {
         return players.size();
     }
 }
