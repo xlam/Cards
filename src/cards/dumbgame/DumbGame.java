@@ -35,6 +35,18 @@ public class DumbGame implements Game {
         trumpCard = deck.deal();
         trumpSuit = trumpCard.getSuit();
         lastLooser = null;
+        mover = findFirstMover(trumpSuit);
+        printStartGameInfo();
+    }
+
+    private void printStartGameInfo() {
+        System.out.println("New Game Started!");
+        System.out.println("Deck:" + deck);
+        System.out.println("Cards left in deck: " + deck.getCardsRemaining());
+        for (Player p: players)
+            System.out.println(p + " hand:" + p.getHand());
+        System.out.println("Trump: " + trumpCard);
+        System.out.println(mover + " moves first");
     }
 
     @Override
@@ -50,9 +62,6 @@ public class DumbGame implements Game {
     @Override
     public void play() {
         init();
-        printStartGameInfo();
-        DumbPlayer mover = findFirstMover(trumpSuit);
-        System.out.println(mover + " moves first");
         while (!gameIsOver()) {
             System.out.println("Round begins!");
             boolean cardsAreTaken = false; // shaker takes or not
@@ -70,15 +79,6 @@ public class DumbGame implements Game {
             mover = nextMover(mover, shaker, cardsAreTaken);
         }
         handleGameOver();
-    }
-
-    private void printStartGameInfo() {
-        System.out.println("New Game Started!");
-        System.out.println("Deck:" + deck);
-        System.out.println("Cards left in deck: " + deck.getCardsRemaining());
-        for (Player p: players)
-            System.out.println(p + " hand:" + p.getHand());
-        System.out.println("Trump: " + trumpCard);
     }
 
     protected DumbPlayer findFirstMover(Suit trump) {
