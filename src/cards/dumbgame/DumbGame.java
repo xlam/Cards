@@ -39,14 +39,18 @@ public class DumbGame implements Game {
         printStartGameInfo();
     }
 
-    protected DumbPlayer findFirstMover(Suit trump) {
+    protected DumbPlayer findFirstMover(Suit trumpSuit) {
         if (players.isEmpty())
             return null;
         mover = players.get(0);
         for (DumbPlayer p: players)
-            if (p.getHand().compareTo(mover.getHand(), trump) > 0)
+            if (compareHands(p, mover, trumpSuit) > 0)
                 mover = p;
         return mover;
+    }
+
+    private int compareHands(DumbPlayer p1, DumbPlayer p2, Suit trumpSuit) {
+        return (p1.getHand().compareTo(p2.getHand(), trumpSuit));
     }
 
     private void printStartGameInfo() {
@@ -116,6 +120,15 @@ public class DumbGame implements Game {
         return null;
     }
 
+    private ArrayList<DumbPlayer> getPlayersListStartingFrom(DumbPlayer first) {
+        ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
+        int index = players.indexOf(first);
+        playersSorted.add(first);
+        playersSorted.addAll(players.subList(index+1, players.size()));
+        playersSorted.addAll(players.subList(0, index));
+        return playersSorted;
+    }
+
     private boolean shakerBeat(Card moverCard) {
         Card shakerCard = shaker.beat(moverCard);
         if (shakerCard == null) { // если вариантов нет то
@@ -144,15 +157,6 @@ public class DumbGame implements Game {
                 }
             }
         }
-    }
-
-    private ArrayList<DumbPlayer> getPlayersListStartingFrom(DumbPlayer first) {
-        ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
-        int index = players.indexOf(first);
-        playersSorted.add(first);
-        playersSorted.addAll(players.subList(index+1, players.size()));
-        playersSorted.addAll(players.subList(0, index));
-        return playersSorted;
     }
 
     private void markWinners() {
