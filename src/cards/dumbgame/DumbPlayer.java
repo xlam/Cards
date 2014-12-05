@@ -44,6 +44,10 @@ public class DumbPlayer extends Player {
         return getSupervisor().getTrumpSuit();
     }
 
+    public Strategy getStrategy() {
+        return strategy;
+    }
+
     public Card move() {
         Card card = strategy.move(hand, getCardsInAction(), getTrumpSuit());
         if (card != null) {

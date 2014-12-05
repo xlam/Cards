@@ -100,17 +100,16 @@ public class DumbGameTest {
         player2.clearHand();
         player3.clearHand();
         game.fillPlayersHands(player3); // dealing starts from player 3
-        // TODO make deck.toArray return Card[]
-        Object[] deck = game.deck.toArray();
-        Card cardOf3 = (Card)deck[6*3]; // pos of first card to deal to player3
-        Card cardOf2 = (Card)deck[6*4]; // pos of first card to deal to player2
+        Card[] deck = game.deck.toArray();
+        Card cardOf3 = deck[6*3]; // pos of first card to deal to player3
+        Card cardOf2 = deck[6*4]; // pos of first card to deal to player2
         assertEquals(cardOf3, player3.getHand().getCard(0));
         assertEquals(cardOf2, player2.getHand().getCard(0));
         // 3 pass
         player2.clearHand();
         player3.clearHand();
         game.fillPlayersHands(player2); // dealing starts from player 2
-        cardOf2 = (Card)deck[6*5]; // pos of first card to deal to player2
+        cardOf2 = deck[6*5]; // pos of first card to deal to player2
         assertEquals(cardOf2, player2.getHand().getCard(0));
     }
 
