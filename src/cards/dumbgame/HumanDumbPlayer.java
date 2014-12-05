@@ -66,4 +66,8 @@ public class HumanDumbPlayer extends DumbPlayer {
             cards.put(c.getSymbol(), c);
         return cards;
     }
+
+    public Strategy getStrategy() {
+        return null;
+    }
 }
