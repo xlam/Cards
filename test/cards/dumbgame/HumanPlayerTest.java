@@ -21,7 +21,7 @@ public class HumanPlayerTest {
 
     @Test
     public void testHumanPlayer() {
-        HumanPlayer human = new HumanPlayer("Human");
+        HumanDumbPlayer human = new HumanDumbPlayer("Human");
         human.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
         human.addCard(new Card(Suit.HEARTS,   Rank.TEN));
         human.addCard(new Card(Suit.CLUBS,    Rank.ACE));

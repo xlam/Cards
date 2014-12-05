@@ -6,9 +6,9 @@ import cards.common.*;
  *
  * @author Sergey
  */
-public class HumanPlayer extends Player implements DumbPlayer {
+public class HumanDumbPlayer extends Player implements DumbPlayer {
 
-    public HumanPlayer(String name) {
+    public HumanDumbPlayer(String name) {
         this.name = name;
         this.hand = new DumbHand();
     }
