@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
 public class DumbGameTest {
 
     private DumbGame game;
-    private final DumbPlayer player1 = new DumbPlayer("Player1");
-    private final DumbPlayer player2 = new DumbPlayer("Player2");
-    private final DumbPlayer player3 = new DumbPlayer("Player3");
+    private final AIDumbPlayer player1 = new AIDumbPlayer("Player1");
+    private final AIDumbPlayer player2 = new AIDumbPlayer("Player2");
+    private final AIDumbPlayer player3 = new AIDumbPlayer("Player3");
 
     public DumbGameTest() {
     }

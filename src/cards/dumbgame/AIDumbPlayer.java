@@ -3,23 +3,23 @@ package cards.dumbgame;
 import cards.common.*;
 import java.util.List;
 
-public class DumbPlayer extends Player {
+public class AIDumbPlayer extends Player {
 
     private final Strategy strategy;
     private Supervisor supervisor;
 
-    public DumbPlayer() {
+    public AIDumbPlayer() {
         super();
         strategy = new SimpleStrategy();
         hand = new DumbHand();
     }
 
-    public DumbPlayer(String name) {
+    public AIDumbPlayer(String name) {
         this();
         this.name = name;
     }
 
-    public DumbPlayer(String name, AbstractStrategy strategy) {
+    public AIDumbPlayer(String name, AbstractStrategy strategy) {
         this.name = name;
         this.strategy = strategy;
         hand = new DumbHand();
