@@ -27,36 +27,27 @@ public class HumanDumbPlayer extends DumbPlayer {
 
     @Override
     public Card move() {
-        // TODO refactor duplication with beat()
-        HashMap<String, Card> cards = getCardsHashMap();
         System.out.println("Your hand is" + hand);
         System.out.print("Input card to move: ");
-        String input = "";
-        try {
-            input = inputStream.readLine();
-        }
-        catch (IOException e) {
-        }
-        Card c = cards.get(input);
+        String input = readInput();
+        Card c = getCardMatchedInput(input);
         hand.remove(c);
         return c;
     }
 
     @Override
     public Card beat(Card card) {
-        HashMap<String, Card> cards = getCardsHashMap();
         System.out.println("Your hand is" + hand);
         System.out.print("Input card to beat " + card.getSymbol() + ": ");
-        String input = "";
-        try {
-            input = inputStream.readLine();
-        }
-        catch (IOException e) {
-        }
-        // TODO do card verification
-        Card beatCard = cards.get(input);
-        hand.remove(beatCard);
-        return beatCard;
+        String input = readInput();
+        Card c = getCardMatchedInput(input); // TODO do card verification
+        hand.remove(c);
+        return c;
+    }
+
+    private Card getCardMatchedInput(String input) {
+        HashMap<String, Card> cards = getCardsHashMap();
+        return cards.get(input);
     }
 
     // TODO move this to Hand
@@ -67,6 +58,16 @@ public class HumanDumbPlayer extends DumbPlayer {
         return cards;
     }
 
+    private String readInput() {
+        try {
+            return inputStream.readLine();
+        }
+        catch (IOException e) {
+        }
+        return null;
+    }
+
+    @Override
     public Strategy getStrategy() {
         return null;
     }
