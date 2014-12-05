@@ -28,6 +28,7 @@ public class HumanPlayerTest {
         human.addCard(new Card(Suit.DIAMONDS, Rank.KING));
         human.addCard(new Card(Suit.SPADES,   Rank.EIGHT));
         human.addCard(new Card(Suit.CLUBS,    Rank.EIGHT));
+        human.setInput(new java.io.ByteArrayInputStream("10h".getBytes()));
         Card beatCard = human.beat(new Card(Suit.HEARTS, Rank.NINE));
         assertTrue(beatCard.isSameAs(new Card(Suit.HEARTS, Rank.TEN)));
         // TODO add more tests with multiple cases and trump
