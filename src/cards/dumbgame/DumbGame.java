@@ -6,12 +6,12 @@ import java.util.List;
 
 public class DumbGame implements Game {
 
-    private final ArrayList<AIDumbPlayer> players = new ArrayList<>();
-    private final ArrayList<AIDumbPlayer> playersOut = new ArrayList<>();
+    private final ArrayList<DumbPlayer> players = new ArrayList<>();
+    private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
     private final List<Card> cardsInAction = new ArrayList<>();
     private Card trumpCard;
     private Suit trumpSuit;
-    private AIDumbPlayer lastLooser;
+    private DumbPlayer lastLooser;
     protected final Deck deck;
 
     public DumbGame() {
@@ -21,10 +21,10 @@ public class DumbGame implements Game {
 
     @Override
     public void addPlayer(Player player) {
-        this.players.add((AIDumbPlayer)player);
+        this.players.add((DumbPlayer)player);
     }
 
-    public AIDumbPlayer getLastLooser() {
+    public DumbPlayer getLastLooser() {
         return lastLooser;
     }
 
@@ -49,14 +49,14 @@ public class DumbGame implements Game {
     public void play() {
         init();
         printStartGameInfo();
-        AIDumbPlayer mover = findFirstMover(trumpSuit);
+        DumbPlayer mover = findFirstMover(trumpSuit);
         System.out.println(mover + " moves first");
         while (!gameIsOver()) {
             System.out.println("Round begins!");
             boolean cardsAreTaken = false; // shaker takes or not
             cardsInAction.clear();
             Card moverCard, shakerCard;
-            AIDumbPlayer shaker = findShaker(mover);
+            DumbPlayer shaker = findShaker(mover);
             while ((moverCard = mover.move()) != null) {
                 cardsInAction.add(moverCard);
                 System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
@@ -88,11 +88,11 @@ public class DumbGame implements Game {
         System.out.println("Trump: " + trumpCard);
     }
 
-    protected AIDumbPlayer findFirstMover(Suit trump) {
+    protected DumbPlayer findFirstMover(Suit trump) {
         if (players.isEmpty())
             return null;
-        AIDumbPlayer mover = players.get(0);
-        for (AIDumbPlayer p: players)
+        DumbPlayer mover = players.get(0);
+        for (DumbPlayer p: players)
             if (p.getHand().compareTo(mover.getHand(), trump) > 0)
                 mover = p;
         return mover;
@@ -110,22 +110,22 @@ public class DumbGame implements Game {
         return count;
     }
 
-    protected AIDumbPlayer findShaker(AIDumbPlayer mover) {
-        ArrayList<AIDumbPlayer> playersSorted = getPlayersListStartingFrom(mover);
+    protected DumbPlayer findShaker(DumbPlayer mover) {
+        ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(mover);
         playersSorted.remove(0);
-        for (AIDumbPlayer p: playersSorted)
+        for (DumbPlayer p: playersSorted)
             if (!(playersOut.contains(p)))
                 return p;
         return null;
     }
 
-    protected void fillPlayersHands(AIDumbPlayer first) {
-        ArrayList<AIDumbPlayer> playersSorted = getPlayersListStartingFrom(first);
-        for (AIDumbPlayer player: playersSorted)
+    protected void fillPlayersHands(DumbPlayer first) {
+        ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
+        for (DumbPlayer player: playersSorted)
             while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
                 player.addCard(deck.deal());
         if (null != trumpCard) { // trump card is not yet dealt
-            for (AIDumbPlayer player : playersSorted) {
+            for (DumbPlayer player : playersSorted) {
                 if (player.numberOfCards() < 6) {
                     player.addCard(trumpCard);
                     trumpCard = null;
@@ -135,8 +135,8 @@ public class DumbGame implements Game {
         }
     }
 
-    private ArrayList<AIDumbPlayer> getPlayersListStartingFrom(AIDumbPlayer first) {
-        ArrayList<AIDumbPlayer> playersSorted = new ArrayList<>();
+    private ArrayList<DumbPlayer> getPlayersListStartingFrom(DumbPlayer first) {
+        ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
         int index = players.indexOf(first);
         playersSorted.add(first);
         playersSorted.addAll(players.subList(index+1, players.size()));
@@ -145,17 +145,17 @@ public class DumbGame implements Game {
     }
 
     private void markWinners() {
-        for (AIDumbPlayer p: players)
+        for (DumbPlayer p: players)
             if (p.isEmpty())
                 playersOut.add(p);
     }
 
-    private AIDumbPlayer nextMover(AIDumbPlayer mover, AIDumbPlayer shaker, boolean cardsTaken) {
-        ArrayList<AIDumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
+    private DumbPlayer nextMover(DumbPlayer mover, DumbPlayer shaker, boolean cardsTaken) {
+        ArrayList<DumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
         sortedPlayers.remove(mover);
         if (cardsTaken)
             sortedPlayers.remove(shaker);
-        for (AIDumbPlayer p: sortedPlayers)
+        for (DumbPlayer p: sortedPlayers)
             if (!(playersOut.contains(p))) {
                 mover = p;
                 break;
@@ -168,7 +168,7 @@ public class DumbGame implements Game {
             if (countPlayersWithCards() == 0) {
                 System.out.println("Game Draw!");
             } else {
-                for (AIDumbPlayer p: players)
+                for (DumbPlayer p: players)
                     if (!(playersOut.contains(p))) {
                         lastLooser = p;
                         System.out.println("Looser: " + p + " " + p.getHand());

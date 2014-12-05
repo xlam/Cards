@@ -10,7 +10,7 @@ public class StrategyTesterManyPlayers {
     public static void main(String[] args) {
         System.out.println("Cards v" + Version.getVersion());
 
-        HashMap<AIDumbPlayer, Integer> players = new HashMap<>();
+        HashMap<DumbPlayer, Integer> players = new HashMap<>();
 
         players.put(new AIDumbPlayer("Vasya", new SimpleStrategy()), 0);
         players.put(new AIDumbPlayer("Jenya", new SimpleStrategy()), 0);
@@ -21,19 +21,19 @@ public class StrategyTesterManyPlayers {
         Supervisor supervisor = Supervisor.getInstance();
         supervisor.setGame(game);
 
-        Set<Map.Entry<AIDumbPlayer, Integer>> playersSet = players.entrySet();
-        for (Map.Entry<AIDumbPlayer, Integer> entry: playersSet)
+        Set<Map.Entry<DumbPlayer, Integer>> playersSet = players.entrySet();
+        for (Map.Entry<DumbPlayer, Integer> entry: playersSet)
             game.addPlayer(entry.getKey());
 
         for (int i = 0; i < 100; i++) {
             game.play();
-            AIDumbPlayer looser = game.getLastLooser();
+            DumbPlayer looser = game.getLastLooser();
             if (looser != null)
                 players.put(looser, players.get(looser) + 1);
             game.reset();
         }
 
-        for (Map.Entry<AIDumbPlayer, Integer> entry: playersSet) {
+        for (Map.Entry<DumbPlayer, Integer> entry: playersSet) {
             System.out.print(entry.getKey() + " looses: " + entry.getValue());
             System.out.println(" (" + entry.getKey().getStrategy() + ")");
         }

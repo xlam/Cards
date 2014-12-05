@@ -3,7 +3,7 @@ package cards.dumbgame;
 import cards.common.*;
 import java.util.List;
 
-public class AIDumbPlayer extends Player implements DumbPlayer {
+public class AIDumbPlayer extends DumbPlayer {
 
     private final Strategy strategy;
     private Supervisor supervisor;
@@ -29,11 +29,6 @@ public class AIDumbPlayer extends Player implements DumbPlayer {
         if (null == supervisor)
             supervisor = Supervisor.getInstance();
         return supervisor;
-    }
-
-    @Override
-    public DumbHand getHand() {
-        return (DumbHand)hand;
     }
 
     public List<Card> getCardsInAction() {

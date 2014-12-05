@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author Sergey
  */
-public class HumanDumbPlayer extends Player implements DumbPlayer {
+public class HumanDumbPlayer extends DumbPlayer {
 
     private BufferedReader inputStream;
 
@@ -65,5 +65,9 @@ public class HumanDumbPlayer extends Player implements DumbPlayer {
         for (Card c: hand.toList())
             cards.put(c.getSymbol(), c);
         return cards;
+    }
+
+    public Strategy getStrategy() {
+        return null;
     }
 }
