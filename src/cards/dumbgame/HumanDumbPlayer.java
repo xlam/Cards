@@ -46,16 +46,8 @@ public class HumanDumbPlayer extends DumbPlayer {
     }
 
     private Card getCardMatchedInput(String input) {
-        HashMap<String, Card> cards = getCardsHashMap();
+        HashMap<String, Card> cards = hand.toHashMap();
         return cards.get(input);
-    }
-
-    // TODO move this to Hand
-    private HashMap<String, Card> getCardsHashMap() {
-        HashMap<String, Card> cards = new HashMap<>();
-        for (Card c: hand.toList())
-            cards.put(c.getSymbol(), c);
-        return cards;
     }
 
     private String readInput() {

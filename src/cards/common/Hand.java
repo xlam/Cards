@@ -2,6 +2,7 @@ package cards.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -91,7 +92,6 @@ public class Hand {
         return this;
     }
 
-
     @Override
     public String toString() {
         String out = "";
@@ -105,4 +105,12 @@ public class Hand {
     public List<Card> toList() {
         return new ArrayList<>(hand);
     }
+
+    public HashMap<String, Card> toHashMap() {
+        HashMap<String, Card> cards = new HashMap<>();
+        for (Card c: this.toList())
+            cards.put(c.getSymbol(), c);
+        return cards;
+    }
+
 }
