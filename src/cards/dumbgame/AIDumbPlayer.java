@@ -3,7 +3,7 @@ package cards.dumbgame;
 import cards.common.*;
 import java.util.List;
 
-public class AIDumbPlayer extends Player implements DumbPlayer {
+public class AIDumbPlayer extends DumbPlayer {
 
     private final Strategy strategy;
     private Supervisor supervisor;

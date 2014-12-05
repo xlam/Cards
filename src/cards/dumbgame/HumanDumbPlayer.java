@@ -11,7 +11,7 @@ import java.util.HashMap;
  *
  * @author Sergey
  */
-public class HumanDumbPlayer extends Player implements DumbPlayer {
+public class HumanDumbPlayer extends DumbPlayer {
 
     private BufferedReader inputStream;
 
