@@ -13,4 +13,9 @@ public abstract class AbstractStrategy implements Strategy {
             supervisor = Supervisor.getInstance();
         return supervisor;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 }

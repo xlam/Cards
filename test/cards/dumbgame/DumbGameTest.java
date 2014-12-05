@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
 public class DumbGameTest {
 
     private DumbGame game;
-    private final DumbPlayer player1 = new DumbPlayer("Player1");
-    private final DumbPlayer player2 = new DumbPlayer("Player2");
-    private final DumbPlayer player3 = new DumbPlayer("Player3");
+    private final AIDumbPlayer player1 = new AIDumbPlayer("Player1");
+    private final AIDumbPlayer player2 = new AIDumbPlayer("Player2");
+    private final AIDumbPlayer player3 = new AIDumbPlayer("Player3");
 
     public DumbGameTest() {
     }
@@ -100,17 +100,16 @@ public class DumbGameTest {
         player2.clearHand();
         player3.clearHand();
         game.fillPlayersHands(player3); // dealing starts from player 3
-        // TODO make deck.toArray return Card[]
-        Object[] deck = game.deck.toArray();
-        Card cardOf3 = (Card)deck[6*3]; // pos of first card to deal to player3
-        Card cardOf2 = (Card)deck[6*4]; // pos of first card to deal to player2
+        Card[] deck = game.deck.toArray();
+        Card cardOf3 = deck[6*3]; // pos of first card to deal to player3
+        Card cardOf2 = deck[6*4]; // pos of first card to deal to player2
         assertEquals(cardOf3, player3.getHand().getCard(0));
         assertEquals(cardOf2, player2.getHand().getCard(0));
         // 3 pass
         player2.clearHand();
         player3.clearHand();
         game.fillPlayersHands(player2); // dealing starts from player 2
-        cardOf2 = (Card)deck[6*5]; // pos of first card to deal to player2
+        cardOf2 = deck[6*5]; // pos of first card to deal to player2
         assertEquals(cardOf2, player2.getHand().getCard(0));
     }
 
