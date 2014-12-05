@@ -31,11 +31,6 @@ public class AIDumbPlayer extends DumbPlayer {
         return supervisor;
     }
 
-    @Override
-    public DumbHand getHand() {
-        return (DumbHand)hand;
-    }
-
     public List<Card> getCardsInAction() {
         return getSupervisor().getCardsInAction();
     }

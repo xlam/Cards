@@ -10,4 +10,9 @@ import cards.common.Player;
 public abstract class DumbPlayer extends Player {
     public abstract Card move();
     public abstract Card beat(Card card);
+
+    @Override
+    public DumbHand getHand() {
+        return (DumbHand)hand;
+    }
 }
