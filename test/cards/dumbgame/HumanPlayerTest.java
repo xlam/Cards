@@ -41,8 +41,8 @@ public class HumanPlayerTest {
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
         expected.clear();
-        expected.add(new Card(Suit.SPADES, Rank.EIGHT));
-        expected.add(new Card(Suit.CLUBS, Rank.EIGHT));
+        expected.add(hand.getCard(4));
+        expected.add(hand.getCard(5));
         result = human.getValidCardsToMove(cardsInAction, trump);
         assertEquals(expected, result);
 
