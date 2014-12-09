@@ -59,4 +59,20 @@ public class HumanPlayerTest {
 //        assertTrue(beatCard.isSameAs(new Card(Suit.HEARTS, Rank.TEN)));
         // TODO add more tests with multiple cases and trump
     }
+
+//    @Test
+//    public void testUserInput() {
+//        ArrayList<Card> cardsInAction = new ArrayList<>();
+//        HumanDumbPlayer human = new HumanDumbPlayer("Human");
+//        human.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
+//        human.addCard(new Card(Suit.HEARTS,   Rank.TEN));
+//        human.addCard(new Card(Suit.CLUBS,    Rank.ACE));
+//        human.addCard(new Card(Suit.DIAMONDS, Rank.KING));
+//        human.addCard(new Card(Suit.SPADES,   Rank.EIGHT));
+//        human.addCard(new Card(Suit.CLUBS,    Rank.EIGHT));
+//        human.setInput(new java.io.ByteArrayInputStream("10h".getBytes()));
+//        Card moveCard = human.move();
+//        assertTrue(moveCard.isSameAs(new Card(Suit.HEARTS, Rank.TEN)));
+//        // TODO add more tests with multiple cases and trump
+//    }
 }

@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -28,11 +29,22 @@ public class HumanDumbPlayer extends DumbPlayer {
 
     @Override
     public Card move() {
+        // TODO: terrible testing support due to need of DumbGame and Supervisor
+        //       objects to present
         System.out.println("Your hand is" + hand);
         System.out.print("Input card to move: ");
-        String input = readInput();
-        Card c = getCardMatchedInput(input);
-        hand.remove(c);
+        ArrayList<Card> validCards = getValidCardsToMove(null, Suit.CLUBS);
+        if (validCards.isEmpty())
+            return null;
+        Card c;
+        List<Card> cardsInAction = getCardsInAction();
+        while(true) {
+            c = getInputCardMatched(validCards);
+            if (!cardsInAction.isEmpty() && c == null)
+                break;
+        }
+        if (c != null)
+            hand.remove(c);
         return c;
     }
 
@@ -55,6 +67,15 @@ public class HumanDumbPlayer extends DumbPlayer {
                 if (c1.getRank().equals(c2.getRank()))
                     validCards.add(c1);
         return validCards;
+    }
+
+    private Card getInputCardMatched(ArrayList<Card> validCards) {
+        String input = readInput();
+        Card card = null;
+        for (Card c: validCards)
+            if (input.equals(c.getSymbol()))
+                card = c;   // TODO: does it need break?
+        return card;
     }
 
     private Card getCardMatchedInput(String input) {
