@@ -36,7 +36,7 @@ public class HumanPlayerTest {
         Hand hand = human.getHand();
         // PASS 1: first move, no cards in action
         expected = hand.toArrayList();
-        result = human.getValidCardsToMove(cardsInAction, trump);
+        result = human.getValidCardsToMove(cardsInAction);
         assertEquals(expected, result);
         // PASS 2: two cards are matching cards in action ranks
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
@@ -44,14 +44,14 @@ public class HumanPlayerTest {
         expected.clear();
         expected.add(hand.getCard(4));
         expected.add(hand.getCard(5));
-        result = human.getValidCardsToMove(cardsInAction, trump);
+        result = human.getValidCardsToMove(cardsInAction);
         assertEquals(expected, result);
         // PASS 3: no cards are matching cards in action ranks
         expected.clear();
         cardsInAction.clear();
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.JACK));
-        result = human.getValidCardsToMove(cardsInAction, trump);
+        result = human.getValidCardsToMove(cardsInAction);
         assertEquals(expected, result);
 
 //        human.setInput(new java.io.ByteArrayInputStream("10h".getBytes()));
