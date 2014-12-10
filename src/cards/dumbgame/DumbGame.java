@@ -91,7 +91,7 @@ public class DumbGame implements Game {
             cardsInAction.clear();
             Card moverCard;
             shaker = findShaker(mover);
-            while ((moverCard = mover.move()) != null) {
+            while ((moverCard = mover.move(cardsInAction, trumpSuit)) != null) {
                 cardsInAction.add(moverCard);
                 System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
                 if (cardsAreTaken = shakerBeat(moverCard))
@@ -131,7 +131,7 @@ public class DumbGame implements Game {
 
     private boolean shakerBeat(Card moverCard) {
         // TODO: exchange true and false to reflect method name
-        Card shakerCard = shaker.beat(moverCard);
+        Card shakerCard = shaker.beat(moverCard, trumpSuit);
         if (shakerCard == null) { // если вариантов нет то
             System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());
             shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2

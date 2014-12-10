@@ -30,8 +30,8 @@ public class AIDumbPlayer extends DumbPlayer {
     }
 
     @Override
-    public Card move() {
-        Card card = strategy.move(hand, getCardsInAction(), getTrumpSuit());
+    public Card move(List cardsInAction, Suit trump) {
+        Card card = strategy.move(hand, cardsInAction, trump);
         if (card != null) {
             hand.remove(card);
             return card;
@@ -40,8 +40,8 @@ public class AIDumbPlayer extends DumbPlayer {
     }
 
     @Override
-    public Card beat(Card card) {
-        Card beatCard = strategy.beat(card, hand, getTrumpSuit());
+    public Card beat(Card card, Suit trump) {
+        Card beatCard = strategy.beat(card, hand, trump);
         if (beatCard != null) {
             hand.remove(beatCard);
             return beatCard;

@@ -10,8 +10,8 @@ import java.util.List;
  * @author Sergey
  */
 public abstract class DumbPlayer extends Player {
-    public abstract Card move();
-    public abstract Card beat(Card card);
+    public abstract Card move(List cardsInAction, Suit trump);
+    public abstract Card beat(Card card, Suit trump);
     public abstract Strategy getStrategy();
 
     protected Supervisor supervisor;

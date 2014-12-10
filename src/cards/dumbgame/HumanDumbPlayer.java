@@ -28,10 +28,9 @@ public class HumanDumbPlayer extends DumbPlayer {
     }
 
     @Override
-    public Card move() {
+    public Card move(List cardsInAction, Suit trump) {
         // TODO: terrible testing support due to need of DumbGame and Supervisor
         //       objects to present
-        List cardsInAction = getCardsInAction();
         ArrayList validCards = getValidCardsToMove(cardsInAction);
         if (validCards.isEmpty())
             return null;
@@ -50,7 +49,7 @@ public class HumanDumbPlayer extends DumbPlayer {
     }
 
     @Override
-    public Card beat(Card card) {
+    public Card beat(Card card, Suit trump) {
         System.out.println("Your hand is" + hand);
         System.out.print("Input card to beat " + card.getSymbol() + ": ");
         String input = readInput();
