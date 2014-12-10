@@ -5,7 +5,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -27,11 +29,23 @@ public class HumanDumbPlayer extends DumbPlayer {
 
     @Override
     public Card move() {
-        System.out.println("Your hand is" + hand);
-        System.out.print("Input card to move: ");
-        String input = readInput();
-        Card c = getCardMatchedInput(input);
-        hand.remove(c);
+        // TODO: terrible testing support due to need of DumbGame and Supervisor
+        //       objects to present
+        List cardsInAction = getCardsInAction();
+        ArrayList validCards = getValidCardsToMove(cardsInAction);
+        if (validCards.isEmpty())
+            return null;
+        Card c;
+        do {
+            System.out.println("Your hand is" + hand);
+            System.out.println("Cards in action: " + cardsInAction);
+            System.out.print("Input card to move: ");
+            c = getInputCardMatched(validCards);
+            System.out.println("Card selected to move: " + c);
+        }
+        while (cardsInAction.isEmpty() && c == null);
+        if (c != null)
+            hand.remove(c);
         return c;
     }
 
@@ -43,6 +57,40 @@ public class HumanDumbPlayer extends DumbPlayer {
         Card c = getCardMatchedInput(input); // TODO do card verification
         hand.remove(c);
         return c;
+    }
+
+    protected ArrayList getValidCardsToMove(List<Card> cardsInAction) {
+        if (cardsInAction.isEmpty())
+            return hand.toArrayList();
+        ArrayList<Card> validCards = new ArrayList<>();
+        for (Card c1: hand.toArrayList())
+            for (Card c2: cardsInAction)
+                if (c1.getRank().equals(c2.getRank()))
+                    validCards.add(c1);
+        return validCards;
+    }
+
+    protected ArrayList getValidCardsToBeat(Card cardToBeat) {
+        ArrayList<Card> validCards = new ArrayList();
+        //Suit trump = getTrumpSuit();
+        Suit trump = Suit.SPADES;
+        for (Card c: hand.toArrayList()) {
+            if (c.getSuit().equals(cardToBeat.getSuit()))
+                if (c.getRank().compareTo(cardToBeat.getRank()) > 0)
+                    validCards.add(c);
+            if (!(cardToBeat.getSuit().equals(trump)) && c.getSuit().equals(trump))
+                validCards.add(c);
+        }
+        return validCards;
+    }
+
+    private Card getInputCardMatched(ArrayList<Card> validCards) {
+        String input = readInput();
+        Card card = null;
+        for (Card c: validCards)
+            if (input.equals(c.getSymbol()))
+                card = c;   // TODO: does it need break?
+        return card;
     }
 
     private Card getCardMatchedInput(String input) {

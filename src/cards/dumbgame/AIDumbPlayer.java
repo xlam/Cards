@@ -6,7 +6,6 @@ import java.util.List;
 public class AIDumbPlayer extends DumbPlayer {
 
     private final Strategy strategy;
-    private Supervisor supervisor;
 
     public AIDumbPlayer() {
         super();
@@ -25,24 +24,12 @@ public class AIDumbPlayer extends DumbPlayer {
         hand = new DumbHand();
     }
 
-    private Supervisor getSupervisor() {
-        if (null == supervisor)
-            supervisor = Supervisor.getInstance();
-        return supervisor;
-    }
-
-    public List<Card> getCardsInAction() {
-        return getSupervisor().getCardsInAction();
-    }
-
-    public Suit getTrumpSuit() {
-        return getSupervisor().getTrumpSuit();
-    }
-
+    @Override
     public Strategy getStrategy() {
         return strategy;
     }
 
+    @Override
     public Card move() {
         Card card = strategy.move(hand, getCardsInAction(), getTrumpSuit());
         if (card != null) {
@@ -52,6 +39,7 @@ public class AIDumbPlayer extends DumbPlayer {
         return null;
     }
 
+    @Override
     public Card beat(Card card) {
         Card beatCard = strategy.beat(card, hand, getTrumpSuit());
         if (beatCard != null) {

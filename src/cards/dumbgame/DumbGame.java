@@ -130,6 +130,7 @@ public class DumbGame implements Game {
     }
 
     private boolean shakerBeat(Card moverCard) {
+        // TODO: exchange true and false to reflect method name
         Card shakerCard = shaker.beat(moverCard);
         if (shakerCard == null) { // если вариантов нет то
             System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());

@@ -106,6 +106,10 @@ public class Hand {
         return new ArrayList<>(hand);
     }
 
+    public ArrayList<Card> toArrayList() {
+        return new ArrayList<>(hand);
+    }
+
     public HashMap<String, Card> toHashMap() {
         HashMap<String, Card> cards = new HashMap<>();
         for (Card c: this.toList())
