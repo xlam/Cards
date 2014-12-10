@@ -39,6 +39,10 @@ public class Deck {
         return deck.size() - index;
     }
 
+    public boolean haveCardsToDeal() {
+        return getCardsRemaining() > 0;
+    }
+
     public Card deal() {
         if (index < deck.size()) {
             return (Card) deck.get(index++);
@@ -50,7 +54,7 @@ public class Deck {
         Collections.sort(deck);
         return this;
     }
-    
+
     public Deck shuffle() {
         Collections.shuffle(deck);
         return this;
@@ -70,7 +74,10 @@ public class Deck {
         return result;
     }
 
-    public Object[] toArray() {
-        return deck.toArray();
+    public Card[] toArray() {
+        Card[] cards = new Card[deck.size()];
+        for (int i = 0; i < deck.size(); i++)
+            cards[i] = (Card) deck.get(i);
+        return cards;
     }
 }

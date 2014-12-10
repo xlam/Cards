@@ -46,29 +46,21 @@ public class DumbHand extends Hand {
         return null;
     }
 
-    // TODO method seems ugly, try to refactor
-    public Card getHighest(Suit trumpSuit) {
+    public Card getHighestCard(Suit trumpSuit) {
         Rank.setAceHigh();
-        Card result = (Card) hand.get(0);
-        ArrayList<Card> trumps = getTrumps(trumpSuit);
-        if (trumps.isEmpty()) {
-            for (Object o: hand) {
-                Card c = (Card) o;
-                if (c.getRank().compareTo(result.getRank()) > 0)
-                    result = c;
-            }
-        }
-        else {
-            result = trumps.get(0);
-            for (Card c: trumps) {
-                if (c.getRank().compareTo(result.getRank()) > 0)
-                    result = c;
-            }
+        List cards = getTrumps(trumpSuit);
+        if (cards.isEmpty())
+            cards = hand;
+        Card result = (Card) cards.get(0);
+        for (Object o: cards) {
+            Card c = (Card) o;
+            if (c.getRank().compareTo(result.getRank()) > 0)
+                result = c;
         }
         return result;
     }
 
-    protected ArrayList<Card> getTrumps(Suit trump) {
+    protected List getTrumps(Suit trump) {
         ArrayList<Card> trumps = new ArrayList<>();
         for (Object o: hand) {
             Card c = (Card) o;
@@ -80,15 +72,14 @@ public class DumbHand extends Hand {
 
     // TODO needs refactoring
     public int compareTo(DumbHand hand, Suit trump) {
-        Rank.setAceHigh();
         if (this.hand.isEmpty() && hand.isEmpty())
             return 0;
         if (this.hand.isEmpty())
             return -1;
         if (hand.isEmpty())
             return 1;
-        Card highestCardHand1 = getHighest(trump);
-        Card highestCardHand2 = hand.getHighest(trump);
+        Card highestCardHand1 = getHighestCard(trump);
+        Card highestCardHand2 = hand.getHighestCard(trump);
         Suit suit1 = highestCardHand1.getSuit();
         Suit suit2 = highestCardHand2.getSuit();
         if (suit1.equals(trump) && !(suit2.equals(trump)) ||

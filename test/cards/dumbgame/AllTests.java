@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
     DumbGameTest.class,
     SimpleStrategyTest.class,
     MemoryStrategyTest.class,
-    SupervisorTest.class
+    SupervisorTest.class,
+    HumanPlayerTest.class
 })
 public class AllTests {
 

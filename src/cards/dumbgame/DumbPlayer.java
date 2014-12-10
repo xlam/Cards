@@ -1,65 +1,37 @@
 package cards.dumbgame;
 
-import cards.common.*;
+import cards.common.Card;
+import cards.common.Player;
+import cards.common.Suit;
 import java.util.List;
 
-public class DumbPlayer extends Player {
+/**
+ *
+ * @author Sergey
+ */
+public abstract class DumbPlayer extends Player {
+    public abstract Card move(List cardsInAction, Suit trump);
+    public abstract Card beat(Card card, Suit trump);
+    public abstract Strategy getStrategy();
 
-    private final Strategy strategy;
-    private Supervisor supervisor;
+    protected Supervisor supervisor;
 
-    public DumbPlayer() {
-        super();
-        strategy = new SimpleStrategy();
-        hand = new DumbHand();
-    }
-
-    public DumbPlayer(String name) {
-        this();
-        this.name = name;
-    }
-
-    public DumbPlayer(String name, AbstractStrategy strategy) {
-        this.name = name;
-        this.strategy = strategy;
-        hand = new DumbHand();
-    }
-
-    private Supervisor getSupervisor() {
+    protected Supervisor getSupervisor() {
         if (null == supervisor)
             supervisor = Supervisor.getInstance();
         return supervisor;
+    }
+
+    protected List getCardsInAction() {
+        return getSupervisor().getCardsInAction();
+    }
+
+    protected Suit getTrumpSuit() {
+        return getSupervisor().getTrumpSuit();
     }
 
     @Override
     public DumbHand getHand() {
         return (DumbHand)hand;
     }
-
-    public List<Card> getCardsInAction() {
-        return getSupervisor().getCardsInAction();
-    }
-
-    public Suit getTrumpSuit() {
-        return getSupervisor().getTrumpSuit();
-    }
-
-    public Card move() {
-        Card card = strategy.move(hand, getCardsInAction(), getTrumpSuit());
-        if (card != null) {
-            hand.remove(card);
-            return card;
-        }
-        return null;
-    }
-
-    public Card beat(Card card) {
-        Card beatCard = strategy.beat(card, hand, getTrumpSuit());
-        if (beatCard != null) {
-            hand.remove(beatCard);
-            return beatCard;
-        }
-        return null;
-    }
-
 }

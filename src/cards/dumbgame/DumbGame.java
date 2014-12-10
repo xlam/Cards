@@ -6,15 +6,15 @@ import java.util.List;
 
 public class DumbGame implements Game {
 
-    protected final Deck deck;
-    private final List<Card> cardsInAction = new ArrayList<>();
+    private final ArrayList<DumbPlayer> players = new ArrayList();
+    private final ArrayList<DumbPlayer> playersOut = new ArrayList();
+    private final List<Card> cardsInAction = new ArrayList();
     private Card trumpCard;
     private Suit trumpSuit;
-
-    private final ArrayList<DumbPlayer> players = new ArrayList<>();
-    private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
-
-    public static DumbPlayer lastLooser;
+    private DumbPlayer mover;
+    private DumbPlayer shaker;
+    private DumbPlayer looser; // TODO handle this later
+    protected final Deck deck;
 
     public DumbGame() {
         deck = new DumbDeck();
@@ -26,38 +26,41 @@ public class DumbGame implements Game {
         this.players.add((DumbPlayer)player);
     }
 
-    public int countPlayersWithCards() {
-        int count = 0;
-        for (Player p: players)
-            if (!(p.isEmpty()))
-                count++;
-        return count;
+    public DumbPlayer getLastLooser() {
+        return looser;
     }
 
-    public DumbPlayer findFirstMover(Suit trump) {
+    private void init() {
+        fillPlayersHandsStartingFrom(players.get(0));
+        trumpCard = deck.deal();
+        trumpSuit = trumpCard.getSuit();
+        looser = null;
+        mover = findFirstMover(trumpSuit);
+        printStartGameInfo();
+    }
+
+    protected DumbPlayer findFirstMover(Suit trumpSuit) {
         if (players.isEmpty())
             return null;
-        DumbPlayer mover = players.get(0);
+        mover = players.get(0);
         for (DumbPlayer p: players)
-            if (p.getHand().compareTo(mover.getHand(), trump) > 0)
+            if (compareHands(p, mover, trumpSuit) > 0)
                 mover = p;
         return mover;
     }
 
-    protected DumbPlayer findShaker(DumbPlayer mover) {
-        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(mover);
-        playersSorted.remove(0);
-        for (DumbPlayer p: playersSorted)
-            if (!(playersOut.contains(p)))
-                return p;
-        return null;
+    private int compareHands(DumbPlayer p1, DumbPlayer p2, Suit trumpSuit) {
+        return (p1.getHand().compareTo(p2.getHand(), trumpSuit));
     }
 
-    private void init() {
-        fillPlayersHands(players.get(0));
-        trumpCard = deck.deal();
-        trumpSuit = trumpCard.getSuit();
-        lastLooser = null;
+    private void printStartGameInfo() {
+        System.out.println("New Game Started!");
+        System.out.println("Deck:" + deck);
+        System.out.println("Cards left in deck: " + deck.getCardsRemaining());
+        for (Player p: players)
+            System.out.println(p + " hand:" + p.getHand());
+        System.out.println("Trump: " + trumpCard);
+        System.out.println(mover + " moves first");
     }
 
     @Override
@@ -73,94 +76,80 @@ public class DumbGame implements Game {
     @Override
     public void play() {
         init();
-
-        // TODO extract method
-        System.out.println("New Game Started!");
-        System.out.println("Deck:" + deck);
-        System.out.println("Cards left in deck: " + deck.getCardsRemaining());
-        for (Player p: players)
-            System.out.println(p + " hand:" + p.getHand());
-        System.out.println("Trump: " + trumpCard);
-
-        DumbPlayer mover = findFirstMover(trumpSuit);
-
-        System.out.println(mover + " moves first");
-
-        while (true) {
-        System.out.println("Round begins!");
-            boolean cardsTaken = false; // shaker takes or not
-            cardsInAction.clear();
-            Card moverCard, shakerCard;
-            DumbPlayer shaker = findShaker(mover);
-
-            while ((moverCard = mover.move()) != null) {
-                // ходим пока у 1 есть карты для хода
-                cardsInAction.add(moverCard);
-                System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
-                shakerCard = shaker.beat(moverCard);
-                // найти карту для покрытия у 2
-                if (shakerCard == null) { // если вариантов нет то
-                    System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());
-                    shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2
-                    cardsTaken = true;
-                    break;
-                } else { // иначе
-                    System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "(" + shakerCard + ") Hand:" + shaker.getHand());
-                    cardsInAction.add(shakerCard); // и положить ее на стол (покрыть)
-                }
-            }
-            System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
-            fillPlayersHands(mover); // раздать карты из колоды если кому нехватает
-
-            // find out players if any
-            for (DumbPlayer p: players)
-                if (p.isEmpty())
-                    playersOut.add(p);
-
-            // if game over, find looser
-            int playersWithCards = countPlayersWithCards();
-            if (deck.getCardsRemaining() == 0 && playersWithCards < 2) {
-                System.out.println("Game Over!");
-                if (playersWithCards == 0) {
-                    System.out.println("Game Draw!");
-                } else {
-                    for (DumbPlayer p: players)
-                        if (!(playersOut.contains(p))) {
-                            lastLooser = p;
-                            System.out.println("Looser: " + p + " " + p.getHand());
-                        }
-                }
-                return;
-            }
-
-            // change player
-            ArrayList<DumbPlayer> sortedPlayers = getPlayersSortedByFirst(mover);
-            sortedPlayers.remove(0);
-            if (cardsTaken) {
-                for (DumbPlayer p: sortedPlayers)
-                    if (!(p.equals(shaker)) && !(playersOut.contains(p))) {
-                        mover = p;
-                        break;
-                    }
-            }
-            else {
-                for (DumbPlayer p: sortedPlayers)
-                    if (!(playersOut.contains(p))) {
-                        mover = p;
-                        break;
-                    }
-            }
-        }
+        while (!gameIsOver())
+            playRound();
+        handleGameOver();
     }
 
-    protected void fillPlayersHands(DumbPlayer first) {
-        ArrayList<DumbPlayer> playersSorted = getPlayersSortedByFirst(first);
-        //System.out.println("Sorted players (first is " + first.toString() + "): " + playersSorted.toString());
+    private boolean gameIsOver() {
+        return (!deck.haveCardsToDeal() && countPlayersWithCards() < 2);
+    }
+
+    private void playRound() {
+            System.out.println("Round begins!");
+            boolean cardsAreTaken = false; // shaker takes or not
+            cardsInAction.clear();
+            Card moverCard;
+            shaker = findShaker(mover);
+            while ((moverCard = mover.move(cardsInAction, trumpSuit)) != null) {
+                cardsInAction.add(moverCard);
+                System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
+                if (cardsAreTaken = shakerBeat(moverCard))
+                    break;
+            }
+            System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
+            fillPlayersHandsStartingFrom(mover);
+            markWinners();
+            mover = nextMover(cardsAreTaken);
+    }
+
+    protected int countPlayersWithCards() {
+        int count = 0;
+        for (Player p: players)
+            if (!(p.isEmpty()))
+                count++;
+        return count;
+    }
+
+    protected DumbPlayer findShaker(DumbPlayer mover) {
+        ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(mover);
+        playersSorted.remove(0);
+        for (DumbPlayer p: playersSorted)
+            if (!(playersOut.contains(p)))
+                return p;
+        return null;
+    }
+
+    private ArrayList getPlayersListStartingFrom(DumbPlayer first) {
+        ArrayList<DumbPlayer> playersSorted = new ArrayList();
+        int index = players.indexOf(first);
+        playersSorted.add(first);
+        playersSorted.addAll(players.subList(index+1, players.size()));
+        playersSorted.addAll(players.subList(0, index));
+        return playersSorted;
+    }
+
+    private boolean shakerBeat(Card moverCard) {
+        // TODO: exchange true and false to reflect method name
+        Card shakerCard = shaker.beat(moverCard, trumpSuit);
+        if (shakerCard == null) { // если вариантов нет то
+            System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());
+            shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2
+            return true;
+        } else { // иначе
+            System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "(" + shakerCard + ") Hand:" + shaker.getHand());
+            cardsInAction.add(shakerCard); // и положить ее на стол (покрыть)
+            return false;
+        }
+
+    }
+
+    protected void fillPlayersHandsStartingFrom(DumbPlayer first) {
+        List<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
         for (DumbPlayer player: playersSorted)
-            // TODO implement something like deck.isEmpty()
-            while (deck.getCardsRemaining() > 0 &&  player.numberOfCards() < 6)
+            while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
                 player.addCard(deck.deal());
-        if (null != trumpCard) {
+        if (null != trumpCard) { // trump card is not yet dealt
             for (DumbPlayer player : playersSorted) {
                 if (player.numberOfCards() < 6) {
                     player.addCard(trumpCard);
@@ -171,34 +160,50 @@ public class DumbGame implements Game {
         }
     }
 
-    protected ArrayList<DumbPlayer> getPlayersSortedByFirst(DumbPlayer first) {
-        // TODO needs refactoring
-        ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
-        int index = players.indexOf(first);
-        if (first.equals(players.get(0)))
-            playersSorted.addAll(players);
-        else if (first.equals(players.get(players.size()-1))) {
-            playersSorted.add(first);
-            playersSorted.addAll(players.subList(0, index));
-        }
-        else {
-            playersSorted.add(first);
-            playersSorted.addAll(players.subList(index+1, players.size()));
-            playersSorted.addAll(players.subList(0, index));
-        }
-        return playersSorted;
+    private void markWinners() {
+        for (DumbPlayer p: players)
+            if (p.isEmpty())
+                playersOut.add(p);
     }
 
-    public List<Card> getCardsInAction() {
-        List<Card> cards = new ArrayList<>(cardsInAction);
+    private DumbPlayer nextMover(boolean cardsTaken) {
+        List<DumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
+        sortedPlayers.remove(mover);
+        if (cardsTaken)
+            sortedPlayers.remove(shaker);
+        for (DumbPlayer p: sortedPlayers)
+            if (!(playersOut.contains(p))) {
+                mover = p;
+                break;
+            }
+        return mover;
+    }
+
+    private void handleGameOver() {
+        for (DumbPlayer p: players)
+            if (!(playersOut.contains(p)))
+                looser = p;
+        printGameOverInfo();
+    }
+
+    private void printGameOverInfo() {
+        System.out.println("Game Over!");
+        if (looser == null)
+            System.out.println("Game Draw!");
+        else
+            System.out.println("Looser: " + looser + " " + looser.getHand());
+    }
+
+    protected List getCardsInAction() {
+        List cards = new ArrayList(cardsInAction);
         return cards;
     }
 
-    public Suit getTrumpSuit() {
+    protected Suit getTrumpSuit() {
         return trumpSuit;
     }
 
-    public int getPlayersCount() {
+    protected int getPlayersCount() {
         return players.size();
     }
 }
