@@ -86,7 +86,7 @@ public class DumbHandTest {
         hand.add(trump2);
         hand.add(trump3);
         hand.add(trump4);
-        ArrayList<Card> trumps = hand.getTrumps(trump);
+        List trumps = hand.getTrumps(trump);
         assertEquals(4, trumps.size());
         assertTrue(trumps.contains(trump1));
         assertTrue(trumps.contains(trump2));

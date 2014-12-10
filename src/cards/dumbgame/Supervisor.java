@@ -1,6 +1,5 @@
 package cards.dumbgame;
 
-import cards.common.Card;
 import cards.common.Suit;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class Supervisor {
         this.game = game;
     }
 
-    public List<Card> getCardsInAction() {
+    public List getCardsInAction() {
         checkGameNotNull();
         return game.getCardsInAction();
     }

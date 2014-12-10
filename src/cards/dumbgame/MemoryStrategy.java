@@ -10,12 +10,12 @@ import java.util.List;
  */
 public class MemoryStrategy extends AbstractStrategy {
 
-    List<Card> knownEnemyCards = new ArrayList<>();
-    List<Card> knownOutCards = new ArrayList<>();
-    List<Card> possibleDeckCards = new ArrayList<>();
+    List<Card> knownEnemyCards = new ArrayList();
+    List<Card> knownOutCards = new ArrayList();
+    List<Card> possibleDeckCards = new ArrayList();
 
-    private static final List<Card> defaultDeck = new ArrayList<>();
-    private List<Card> lastCardsInAction = new ArrayList<>();
+    private static final List<Card> defaultDeck = new ArrayList();
+    private List<Card> lastCardsInAction = new ArrayList();
     private static String lastAction = "";
 
 

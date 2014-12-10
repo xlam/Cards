@@ -22,7 +22,7 @@ public abstract class DumbPlayer extends Player {
         return supervisor;
     }
 
-    protected List<Card> getCardsInAction() {
+    protected List getCardsInAction() {
         return getSupervisor().getCardsInAction();
     }
 

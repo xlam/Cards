@@ -6,9 +6,9 @@ import java.util.List;
 
 public class DumbGame implements Game {
 
-    private final ArrayList<DumbPlayer> players = new ArrayList<>();
-    private final ArrayList<DumbPlayer> playersOut = new ArrayList<>();
-    private final List<Card> cardsInAction = new ArrayList<>();
+    private final ArrayList<DumbPlayer> players = new ArrayList();
+    private final ArrayList<DumbPlayer> playersOut = new ArrayList();
+    private final List<Card> cardsInAction = new ArrayList();
     private Card trumpCard;
     private Suit trumpSuit;
     private DumbPlayer mover;
@@ -120,8 +120,8 @@ public class DumbGame implements Game {
         return null;
     }
 
-    private ArrayList<DumbPlayer> getPlayersListStartingFrom(DumbPlayer first) {
-        ArrayList<DumbPlayer> playersSorted = new ArrayList<>();
+    private ArrayList getPlayersListStartingFrom(DumbPlayer first) {
+        ArrayList<DumbPlayer> playersSorted = new ArrayList();
         int index = players.indexOf(first);
         playersSorted.add(first);
         playersSorted.addAll(players.subList(index+1, players.size()));
@@ -145,7 +145,7 @@ public class DumbGame implements Game {
     }
 
     protected void fillPlayersHandsStartingFrom(DumbPlayer first) {
-        ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
+        List<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
         for (DumbPlayer player: playersSorted)
             while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
                 player.addCard(deck.deal());
@@ -167,7 +167,7 @@ public class DumbGame implements Game {
     }
 
     private DumbPlayer nextMover(boolean cardsTaken) {
-        ArrayList<DumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
+        List<DumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
         sortedPlayers.remove(mover);
         if (cardsTaken)
             sortedPlayers.remove(shaker);
@@ -194,8 +194,8 @@ public class DumbGame implements Game {
             System.out.println("Looser: " + looser + " " + looser.getHand());
     }
 
-    protected List<Card> getCardsInAction() {
-        List<Card> cards = new ArrayList<>(cardsInAction);
+    protected List getCardsInAction() {
+        List cards = new ArrayList(cardsInAction);
         return cards;
     }
 

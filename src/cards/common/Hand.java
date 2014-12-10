@@ -75,7 +75,8 @@ public class Hand {
         List cards = new ArrayList();
         for (Object c : hand) {
             Card card = (Card) c;
-            if (card.getSuit().equals(suit)) cards.add(card);
+            if (card.getSuit().equals(suit))
+                cards.add(card);
         }
         Collections.sort(cards);
         return cards;
@@ -107,7 +108,7 @@ public class Hand {
     }
 
     public ArrayList<Card> toArrayList() {
-        return new ArrayList<>(hand);
+        return new ArrayList(hand);
     }
 
     public HashMap<String, Card> toHashMap() {

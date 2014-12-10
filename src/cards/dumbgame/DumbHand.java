@@ -60,7 +60,7 @@ public class DumbHand extends Hand {
         return result;
     }
 
-    protected ArrayList<Card> getTrumps(Suit trump) {
+    protected List getTrumps(Suit trump) {
         ArrayList<Card> trumps = new ArrayList<>();
         for (Object o: hand) {
             Card c = (Card) o;
