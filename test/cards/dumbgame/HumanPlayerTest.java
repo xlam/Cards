@@ -48,8 +48,8 @@ public class HumanPlayerTest {
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
         expected.clear();
+        expected.add(hand.getCard(0));
         expected.add(hand.getCard(4));
-        expected.add(hand.getCard(5));
         assertEquals(expected, human.getValidCardsToMove(cardsInAction));
         // PASS 3: no cards are matching cards in action ranks
         expected.clear();

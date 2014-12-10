@@ -71,7 +71,16 @@ public class HumanDumbPlayer extends DumbPlayer {
     }
 
     protected ArrayList getValidCardsToBeat(Card cardToBeat) {
-        ArrayList<Card> validCards = new ArrayList<>();
+        ArrayList<Card> validCards = new ArrayList();
+        //Suit trump = getTrumpSuit();
+        Suit trump = Suit.SPADES;
+        for (Card c: hand.toArrayList()) {
+            if (c.getSuit().equals(cardToBeat.getSuit()))
+                if (c.getRank().compareTo(cardToBeat.getRank()) > 0)
+                    validCards.add(c);
+            if (!(cardToBeat.getSuit().equals(trump)) && c.getSuit().equals(trump))
+                validCards.add(c);
+        }
         return validCards;
     }
 
