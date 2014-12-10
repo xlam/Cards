@@ -33,6 +33,14 @@ public class DumbService {
     }
 
     public int compare(Card card1, Card card2, Suit trump) {
+        Suit suit1 = card1.getSuit();
+        Suit suit2 = card2.getSuit();
+        if (suit1.equals(suit2))
+            return VALUES.get(card1.getRank()) - VALUES.get(card2.getRank());
+        if (suit1.equals(trump))
+            return 1;
+        if (suit2.equals(trump))
+            return -1;
         return -1;
     }
 
