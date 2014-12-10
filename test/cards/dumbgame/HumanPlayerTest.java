@@ -14,16 +14,18 @@ import org.junit.Test;
 public class HumanPlayerTest {
 
     private HumanDumbPlayer human;
+    private Suit trump;
 
     @Before
     public void setUp() {
         human = new HumanDumbPlayer("Human");
-        human.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
-        human.addCard(new Card(Suit.HEARTS,   Rank.TEN));
-        human.addCard(new Card(Suit.CLUBS,    Rank.ACE));
-        human.addCard(new Card(Suit.DIAMONDS, Rank.KING));
-        human.addCard(new Card(Suit.SPADES,   Rank.EIGHT));
         human.addCard(new Card(Suit.CLUBS,    Rank.EIGHT));
+        human.addCard(new Card(Suit.HEARTS,   Rank.TEN));
+        human.addCard(new Card(Suit.DIAMONDS, Rank.KING));
+        human.addCard(new Card(Suit.CLUBS,    Rank.ACE));
+        human.addCard(new Card(Suit.SPADES,   Rank.EIGHT));
+        human.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
+        trump = Suit.SPADES;
     }
 
     @After
@@ -55,6 +57,31 @@ public class HumanPlayerTest {
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.JACK));
         assertEquals(expected, human.getValidCardsToMove(cardsInAction));
+    }
+
+    @Test
+    public void testHumanPlayerBeat() {
+        ArrayList<Card> expected = new ArrayList();
+        Card cardToBeat;
+        Hand hand = human.getHand();
+        // PASS 1
+        cardToBeat = new Card(Suit.HEARTS, Rank.NINE);
+        expected.add(hand.getCard(1));
+        expected.add(hand.getCard(4));
+        expected.add(hand.getCard(5));
+        assertEquals(expected, human.getValidCardsToBeat(cardToBeat));
+        // PASS 2
+        cardToBeat = new Card(Suit.CLUBS, Rank.SIX);
+        expected.clear();
+        expected.add(hand.getCard(0));
+        expected.add(hand.getCard(3));
+        expected.add(hand.getCard(4));
+        expected.add(hand.getCard(5));
+        assertEquals(expected, human.getValidCardsToBeat(cardToBeat));
+        // PASS 3
+        cardToBeat = new Card(Suit.SPADES, Rank.KING);
+        expected.clear();
+        assertEquals(expected, human.getValidCardsToBeat(cardToBeat));
     }
 
 //    @Test

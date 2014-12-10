@@ -70,6 +70,11 @@ public class HumanDumbPlayer extends DumbPlayer {
         return validCards;
     }
 
+    protected ArrayList getValidCardsToBeat(Card cardToBeat) {
+        ArrayList<Card> validCards = new ArrayList<>();
+        return validCards;
+    }
+
     private Card getInputCardMatched(ArrayList<Card> validCards) {
         String input = readInput();
         Card card = null;
