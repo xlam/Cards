@@ -69,17 +69,21 @@ public class HumanDumbPlayer extends DumbPlayer {
         return validCards;
     }
 
-    protected ArrayList getValidCardsToBeat(Card cardToBeat) {
+    protected ArrayList getValidCardsToBeat(Card cardToBeat, Suit trump) {
         ArrayList<Card> validCards = new ArrayList();
-        //Suit trump = getTrumpSuit();
-        Suit trump = Suit.SPADES;
+        DumbService s = new DumbService();
         for (Card c: hand.toArrayList()) {
-            if (c.getSuit().equals(cardToBeat.getSuit()))
-                if (c.getRank().compareTo(cardToBeat.getRank()) > 0)
-                    validCards.add(c);
-            if (!(cardToBeat.getSuit().equals(trump)) && c.getSuit().equals(trump))
+            if (s.getValueOf(c, trump) > s.getValueOf(cardToBeat, trump)) {
                 validCards.add(c);
+                System.out.println(s.getValueOf(c, trump) + " : " + s.getValueOf(cardToBeat, trump));
+                }
+//            if (c.getSuit().equals(cardToBeat.getSuit()))
+//                if (c.getRank().compareTo(cardToBeat.getRank()) > 0)
+//                    validCards.add(c);
+//            if (!(cardToBeat.getSuit().equals(trump)) && c.getSuit().equals(trump))
+//                validCards.add(c);
         }
+        System.out.println(validCards);
         return validCards;
     }
 

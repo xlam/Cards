@@ -32,4 +32,8 @@ public class DumbService {
         return VALUES.get(card.getRank()) + d;
     }
 
+    public int compare(Card card1, Card card2, Suit trump) {
+        return -1;
+    }
+
 }

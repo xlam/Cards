@@ -40,12 +40,11 @@ public class DumbServiceTest {
         Card card5 = new Card(Suit.DIAMONDS, Rank.SEVEN);
         Card card6 = new Card(Suit.SPADES, Rank.SIX);
         Card card7 = new Card(Suit.SPADES, Rank.TEN);
-        assertTrue(service.getValueOf(card1, trump) < service.getValueOf(card2, trump));
-        assertTrue(service.getValueOf(card3, trump) > service.getValueOf(card1, trump));
-        assertTrue(service.getValueOf(card1, trump) == service.getValueOf(card4, trump));
-        assertTrue(service.getValueOf(card2, trump) == service.getValueOf(card5, trump));
-        assertTrue(service.getValueOf(card2, trump) < service.getValueOf(card6, trump));
-        assertTrue(service.getValueOf(card6, trump) < service.getValueOf(card7, trump));
+        assertTrue(service.compare(card1, card2, trump) < 0);
+        assertTrue(service.compare(card2, card1, trump) > 0);
+        assertTrue(service.compare(card5, card1, trump) < 0);
+        assertTrue(service.compare(card2, card6, trump) < 0);
+        assertTrue(service.compare(card6, card3, trump) > 0);
     }
 
 }
