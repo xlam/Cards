@@ -31,8 +31,8 @@ public class HumanDumbPlayer extends DumbPlayer {
     public Card move() {
         // TODO: terrible testing support due to need of DumbGame and Supervisor
         //       objects to present
-        List<Card> cardsInAction = getCardsInAction();
-        ArrayList<Card> validCards = getValidCardsToMove(cardsInAction);
+        List cardsInAction = getCardsInAction();
+        ArrayList validCards = getValidCardsToMove(cardsInAction);
         if (validCards.isEmpty())
             return null;
         Card c;
@@ -59,7 +59,7 @@ public class HumanDumbPlayer extends DumbPlayer {
         return c;
     }
 
-    protected ArrayList<Card> getValidCardsToMove(List<Card> cardsInAction) {
+    protected ArrayList getValidCardsToMove(List<Card> cardsInAction) {
         if (cardsInAction.isEmpty())
             return hand.toArrayList();
         ArrayList<Card> validCards = new ArrayList<>();

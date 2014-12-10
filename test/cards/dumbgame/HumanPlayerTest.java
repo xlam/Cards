@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cards.dumbgame;
 
 import cards.common.*;
@@ -21,10 +15,8 @@ public class HumanPlayerTest {
     }
 
     @Test
-    public void testHumanPlayer() {
-        Suit trump = Suit.SPADES;
+    public void testHumanPlayerMove() {
         ArrayList<Card> expected;
-        ArrayList<Card> result;
         ArrayList<Card> cardsInAction = new ArrayList<>();
         HumanDumbPlayer human = new HumanDumbPlayer("Human");
         human.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
@@ -36,28 +28,20 @@ public class HumanPlayerTest {
         Hand hand = human.getHand();
         // PASS 1: first move, no cards in action
         expected = hand.toArrayList();
-        result = human.getValidCardsToMove(cardsInAction);
-        assertEquals(expected, result);
+        assertEquals(expected, human.getValidCardsToMove(cardsInAction));
         // PASS 2: two cards are matching cards in action ranks
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.EIGHT));
         expected.clear();
         expected.add(hand.getCard(4));
         expected.add(hand.getCard(5));
-        result = human.getValidCardsToMove(cardsInAction);
-        assertEquals(expected, result);
+        assertEquals(expected, human.getValidCardsToMove(cardsInAction));
         // PASS 3: no cards are matching cards in action ranks
         expected.clear();
         cardsInAction.clear();
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
         cardsInAction.add(new Card(Suit.DIAMONDS, Rank.JACK));
-        result = human.getValidCardsToMove(cardsInAction);
-        assertEquals(expected, result);
-
-//        human.setInput(new java.io.ByteArrayInputStream("10h".getBytes()));
-//        Card beatCard = human.beat(new Card(Suit.HEARTS, Rank.NINE));
-//        assertTrue(beatCard.isSameAs(new Card(Suit.HEARTS, Rank.TEN)));
-        // TODO add more tests with multiple cases and trump
+        assertEquals(expected, human.getValidCardsToMove(cardsInAction));
     }
 
 //    @Test
