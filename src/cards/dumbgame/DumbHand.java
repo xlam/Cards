@@ -35,6 +35,7 @@ public class DumbHand extends Hand {
      * @return Card if one is found, null otherwise
      */
     public Card getLowest(Suit trumpSuit) {
+        // TODO: make it use DumbService
         Rank.setAceHigh();
         Card.setSortRankFirst();
         Collections.sort(hand);
@@ -47,6 +48,7 @@ public class DumbHand extends Hand {
     }
 
     public Card getHighestCard(Suit trumpSuit) {
+        // TODO: make it use DumbService
         Rank.setAceHigh();
         List cards = getTrumps(trumpSuit);
         if (cards.isEmpty())
@@ -61,6 +63,7 @@ public class DumbHand extends Hand {
     }
 
     protected List getTrumps(Suit trump) {
+        // TODO: is it really useful?
         ArrayList<Card> trumps = new ArrayList<>();
         for (Object o: hand) {
             Card c = (Card) o;
@@ -70,8 +73,8 @@ public class DumbHand extends Hand {
         return trumps;
     }
 
-    // TODO needs refactoring
     public int compareTo(DumbHand hand, Suit trump) {
+        // TODO think how to utilize DumbService here
         if (this.hand.isEmpty() && hand.isEmpty())
             return 0;
         if (this.hand.isEmpty())

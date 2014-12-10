@@ -11,6 +11,7 @@ public class SimpleStrategy extends AbstractStrategy {
 
     @Override
     public Card move(Hand hand, List<Card> cardsInAction, Suit trump) {
+        // TODO: smells like needs refactoring...
         DumbHand dumbHand = (DumbHand) hand;
         if (dumbHand.isEmpty()) return null;
         Card moveCard = null;
@@ -31,6 +32,7 @@ public class SimpleStrategy extends AbstractStrategy {
 
     @Override
     public Card beat(Card card, Hand hand, Suit trump) {
+        // TODO: smells like needs refactoring...
         Card beatCard = null;
         List<Card> cards = hand.getAllBySuit(card.getSuit());
         if (!cards.isEmpty()) {

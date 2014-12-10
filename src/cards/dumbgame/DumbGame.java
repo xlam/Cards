@@ -6,6 +6,8 @@ import java.util.List;
 
 public class DumbGame implements Game {
 
+    // TODO: is it too many responsibilities?
+
     private final ArrayList<DumbPlayer> players = new ArrayList();
     private final ArrayList<DumbPlayer> playersOut = new ArrayList();
     private final List<Card> cardsInAction = new ArrayList();

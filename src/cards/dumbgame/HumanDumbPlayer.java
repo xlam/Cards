@@ -29,8 +29,7 @@ public class HumanDumbPlayer extends DumbPlayer {
 
     @Override
     public Card move(List cardsInAction, Suit trump) {
-        // TODO: terrible testing support due to need of DumbGame and Supervisor
-        //       objects to present
+        // TODO: needs refactoring?
         ArrayList validCards = getValidCardsToMove(cardsInAction);
         if (validCards.isEmpty())
             return null;

@@ -30,6 +30,7 @@ public class MemoryStrategy extends AbstractStrategy {
 
     @Override
     public Card move(Hand hand, List<Card> cardsInAction, Suit trump) {
+        // TODO: looks like needs refactoring...
         updateKnownCards("move", hand);
         DumbHand dumbHand = (DumbHand) hand;
         if (dumbHand.isEmpty()) return null;
@@ -54,6 +55,7 @@ public class MemoryStrategy extends AbstractStrategy {
 
     @Override
     public Card beat(Card card, Hand hand, Suit trump) {
+        // TODO: looks like needs refactoring...
         updateKnownCards("beat", hand);
         DumbHand dumbHand = (DumbHand) hand;
         Card beatCard = null;
