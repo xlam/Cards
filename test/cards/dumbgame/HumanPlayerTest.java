@@ -69,7 +69,7 @@ public class HumanPlayerTest {
         expected.add(hand.getCard(1));
         expected.add(hand.getCard(4));
         expected.add(hand.getCard(5));
-        assertEquals(expected, human.getValidCardsToBeat(cardToBeat));
+        assertEquals(expected, human.getValidCardsToBeat(cardToBeat, trump));
         // PASS 2
         cardToBeat = new Card(Suit.CLUBS, Rank.SIX);
         expected.clear();
@@ -77,11 +77,11 @@ public class HumanPlayerTest {
         expected.add(hand.getCard(3));
         expected.add(hand.getCard(4));
         expected.add(hand.getCard(5));
-        assertEquals(expected, human.getValidCardsToBeat(cardToBeat));
+        assertEquals(expected, human.getValidCardsToBeat(cardToBeat, trump));
         // PASS 3
         cardToBeat = new Card(Suit.SPADES, Rank.KING);
         expected.clear();
-        assertEquals(expected, human.getValidCardsToBeat(cardToBeat));
+        assertEquals(expected, human.getValidCardsToBeat(cardToBeat, trump));
     }
 
 //    @Test
