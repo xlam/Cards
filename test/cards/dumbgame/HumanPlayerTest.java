@@ -2,7 +2,9 @@ package cards.dumbgame;
 
 import cards.common.*;
 import java.util.ArrayList;
+import org.junit.After;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -11,6 +13,24 @@ import org.junit.Test;
  */
 public class HumanPlayerTest {
 
+    private HumanDumbPlayer human;
+
+    @Before
+    public void setUp() {
+        human = new HumanDumbPlayer("Human");
+        human.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
+        human.addCard(new Card(Suit.HEARTS,   Rank.TEN));
+        human.addCard(new Card(Suit.CLUBS,    Rank.ACE));
+        human.addCard(new Card(Suit.DIAMONDS, Rank.KING));
+        human.addCard(new Card(Suit.SPADES,   Rank.EIGHT));
+        human.addCard(new Card(Suit.CLUBS,    Rank.EIGHT));
+    }
+
+    @After
+    public void tearDown() {
+        human = null;
+    }
+
     public HumanPlayerTest() {
     }
 
@@ -18,15 +38,8 @@ public class HumanPlayerTest {
     public void testHumanPlayerMove() {
         ArrayList<Card> expected;
         ArrayList<Card> cardsInAction = new ArrayList<>();
-        HumanDumbPlayer human = new HumanDumbPlayer("Human");
-        human.addCard(new Card(Suit.SPADES,   Rank.QUEEN));
-        human.addCard(new Card(Suit.HEARTS,   Rank.TEN));
-        human.addCard(new Card(Suit.CLUBS,    Rank.ACE));
-        human.addCard(new Card(Suit.DIAMONDS, Rank.KING));
-        human.addCard(new Card(Suit.SPADES,   Rank.EIGHT));
-        human.addCard(new Card(Suit.CLUBS,    Rank.EIGHT));
         Hand hand = human.getHand();
-        // PASS 1: first move, no cards in action
+        // PASS 1: first move, no cards in action, so all the cards in hand are match
         expected = hand.toArrayList();
         assertEquals(expected, human.getValidCardsToMove(cardsInAction));
         // PASS 2: two cards are matching cards in action ranks
