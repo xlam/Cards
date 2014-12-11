@@ -72,7 +72,7 @@ public class HumanDumbPlayer extends DumbPlayer {
         ArrayList<Card> validCards = new ArrayList();
         DumbService s = new DumbService();
         for (Card c: hand.toArrayList())
-            if (s.compare(c, cardToBeat, trump) > 0)
+            if (s.compareForBeat(c, cardToBeat, trump) > 0)
                 validCards.add(c);
         return validCards;
     }

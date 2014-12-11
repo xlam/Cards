@@ -42,7 +42,7 @@ public class DumbService {
         }
     }
 
-    public int compare(Card card1, Card card2, Suit trump) {
+    public int compareForBeat(Card card1, Card card2, Suit trump) {
         Suit suit1 = card1.getSuit();
         Suit suit2 = card2.getSuit();
         if (suit1.equals(suit2))

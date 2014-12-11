@@ -2,7 +2,6 @@ package cards.dumbgame;
 
 import cards.common.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DumbHand extends Hand {
@@ -48,33 +47,28 @@ public class DumbHand extends Hand {
     }
 
     public Card getHighestCard(Suit trumpSuit) {
-        // TODO: make it use DumbService
-        Rank.setAceHigh();
-        List cards = getTrumps(trumpSuit);
-        if (cards.isEmpty())
-            cards = hand;
-        Card result = (Card) cards.get(0);
-        for (Object o: cards) {
+        if (hand.isEmpty())
+            return null;
+        Card card = (Card) hand.get(0);
+        DumbService s = new DumbService();
+        for (Object o : hand) {
             Card c = (Card) o;
-            if (c.getRank().compareTo(result.getRank()) > 0)
-                result = c;
+            if (s.getValueOf(c, trumpSuit) > s.getValueOf(card, trumpSuit))
+                card = c;
         }
-        return result;
+        return card;
     }
 
-    protected List getTrumps(Suit trump) {
+    protected List<Card> getTrumps(Suit trump) {
         // TODO: is it really useful?
-        ArrayList<Card> trumps = new ArrayList<>();
-        for (Object o: hand) {
-            Card c = (Card) o;
-            if (c.getSuit().compareTo(trump) == 0)
-                trumps.add(c);
-        }
+        List<Card> trumps = new ArrayList();
+        for (Object o: hand)
+            if (((Card)o).getSuit().compareTo(trump) == 0)
+                trumps.add((Card)o);
         return trumps;
     }
 
     public int compareTo(DumbHand hand, Suit trump) {
-        // TODO think how to utilize DumbService here
         if (this.hand.isEmpty() && hand.isEmpty())
             return 0;
         if (this.hand.isEmpty())
@@ -89,6 +83,7 @@ public class DumbHand extends Hand {
             suit2.equals(trump) && !(suit1.equals(trump))) {
                 return suit1.equals(trump) ? 1 : -1;
         }
+        Rank.setAceHigh();
         return highestCardHand1.getRank().compareTo(highestCardHand2.getRank());
     }
 
