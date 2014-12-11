@@ -49,17 +49,16 @@ public class SimpleStrategyTest {
 
     @Test
     public void testSimpleStrategyBeat() {
-        // TODO: get rid of invalid dumb game ranks
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
-        hand.add(new Card(Suit.CLUBS, Rank.TWO));
-        hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
-        Card card = new Card(Suit.DIAMONDS, Rank.TWO);
+        hand.add(new Card(Suit.CLUBS, Rank.SIX));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        Card card = new Card(Suit.DIAMONDS, Rank.SIX);
         assertEquals(hand.getCard(2), strategy.beat(card, hand, trump));
-        card = new Card(Suit.CLUBS, Rank.THREE);
+        card = new Card(Suit.CLUBS, Rank.SEVEN);
         assertEquals(hand.getCard(0), strategy.beat(card, hand, trump));
         hand.remove(2);
-        card = new Card(Suit.DIAMONDS, Rank.TWO);
+        card = new Card(Suit.DIAMONDS, Rank.EIGHT);
         assertEquals(hand.getCard(1), strategy.beat(card, hand, trump));
     }
 }
