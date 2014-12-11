@@ -35,16 +35,16 @@ public class DumbHand extends Hand {
      * @return Card if one is found, null otherwise
      */
     public Card getLowest(Suit trumpSuit) {
-        // TODO: make it use DumbService
-        Rank.setAceHigh();
-        Card.setSortRankFirst();
-        Collections.sort(hand);
-        if (allSuit(trumpSuit)) return (Card) hand.get(0);
-        for (Object c : hand) {
-            Card card = (Card) c;
-            if (!(card.getSuit().equals(trumpSuit))) return card;
+        if (hand.isEmpty())
+            return null;
+        Card card = (Card) hand.get(0);
+        DumbService s = new DumbService();
+        for (Object o : hand) {
+            Card c = (Card) o;
+            if (s.getValueOf(c, trumpSuit) < s.getValueOf(card, trumpSuit))
+                card = c;
         }
-        return null;
+        return card;
     }
 
     public Card getHighestCard(Suit trumpSuit) {

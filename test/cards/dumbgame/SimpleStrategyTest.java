@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cards.dumbgame;
 
 import cards.common.*;
@@ -39,16 +35,13 @@ public class SimpleStrategyTest {
         strategy = null;
     }
 
-    /**
-     * Test of move method, of class SimpleStrategy.
-     */
     @Test
     public void testSimpleStrategyMoveLowestCard() {
         DumbHand hand = new DumbHand();
-        List<Card> cardsInAction = new ArrayList<>();
+        List<Card> cardsInAction = new ArrayList();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
-        hand.add(new Card(Suit.CLUBS, Rank.TWO));
-        hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
+        hand.add(new Card(Suit.CLUBS, Rank.SIX));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SIX));
         assertEquals(hand.getCard(2), strategy.move(hand, cardsInAction, trump));
         hand.remove(2);
         assertEquals(hand.getCard(1), strategy.move(hand, cardsInAction, trump));
@@ -56,6 +49,7 @@ public class SimpleStrategyTest {
 
     @Test
     public void testSimpleStrategyBeat() {
+        // TODO: get rid of invalid dumb game ranks
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));

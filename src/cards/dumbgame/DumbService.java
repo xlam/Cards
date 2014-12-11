@@ -2,6 +2,7 @@ package cards.dumbgame;
 
 import cards.common.*;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -26,10 +27,19 @@ public class DumbService {
     }
 
     public int getValueOf(Card card, Suit trump) {
+        if (!(VALUES.containsKey(card.getRank())))
+            System.err.println("ERROR: invalid rank: " + card.getRank());
         int d = 0;
         if (card.getSuit().equals(trump))
             d += delta;
         return VALUES.get(card.getRank()) + d;
+    }
+
+    private void printDebug(Card card) {
+        System.out.println("card.getRank().hashCode()=" + card.getRank().hashCode());
+        for (Map.Entry r: VALUES.entrySet()) {
+            System.out.println("VALUES.entry=" + r.getKey() + " hashCode()=" + r.getKey().hashCode());
+        }
     }
 
     public int compare(Card card1, Card card2, Suit trump) {
