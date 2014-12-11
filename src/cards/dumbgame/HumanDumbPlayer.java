@@ -30,7 +30,8 @@ public class HumanDumbPlayer extends DumbPlayer {
     @Override
     public Card move(List cardsInAction, Suit trump) {
         // TODO: needs refactoring?
-        ArrayList validCards = getValidCardsToMove(cardsInAction);
+        DumbService s = getService();
+        ArrayList validCards = s.getValidCardsToMove(hand, cardsInAction);
         if (validCards.isEmpty())
             return null;
         Card c;
@@ -55,26 +56,6 @@ public class HumanDumbPlayer extends DumbPlayer {
         Card c = getCardMatchedInput(input); // TODO do card verification
         hand.remove(c);
         return c;
-    }
-
-    protected ArrayList getValidCardsToMove(List<Card> cardsInAction) {
-        if (cardsInAction.isEmpty())
-            return hand.toArrayList();
-        ArrayList<Card> validCards = new ArrayList<>();
-        for (Card c1: hand.toArrayList())
-            for (Card c2: cardsInAction)
-                if (c1.getRank().equals(c2.getRank()))
-                    validCards.add(c1);
-        return validCards;
-    }
-
-    protected ArrayList getValidCardsToBeat(Card cardToBeat, Suit trump) {
-        ArrayList<Card> validCards = new ArrayList();
-        DumbService s = new DumbService();
-        for (Card c: hand.toArrayList())
-            if (s.compareForBeat(c, cardToBeat, trump) > 0)
-                validCards.add(c);
-        return validCards;
     }
 
     private Card getInputCardMatched(ArrayList<Card> validCards) {

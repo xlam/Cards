@@ -11,7 +11,8 @@ import org.junit.runners.Suite;
     SimpleStrategyTest.class,
     MemoryStrategyTest.class,
     SupervisorTest.class,
-    HumanPlayerTest.class
+    HumanPlayerTest.class,
+    DumbServiceTest.class
 })
 public class AllTests {
 

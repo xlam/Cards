@@ -1,7 +1,9 @@
 package cards.dumbgame;
 
 import cards.common.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,5 +55,25 @@ public class DumbService {
             return -1;
         return -1;
     }
+
+   protected ArrayList getValidCardsToMove(Hand hand, List<Card> cardsInAction) {
+        if (cardsInAction.isEmpty())
+            return hand.toArrayList();
+        ArrayList<Card> validCards = new ArrayList<>();
+        for (Card c1: hand.toArrayList())
+            for (Card c2: cardsInAction)
+                if (c1.getRank().equals(c2.getRank()))
+                    validCards.add(c1);
+        return validCards;
+    }
+
+    protected ArrayList getValidCardsToBeat(Card cardToBeat, Hand hand, Suit trump) {
+        ArrayList<Card> validCards = new ArrayList();
+        for (Card c: hand.toArrayList())
+            if (compareForBeat(c, cardToBeat, trump) > 0)
+                validCards.add(c);
+        return validCards;
+    }
+
 
 }
