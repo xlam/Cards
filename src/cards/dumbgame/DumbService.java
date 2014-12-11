@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class DumbService {
 
-    private HashMap<Rank, Integer> VALUES;
+    private final HashMap<Rank, Integer> VALUES;
     private final int delta = 10;
 
     public DumbService() {
