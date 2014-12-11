@@ -11,22 +11,19 @@ public class AdvancedStrategy extends AbstractStrategy {
 
     @Override
     public Card move(Hand hand, List<Card> cardsInAction, Suit trump) {
-        // TODO: looks like needs refactoring...
         DumbHand dumbHand = (DumbHand) hand;
-        if (dumbHand.isEmpty()) return null;
+        if (dumbHand.isEmpty())
+            return null;
         Card moveCard = null;
         if (cardsInAction.isEmpty()) {
             moveCard = dumbHand.getLowestCard(trump);
         } else {
-            for (Card card : cardsInAction) {
-                for (int i = 0; i < dumbHand.size(); i++) {
-                    Card c = (Card) dumbHand.getCard(i);
+            for (Card card : cardsInAction)
+                for (Card c: dumbHand.toList())
                     if (c.getRank().equals(card.getRank())
                         && !(c.getSuit().equals(trump))
                         && c.getRank().compareTo(Rank.KING) < 0)
                             moveCard = c;
-                }
-            }
         }
         return moveCard;
     }
