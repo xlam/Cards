@@ -130,4 +130,40 @@ public class DumbHandTest {
         assertEquals(0, result.compareTo(expected));
     }
 
+    @Test
+    public void testGetLowestCard() {
+        Card result, expected;
+        Suit trump = Suit.SPADES;
+        DumbHand hand = new DumbHand();
+        hand.add(new Card(Suit.SPADES,   Rank.ACE));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SIX));
+        hand.add(new Card(Suit.HEARTS,   Rank.JACK));
+        hand.add(new Card(Suit.SPADES,   Rank.TEN));
+        hand.add(new Card(Suit.SPADES,   Rank.SEVEN));
+        hand.add(new Card(Suit.SPADES,   Rank.JACK));
+        expected = new Card(Suit.DIAMONDS, Rank.SIX);
+        result = hand.getLowestCard(trump);
+        assertTrue(result.isSameAs(expected));
+        hand.clear();
+        hand.add(new Card(Suit.SPADES,   Rank.QUEEN));
+        hand.add(new Card(Suit.HEARTS,   Rank.TEN));
+        hand.add(new Card(Suit.CLUBS,    Rank.ACE));
+        hand.add(new Card(Suit.DIAMONDS, Rank.KING));
+        hand.add(new Card(Suit.SPADES,   Rank.EIGHT));
+        hand.add(new Card(Suit.CLUBS,    Rank.EIGHT));
+        expected = new Card(Suit.CLUBS, Rank.EIGHT);
+        result = hand.getLowestCard(trump);
+        assertTrue(result.isSameAs(expected));
+        hand.clear();
+        hand.add(new Card(Suit.HEARTS,   Rank.SIX));
+        hand.add(new Card(Suit.HEARTS,   Rank.ACE));
+        hand.add(new Card(Suit.CLUBS,    Rank.NINE));
+        hand.add(new Card(Suit.CLUBS,    Rank.SIX));
+        hand.add(new Card(Suit.CLUBS,    Rank.TEN));
+        hand.add(new Card(Suit.DIAMONDS, Rank.JACK));
+        expected = new Card(Suit.HEARTS, Rank.SIX);
+        result = hand.getLowestCard(trump);
+        assertTrue(result.isSameAs(expected));
+    }
+
 }

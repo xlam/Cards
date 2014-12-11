@@ -1,7 +1,10 @@
 package cards.dumbgame;
 
 import cards.common.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -9,7 +12,7 @@ import java.util.HashMap;
  */
 public class DumbService {
 
-    private HashMap<Rank, Integer> VALUES;
+    private final HashMap<Rank, Integer> VALUES;
     private final int delta = 10;
 
     public DumbService() {
@@ -26,13 +29,22 @@ public class DumbService {
     }
 
     public int getValueOf(Card card, Suit trump) {
+        if (!(VALUES.containsKey(card.getRank())))
+            System.err.println("ERROR: invalid rank: " + card.getRank());
         int d = 0;
         if (card.getSuit().equals(trump))
             d += delta;
         return VALUES.get(card.getRank()) + d;
     }
 
-    public int compare(Card card1, Card card2, Suit trump) {
+    private void printDebug(Card card) {
+        System.out.println("card.getRank().hashCode()=" + card.getRank().hashCode());
+        for (Map.Entry r: VALUES.entrySet()) {
+            System.out.println("VALUES.entry=" + r.getKey() + " hashCode()=" + r.getKey().hashCode());
+        }
+    }
+
+    public int compareForBeat(Card card1, Card card2, Suit trump) {
         Suit suit1 = card1.getSuit();
         Suit suit2 = card2.getSuit();
         if (suit1.equals(suit2))
@@ -43,5 +55,25 @@ public class DumbService {
             return -1;
         return -1;
     }
+
+   protected ArrayList getValidCardsToMove(Hand hand, List<Card> cardsInAction) {
+        if (cardsInAction.isEmpty())
+            return hand.toArrayList();
+        ArrayList<Card> validCards = new ArrayList<>();
+        for (Card c1: hand.toArrayList())
+            for (Card c2: cardsInAction)
+                if (c1.getRank().equals(c2.getRank()))
+                    validCards.add(c1);
+        return validCards;
+    }
+
+    protected ArrayList getValidCardsToBeat(Card cardToBeat, Hand hand, Suit trump) {
+        ArrayList<Card> validCards = new ArrayList();
+        for (Card c: hand.toArrayList())
+            if (compareForBeat(c, cardToBeat, trump) > 0)
+                validCards.add(c);
+        return validCards;
+    }
+
 
 }

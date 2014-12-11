@@ -16,7 +16,7 @@ public class SimpleStrategy extends AbstractStrategy {
         if (dumbHand.isEmpty()) return null;
         Card moveCard = null;
         if (cardsInAction.isEmpty()) {
-            moveCard = dumbHand.getLowest(trump);
+            moveCard = dumbHand.getLowestCard(trump);
         } else {
             for (Card card : cardsInAction) {
                 for (int i = 0; i < dumbHand.size(); i++) {

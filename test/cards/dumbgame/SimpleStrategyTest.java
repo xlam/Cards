@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cards.dumbgame;
 
 import cards.common.*;
@@ -39,16 +35,13 @@ public class SimpleStrategyTest {
         strategy = null;
     }
 
-    /**
-     * Test of move method, of class SimpleStrategy.
-     */
     @Test
     public void testSimpleStrategyMoveLowestCard() {
         DumbHand hand = new DumbHand();
-        List<Card> cardsInAction = new ArrayList<>();
+        List<Card> cardsInAction = new ArrayList();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
-        hand.add(new Card(Suit.CLUBS, Rank.TWO));
-        hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
+        hand.add(new Card(Suit.CLUBS, Rank.SIX));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SIX));
         assertEquals(hand.getCard(2), strategy.move(hand, cardsInAction, trump));
         hand.remove(2);
         assertEquals(hand.getCard(1), strategy.move(hand, cardsInAction, trump));
@@ -58,14 +51,14 @@ public class SimpleStrategyTest {
     public void testSimpleStrategyBeat() {
         DumbHand hand = new DumbHand();
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
-        hand.add(new Card(Suit.CLUBS, Rank.TWO));
-        hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
-        Card card = new Card(Suit.DIAMONDS, Rank.TWO);
+        hand.add(new Card(Suit.CLUBS, Rank.SIX));
+        hand.add(new Card(Suit.DIAMONDS, Rank.SEVEN));
+        Card card = new Card(Suit.DIAMONDS, Rank.SIX);
         assertEquals(hand.getCard(2), strategy.beat(card, hand, trump));
-        card = new Card(Suit.CLUBS, Rank.THREE);
+        card = new Card(Suit.CLUBS, Rank.SEVEN);
         assertEquals(hand.getCard(0), strategy.beat(card, hand, trump));
         hand.remove(2);
-        card = new Card(Suit.DIAMONDS, Rank.TWO);
+        card = new Card(Suit.DIAMONDS, Rank.EIGHT);
         assertEquals(hand.getCard(1), strategy.beat(card, hand, trump));
     }
 }
