@@ -34,7 +34,7 @@ public class DumbHand extends Hand {
      * @param trumpSuit Suit of trump
      * @return Card if one is found, null otherwise
      */
-    public Card getLowest(Suit trumpSuit) {
+    public Card getLowestCard(Suit trumpSuit) {
         if (hand.isEmpty())
             return null;
         Card card = (Card) hand.get(0);

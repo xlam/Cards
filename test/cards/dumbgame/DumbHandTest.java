@@ -142,7 +142,7 @@ public class DumbHandTest {
         hand.add(new Card(Suit.SPADES,   Rank.SEVEN));
         hand.add(new Card(Suit.SPADES,   Rank.JACK));
         expected = new Card(Suit.DIAMONDS, Rank.SIX);
-        result = hand.getLowest(trump);
+        result = hand.getLowestCard(trump);
         assertTrue(result.isSameAs(expected));
         hand.clear();
         hand.add(new Card(Suit.SPADES,   Rank.QUEEN));
@@ -152,7 +152,7 @@ public class DumbHandTest {
         hand.add(new Card(Suit.SPADES,   Rank.EIGHT));
         hand.add(new Card(Suit.CLUBS,    Rank.EIGHT));
         expected = new Card(Suit.CLUBS, Rank.EIGHT);
-        result = hand.getLowest(trump);
+        result = hand.getLowestCard(trump);
         assertTrue(result.isSameAs(expected));
         hand.clear();
         hand.add(new Card(Suit.HEARTS,   Rank.SIX));
@@ -162,7 +162,7 @@ public class DumbHandTest {
         hand.add(new Card(Suit.CLUBS,    Rank.TEN));
         hand.add(new Card(Suit.DIAMONDS, Rank.JACK));
         expected = new Card(Suit.HEARTS, Rank.SIX);
-        result = hand.getLowest(trump);
+        result = hand.getLowestCard(trump);
         assertTrue(result.isSameAs(expected));
     }
 
