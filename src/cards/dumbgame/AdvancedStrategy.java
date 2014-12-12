@@ -15,8 +15,13 @@ public class AdvancedStrategy extends AbstractStrategy {
         Card moveCard = null;
         DumbService s = new DumbService();
         ArrayList<Card> validCards = s.getValidCardsToMove(hand, cardsInAction);
-        if (!(validCards.isEmpty()))
-            moveCard = validCards.get(0);
+        if (!(validCards.isEmpty())) {
+            List pairs = getPairs(validCards);
+            if (!(pairs.isEmpty()))
+                moveCard = validCards.get(validCards.indexOf(pairs.get(0)));
+            else
+                moveCard = validCards.get(0);
+        }
         return moveCard;
     }
 
