@@ -37,16 +37,19 @@ public class AdvancedStrategyTest {
     @Test
     public void testGetPairs() {
         List<Card> cards = new ArrayList();
-        cards.add(new Card(Suit.CLUBS,     Rank.SIX));
+        Card card1 = new Card(Suit.CLUBS,     Rank.SIX);
+        Card card2 = new Card(Suit.CLUBS,     Rank.SEVEN);
+        cards.add(card1);
         cards.add(new Card(Suit.DIAMONDS,  Rank.SIX));
-        cards.add(new Card(Suit.CLUBS,     Rank.SEVEN));
+        cards.add(card2);
         cards.add(new Card(Suit.CLUBS,     Rank.EIGHT));
         cards.add(new Card(Suit.SPADES,    Rank.SIX));
         cards.add(new Card(Suit.SPADES,    Rank.SEVEN));
         List pairs = strategy.getPairs(cards);
         System.out.println(pairs);
         assertEquals(2, pairs.size());
-        fail("getPairs() is buggy");
+        assertTrue(pairs.contains(card1));
+        assertTrue(pairs.contains(card2));
     }
 
 }

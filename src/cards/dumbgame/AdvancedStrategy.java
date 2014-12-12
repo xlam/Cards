@@ -36,9 +36,10 @@ public class AdvancedStrategy extends AbstractStrategy {
             int count = 0;
             Card card = null;
             for (Card c: cards) {
-                card = c;
-                if (c.getRank().equals(rank))
-                    count++;
+                if (c.getRank().equals(rank)) {
+                    if (++count == 1)
+                        card = c;
+                }
             }
             if (count > 1)
                 pairs.add(card);
