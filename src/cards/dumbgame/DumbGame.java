@@ -11,6 +11,7 @@ public class DumbGame implements Game {
     private final ArrayList<DumbPlayer> players = new ArrayList();
     private final ArrayList<DumbPlayer> playersOut = new ArrayList();
     private final List<Card> cardsInAction = new ArrayList();
+    private final DumbService service;
     private Card trumpCard;
     private Suit trumpSuit;
     private DumbPlayer mover;
@@ -19,6 +20,7 @@ public class DumbGame implements Game {
     protected final Deck deck;
 
     public DumbGame() {
+        service = new DumbService();
         deck = new DumbDeck();
         deck.shuffle();
     }
@@ -46,13 +48,9 @@ public class DumbGame implements Game {
             return null;
         mover = players.get(0);
         for (DumbPlayer p: players)
-            if (compareHands(p, mover, trumpSuit) > 0)
+            if (service.compareHands(p, mover, trumpSuit) > 0)
                 mover = p;
         return mover;
-    }
-
-    private int compareHands(DumbPlayer p1, DumbPlayer p2, Suit trumpSuit) {
-        return (p1.getHand().compareTo(p2.getHand(), trumpSuit));
     }
 
     private void printStartGameInfo() {

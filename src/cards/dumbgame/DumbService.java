@@ -37,13 +37,6 @@ public class DumbService {
         return VALUES.get(card.getRank()) + d;
     }
 
-    private void printDebug(Card card) {
-        System.out.println("card.getRank().hashCode()=" + card.getRank().hashCode());
-        for (Map.Entry r: VALUES.entrySet()) {
-            System.out.println("VALUES.entry=" + r.getKey() + " hashCode()=" + r.getKey().hashCode());
-        }
-    }
-
     public int compareForBeat(Card card1, Card card2, Suit trump) {
         Suit suit1 = card1.getSuit();
         Suit suit2 = card2.getSuit();
@@ -75,5 +68,8 @@ public class DumbService {
         return validCards;
     }
 
+    protected int compareHands(DumbPlayer p1, DumbPlayer p2, Suit trumpSuit) {
+        return (p1.getHand().compareTo(p2.getHand(), trumpSuit));
+    }
 
 }
