@@ -86,21 +86,21 @@ public class DumbGame implements Game {
     }
 
     private void playRound() {
-            System.out.println("Round begins!");
-            boolean cardsAreTaken = false; // shaker takes or not
-            cardsInAction.clear();
-            Card moverCard;
-            shaker = findShaker(mover);
-            while ((moverCard = mover.move(cardsInAction, trumpSuit)) != null) {
-                cardsInAction.add(moverCard);
-                System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
-                if (cardsAreTaken = shakerBeat(moverCard))
-                    break;
-            }
-            System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
-            dealCardsStartingFrom(mover);
-            markWinners();
-            mover = nextMover(cardsAreTaken);
+        System.out.println("Round begins!");
+        boolean cardsAreTaken = false; // shaker takes or not
+        cardsInAction.clear();
+        Card moverCard;
+        shaker = findShaker(mover);
+        while ((moverCard = mover.move(cardsInAction, trumpSuit)) != null) {
+            cardsInAction.add(moverCard);
+            System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
+            if (cardsAreTaken = shakerBeat(moverCard))
+                break;
+        }
+        System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
+        dealCardsStartingFrom(mover);
+        markWinners();
+        mover = nextMover(cardsAreTaken);
     }
 
     protected int countPlayersWithCards() {
