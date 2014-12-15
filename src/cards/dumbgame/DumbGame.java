@@ -48,7 +48,7 @@ public class DumbGame implements Game {
             return null;
         mover = players.get(0);
         for (DumbPlayer p: players)
-            if (service.compareHands(p, mover, trumpSuit) > 0)
+            if (service.compareHands(p.getHand(), mover.getHand(), trumpSuit) > 0)
                 mover = p;
         return mover;
     }

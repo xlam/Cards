@@ -68,8 +68,8 @@ public class DumbService {
         return validCards;
     }
 
-    protected int compareHands(DumbPlayer p1, DumbPlayer p2, Suit trumpSuit) {
-        return (p1.getHand().compareTo(p2.getHand(), trumpSuit));
+    protected int compareHands(DumbHand hand1, DumbHand hand2, Suit trumpSuit) {
+        return (hand1.compareTo(hand2, trumpSuit));
     }
 
 }
