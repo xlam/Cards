@@ -35,7 +35,7 @@ public class DumbGame implements Game {
     }
 
     private void init() {
-        fillPlayersHandsStartingFrom(players.get(0));
+        dealCardsStartingFrom(players.get(0));
         trumpCard = deck.deal();
         trumpSuit = trumpCard.getSuit();
         looser = null;
@@ -98,7 +98,7 @@ public class DumbGame implements Game {
                     break;
             }
             System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
-            fillPlayersHandsStartingFrom(mover);
+            dealCardsStartingFrom(mover);
             markWinners();
             mover = nextMover(cardsAreTaken);
     }
@@ -144,7 +144,7 @@ public class DumbGame implements Game {
 
     }
 
-    protected void fillPlayersHandsStartingFrom(DumbPlayer first) {
+    protected void dealCardsStartingFrom(DumbPlayer first) {
         List<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
         for (DumbPlayer player: playersSorted)
             while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
