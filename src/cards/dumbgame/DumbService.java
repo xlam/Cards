@@ -12,7 +12,7 @@ import java.util.List;
 public class DumbService {
 
     private final HashMap<Rank, Integer> VALUES;
-    private final int delta = 10;
+    private final int TRUMP_VALUE_DELTA = 10;
 
     public DumbService() {
         VALUES = new HashMap();
@@ -30,10 +30,10 @@ public class DumbService {
     public int getValueOf(Card card, Suit trump) {
         if (!(VALUES.containsKey(card.getRank())))
             System.err.println("ERROR: invalid rank: " + card.getRank());
-        int d = 0;
+        int value = VALUES.get(card.getRank());
         if (card.getSuit().equals(trump))
-            d += delta;
-        return VALUES.get(card.getRank()) + d;
+            value += TRUMP_VALUE_DELTA;
+        return value;
     }
 
     public int compareForBeat(Card card1, Card card2, Suit trump) {
