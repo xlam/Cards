@@ -1,0 +1,19 @@
+2014-12-16 20:53
+
+...
+Round begins!
+Vasya move: 7d(Seven of Diamonds) Hand: 8s Jd Qd 8c Qc 8d 9s 7h Kh Ks
+Jenya beat: Jc(Jack of Clubs) Hand: Ac Kc Ah
+Vasya move: Jd(Jack of Diamonds) Hand: 8s Qd 8c Qc 8d 9s 7h Kh Ks
+Jenya beat: Kc(King of Clubs) Hand: Ac Ah
+Vasya move: Ks(King of Spades) Hand: 8s Qd 8c Qc 8d 9s 7h Kh
+Jenya beat: Ac(Ace of Clubs) Hand: Ah
+Vasya move: Kh(King of Hearts) Hand: 8s Qd 8c Qc 8d 9s 7h
+Jenya beat: Ah(Ace of Hearts) Hand:
+Vasya move: 7h(Seven of Hearts) Hand: 8s Qd 8c Qc 8d 9s
+Jenya take: 7h(Seven of Hearts) Hand:                       <-------
+Round end! Cards left in deck: 0 trump: null
+...
+
+Jenya must not take because round was already finished when Jenya beat
+Kh with Ah. Ah was the last card in Janya's hand so round ends at this point.

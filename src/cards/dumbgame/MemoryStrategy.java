@@ -33,14 +33,14 @@ public class MemoryStrategy extends AbstractStrategy {
         // TODO: looks like needs refactoring...
         updateKnownCards("move", hand);
         DumbHand dumbHand = (DumbHand) hand;
-        if (dumbHand.isEmpty()) return null;
+        if (hand.isEmpty())
+            return null;
         Card moveCard = null;
         if (cardsInAction.isEmpty()) {
             moveCard = dumbHand.getLowestCard(trump);
         } else {
             for (Card card : cardsInAction) {
-                for (int i = 0; i < dumbHand.size(); i++) {
-                    Card c = (Card) dumbHand.getCard(i);
+                for (Card c: dumbHand.toList()) {
                     if (c.getRank().equals(card.getRank())
                             && !(c.getSuit().equals(trump))
                             && c.getRank().compareTo(Rank.JACK) < 0) moveCard = c;
