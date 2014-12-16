@@ -88,6 +88,19 @@ public class DumbGameTest {
     }
 
     @Test
+    public void testNextMover() {
+        game.mover = player1;
+        assertEquals(player2, game.nextMover(false));
+        assertEquals(player3, game.nextMover(true));
+        game.mover = player2;
+        assertEquals(player3, game.nextMover(false));
+        assertEquals(player1, game.nextMover(true));
+        game.mover = player3;
+        assertEquals(player1, game.nextMover(false));
+        assertEquals(player2, game.nextMover(true));
+    }
+
+    @Test
     public void testHandsFilled() {
         game.deck.restore();
         //System.out.println(game.deck.toString());

@@ -14,7 +14,7 @@ public class DumbGame implements Game {
     private final DumbService service;
     private Card trumpCard;
     private Suit trumpSuit;
-    private DumbPlayer mover;
+    protected DumbPlayer mover;
     private DumbPlayer shaker;
     private DumbPlayer looser; // TODO handle this later
     protected final Deck deck;
@@ -166,7 +166,7 @@ public class DumbGame implements Game {
                 playersOut.add(p);
     }
 
-    private DumbPlayer nextMover(boolean cardsTaken) {
+    protected DumbPlayer nextMover(boolean cardsTaken) {
         List<DumbPlayer> sortedPlayers = getPlayersListStartingFrom(mover);
         sortedPlayers.remove(mover);
         if (cardsTaken)
