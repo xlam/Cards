@@ -147,9 +147,19 @@ public class DumbGame implements Game {
     protected void dealCardsStartingFrom(DumbPlayer first) {
         List<DumbPlayer> playersSorted = getPlayersListStartingFrom(first);
         for (DumbPlayer player: playersSorted)
-            while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
-                player.addCard(deck.deal());
-        if (null != trumpCard) { // trump card is not yet dealt
+            dealCardTo(player);
+        dealTrumpIfNeeded(playersSorted);
+    }
+
+    private void dealCardTo(DumbPlayer player) {
+        while (deck.haveCardsToDeal() &&  player.numberOfCards() < 6)
+            player.addCard(deck.deal());
+    }
+
+    private void dealTrumpIfNeeded(List<DumbPlayer> playersSorted) {
+        if (deck.haveCardsToDeal())
+            return;
+        if (null != trumpCard) {
             for (DumbPlayer player : playersSorted) {
                 if (player.numberOfCards() < 6) {
                     player.addCard(trumpCard);
