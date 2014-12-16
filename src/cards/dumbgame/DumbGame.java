@@ -157,17 +157,23 @@ public class DumbGame implements Game {
     }
 
     private void dealTrumpIfNeeded(List<DumbPlayer> playersSorted) {
-        if (deck.haveCardsToDeal())
+        if (deck.haveCardsToDeal() || trumpCardIsDealt())
             return;
-        if (null != trumpCard) {
-            for (DumbPlayer player : playersSorted) {
-                if (player.numberOfCards() < 6) {
-                    player.addCard(trumpCard);
-                    trumpCard = null;
-                    break;
-                }
+        dealTrump(playersSorted);
+    }
+
+    private void dealTrump(List<DumbPlayer> playersSorted) {
+        for (DumbPlayer player : playersSorted) {
+            if (player.numberOfCards() < 6) {
+                player.addCard(trumpCard);
+                trumpCard = null;
+                break;
             }
         }
+    }
+
+    private boolean trumpCardIsDealt() {
+        return null == trumpCard;
     }
 
     private void markWinners() {
