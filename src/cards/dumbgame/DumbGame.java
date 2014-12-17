@@ -8,8 +8,8 @@ public class DumbGame implements Game {
 
     // TODO: is it too many responsibilities?
 
-    private final ArrayList<DumbPlayer> players = new ArrayList();
-    private final ArrayList<DumbPlayer> playersOut = new ArrayList();
+    private final List<DumbPlayer> players = new ArrayList();
+    private final List<DumbPlayer> playersOut = new ArrayList();
     private final List<Card> cardsInAction = new ArrayList();
     private final DumbService service;
     private Card trumpCard;
@@ -90,10 +90,10 @@ public class DumbGame implements Game {
         boolean cardsAreTaken = false; // shaker takes or not
         cardsInAction.clear();
         Card moverCard;
-        shaker = findShaker(mover);
+        shaker = findShakerNextTo(mover);
         while ((moverCard = mover.move(cardsInAction, trumpSuit)) != null) {
             cardsInAction.add(moverCard);
-            System.out.println(mover + " move: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + mover.getHand());
+            System.out.println(mover + " move: " + moverCard.getSymbol() + "\tHand:" + mover.getHand());
             if (cardsAreTaken = shakerBeat(moverCard))
                 break;
         }
@@ -111,8 +111,8 @@ public class DumbGame implements Game {
         return count;
     }
 
-    protected DumbPlayer findShaker(DumbPlayer mover) {
-        ArrayList<DumbPlayer> playersSorted = getPlayersListStartingFrom(mover);
+    protected DumbPlayer findShakerNextTo(DumbPlayer mover) {
+        List<DumbPlayer> playersSorted = getPlayersListStartingFrom(mover);
         playersSorted.remove(0);
         for (DumbPlayer p: playersSorted)
             if (!(playersOut.contains(p)))
@@ -120,8 +120,8 @@ public class DumbGame implements Game {
         return null;
     }
 
-    private ArrayList getPlayersListStartingFrom(DumbPlayer first) {
-        ArrayList<DumbPlayer> playersSorted = new ArrayList();
+    private List getPlayersListStartingFrom(DumbPlayer first) {
+        List<DumbPlayer> playersSorted = new ArrayList();
         int index = players.indexOf(first);
         playersSorted.add(first);
         playersSorted.addAll(players.subList(index+1, players.size()));
@@ -133,11 +133,11 @@ public class DumbGame implements Game {
         // TODO: exchange true and false to reflect method name
         Card shakerCard = shaker.beat(moverCard, trumpSuit);
         if (shakerCard == null) { // если вариантов нет то
-            System.out.println(shaker + " take: " + moverCard.getSymbol() + "(" + moverCard + ") Hand:" + shaker.getHand());
+            System.out.println(shaker + " take: " + moverCard.getSymbol() + "\tHand:" + shaker.getHand());
             shaker.addCard(cardsInAction); // берем все карты со стола и перемещаем в 2
             return true;
         } else { // иначе
-            System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "(" + shakerCard + ") Hand:" + shaker.getHand());
+            System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "\tHand:" + shaker.getHand());
             cardsInAction.add(shakerCard); // и положить ее на стол (покрыть)
             return false;
         }
@@ -156,7 +156,7 @@ public class DumbGame implements Game {
             player.addCard(deck.deal());
     }
 
-    private void dealTrumpIfNeeded(List<DumbPlayer> playersSorted) {
+    private void dealTrumpIfNeeded(List playersSorted) {
         if (deck.haveCardsToDeal() || trumpCardIsDealt())
             return;
         dealTrump(playersSorted);

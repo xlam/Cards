@@ -82,9 +82,9 @@ public class DumbGameTest {
 
     @Test
     public void testFindShaker() {
-        assertEquals(player2, game.findShaker(player1));
-        assertEquals(player3, game.findShaker(player2));
-        assertEquals(player1, game.findShaker(player3));
+        assertEquals(player2, game.findShakerNextTo(player1));
+        assertEquals(player3, game.findShakerNextTo(player2));
+        assertEquals(player1, game.findShakerNextTo(player3));
     }
 
     @Test

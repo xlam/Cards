@@ -31,7 +31,7 @@ public class HumanDumbPlayer extends DumbPlayer {
     public Card move(List cardsInAction, Suit trump) {
         // TODO: needs refactoring?
         DumbService s = getService();
-        ArrayList validCards = s.getValidCardsToMove(hand, cardsInAction);
+        List validCards = s.getValidCardsToMove(hand, cardsInAction);
         if (validCards.isEmpty())
             return null;
         Card c;
@@ -58,7 +58,7 @@ public class HumanDumbPlayer extends DumbPlayer {
         return c;
     }
 
-    private Card getInputCardMatched(ArrayList<Card> validCards) {
+    private Card getInputCardMatched(List<Card> validCards) {
         String input = readInput();
         Card card = null;
         for (Card c: validCards)
