@@ -55,32 +55,22 @@ public class MemoryStrategy extends AbstractStrategy {
 
     @Override
     public Card beat(Card card, Hand hand, Suit trump) {
-        // TODO: looks like needs refactoring...
         updateKnownCards("beat", hand);
-        DumbHand dumbHand = (DumbHand) hand;
-        Card beatCard = null;
-
-        List<Card> cards = dumbHand.getAllBySuit(card.getSuit());
-        if (!cards.isEmpty()) {
-            for (Card c : cards) {
-                if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
-            }
-        } else {
-            cards = dumbHand.getAllBySuit(trump);
-            if (!cards.isEmpty()) {
-                if (card.getSuit().equals(trump)) {
-                    for (Card c : cards) {
-                        if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
-                    }
-                } else {
-                    beatCard = cards.get(0);
-                }
-            }
-        }
+        Card beatCard = findBeatCardOfSameSuit(card, hand);
+        if (beatCard == null && card.suitIsNot(trump))
+            beatCard = ((DumbHand)hand).getLowestTrump(trump);
         lastCardsInAction.clear();
         lastCardsInAction = getSupervisor().getCardsInAction();
         lastAction = "beat";
         return beatCard;
+    }
+
+    private Card findBeatCardOfSameSuit(Card card, Hand hand) {
+        List<Card> cards = hand.getAllBySuit(card.getSuit());
+        for (Card c : cards)
+            if (c.getRank().compareTo(card.getRank()) > 0)
+                return c;
+        return null;
     }
 
     protected void updateKnownCards(String action, Hand hand) {
