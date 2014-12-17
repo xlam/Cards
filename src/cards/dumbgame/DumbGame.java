@@ -30,8 +30,12 @@ public class DumbGame implements Game {
         this.players.add((DumbPlayer)player);
     }
 
-    public DumbPlayer getLastLooser() {
-        return looser;
+    @Override
+    public void play() {
+        init();
+        while (!gameIsOver())
+            playRound();
+        handleGameOver();
     }
 
     private void init() {
@@ -41,6 +45,30 @@ public class DumbGame implements Game {
         looser = null;
         mover = findFirstMover(trumpSuit);
         printStartGameInfo();
+    }
+
+    private boolean gameIsOver() {
+        return (!deck.haveCardsToDeal() && countPlayersWithCards() < 2);
+    }
+
+    private void playRound() {
+        System.out.println("Round begins!");
+        boolean shakerDoesNotTake = true;
+        cardsInAction.clear();
+        shaker = findShakerNextTo(mover);
+        Card moverCard;
+        do {
+            moverCard = mover.move(cardsInAction, trumpSuit);
+            if (moverCard == null)
+                break;
+            cardsInAction.add(moverCard);
+            System.out.println(mover + " move: " + moverCard.getSymbol() + "\tHand:" + mover.getHand());
+        }
+        while (shakerDoesNotTake = shakerBeat(moverCard) && !(shaker.isEmpty()));
+        System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
+        dealCardsStartingFrom(mover);
+        markWinners();
+        mover = nextMover(shakerDoesNotTake);
     }
 
     protected DumbPlayer findFirstMover(Suit trumpSuit) {
@@ -71,38 +99,6 @@ public class DumbGame implements Game {
         cardsInAction.clear();
         deck.restore();
         deck.shuffle();
-    }
-
-    @Override
-    public void play() {
-        init();
-        while (!gameIsOver())
-            playRound();
-        handleGameOver();
-    }
-
-    private boolean gameIsOver() {
-        return (!deck.haveCardsToDeal() && countPlayersWithCards() < 2);
-    }
-
-    private void playRound() {
-        System.out.println("Round begins!");
-        boolean shakerDoesNotTake = true;
-        cardsInAction.clear();
-        shaker = findShakerNextTo(mover);
-        Card moverCard;
-        do {
-            moverCard = mover.move(cardsInAction, trumpSuit);
-            if (moverCard == null)
-                break;
-            cardsInAction.add(moverCard);
-            System.out.println(mover + " move: " + moverCard.getSymbol() + "\tHand:" + mover.getHand());
-        }
-        while (shakerDoesNotTake = shakerBeat(moverCard) && !(shaker.isEmpty()));
-        System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
-        dealCardsStartingFrom(mover);
-        markWinners();
-        mover = nextMover(shakerDoesNotTake);
     }
 
     protected int countPlayersWithCards() {
@@ -208,6 +204,10 @@ public class DumbGame implements Game {
             System.out.println("Game Draw!");
         else
             System.out.println("Looser: " + looser + " " + looser.getHand());
+    }
+
+    public DumbPlayer getLastLooser() {
+        return looser;
     }
 
     protected List getCardsInAction() {
