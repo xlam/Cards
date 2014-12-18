@@ -66,7 +66,7 @@ public class MemoryStrategy extends AbstractStrategy {
     }
 
     private Card findBeatCardOfSameSuit(Card card, Hand hand) {
-        List<Card> cards = hand.getAllBySuit(card.getSuit());
+        List<Card> cards = hand.getAllBySuitSorted(card.getSuit());
         for (Card c : cards)
             if (c.getRank().compareTo(card.getRank()) > 0)
                 return c;

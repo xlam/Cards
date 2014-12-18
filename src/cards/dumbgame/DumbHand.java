@@ -61,7 +61,7 @@ public class DumbHand extends Hand {
     }
 
     public Card getLowestTrump(Suit trump) {
-        List<Card> cards = getAllBySuit(trump);
+        List<Card> cards = getAllBySuitSorted(trump);
         if (cards.isEmpty())
             return null;
         Rank.setAceHigh();

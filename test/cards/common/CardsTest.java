@@ -120,14 +120,14 @@ public class CardsTest {
         hand.add(new Card(Suit.CLUBS, Rank.ACE));
         hand.add(new Card(Suit.CLUBS, Rank.TWO));
         hand.add(new Card(Suit.DIAMONDS, Rank.THREE));
-        List cards = hand.getAllBySuit(Suit.CLUBS);
+        List cards = hand.getAllBySuitSorted(Suit.CLUBS);
         assertEquals(2, cards.size());
         assertTrue(((Card) cards.get(0)).getSuit().equals(Suit.CLUBS));
         assertTrue(((Card) cards.get(1)).getSuit().equals(Suit.CLUBS));
-        cards = hand.getAllBySuit(Suit.DIAMONDS);
+        cards = hand.getAllBySuitSorted(Suit.DIAMONDS);
         assertEquals(1, cards.size());
         assertTrue(((Card) cards.get(0)).getSuit().equals(Suit.DIAMONDS));
-        cards = hand.getAllBySuit(Suit.HEARTS);
+        cards = hand.getAllBySuitSorted(Suit.HEARTS);
         assertTrue(cards.isEmpty());
     }
 
