@@ -15,12 +15,21 @@ public class AdvancedStrategy extends AbstractStrategy {
         Card moveCard = null;
         DumbService s = new DumbService();
         List<Card> validCards = s.getValidCardsToMove(hand, cardsInAction);
-        if (!(validCards.isEmpty())) {
-            List pairs = getPairs(validCards);
-            if (!(pairs.isEmpty()))
-                moveCard = validCards.get(validCards.indexOf(pairs.get(0)));
-            else
-                moveCard = validCards.get(0);
+        float value = s.getValueOf(hand, trump);
+        System.out.println("AS: hand value: " + value);
+        System.out.println("AS: valid cards to move: " + validCards);
+        List handCards = hand.toList();
+        for (Card c: validCards) {
+            handCards.remove(c);
+            float newValue = s.getValueOf(handCards, trump);
+            System.out.println("AS: value without " + c + ": " + newValue);
+            if (newValue > value) {
+                if (newValue - value > 0.5) {
+                    moveCard = c;
+                    value = newValue;
+                }
+            }
+            handCards.add(c);
         }
         return moveCard;
     }

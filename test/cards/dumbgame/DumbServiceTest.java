@@ -1,9 +1,6 @@
 package cards.dumbgame;
 
-import cards.common.Card;
-import cards.common.Hand;
-import cards.common.Rank;
-import cards.common.Suit;
+import cards.common.*;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
