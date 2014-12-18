@@ -12,7 +12,7 @@ import java.util.List;
 public class DumbService {
 
     private final HashMap<Rank, Integer> VALUES;
-    private final int TRUMP_VALUE_DELTA = 10;
+    private final int TRUMP_VALUE_DELTA;
 
     public DumbService() {
         VALUES = new HashMap();
@@ -25,6 +25,7 @@ public class DumbService {
         VALUES.put(Rank.QUEEN,  7);
         VALUES.put(Rank.KING,   8);
         VALUES.put(Rank.ACE,    9);
+        TRUMP_VALUE_DELTA = VALUES.size();
     }
 
     public int getValueOf(Card card, Suit trump) {
@@ -34,6 +35,19 @@ public class DumbService {
         if (card.getSuit().equals(trump))
             value += TRUMP_VALUE_DELTA;
         return value;
+    }
+
+    public float getValueOf(List<Card> cards, Suit trump) {
+        float result = 0;
+        if (cards.isEmpty())
+            return result;
+        for (Card c: cards)
+            result += getValueOf(c, trump);
+        return result / cards.size();
+    }
+
+    public float getValueOf(Hand hand, Suit trump) {
+        return getValueOf(hand.toList(), trump);
     }
 
     public int compareForBeat(Card card1, Card card2, Suit trump) {

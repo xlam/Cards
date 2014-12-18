@@ -103,4 +103,12 @@ public class DumbServiceTest {
         assertEquals(expected, service.getValidCardsToBeat(cardToBeat, hand, trump));
     }
 
+    @Test
+    public void testDumbServiceSetOfCardsValue() {
+        float delta = 0.01f;
+        assertEquals(0, service.getValueOf(new ArrayList(), trump), delta);
+        assertEquals(8.83f, service.getValueOf(hand.toList(), trump), delta);
+        assertEquals(8.83f, service.getValueOf(hand, trump), delta);
+    }
+
 }
