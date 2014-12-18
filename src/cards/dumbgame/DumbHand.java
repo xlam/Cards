@@ -2,6 +2,7 @@ package cards.dumbgame;
 
 import cards.common.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DumbHand extends Hand {
@@ -63,6 +64,8 @@ public class DumbHand extends Hand {
         List<Card> cards = getAllBySuit(trump);
         if (cards.isEmpty())
             return null;
+        Rank.setAceHigh();
+        Collections.sort(cards);
         return cards.get(0);
     }
 
