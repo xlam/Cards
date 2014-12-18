@@ -59,13 +59,11 @@ public class DumbHand extends Hand {
         return card;
     }
 
-    protected List<Card> getTrumps(Suit trump) {
-        // TODO: is it really useful?
-        List<Card> trumps = new ArrayList();
-        for (Object o: hand)
-            if (((Card)o).getSuit().compareTo(trump) == 0)
-                trumps.add((Card)o);
-        return trumps;
+    public Card getLowestTrump(Suit trump) {
+        List<Card> cards = getAllBySuit(trump);
+        if (cards.isEmpty())
+            return null;
+        return cards.get(0);
     }
 
     public int compareTo(DumbHand hand, Suit trump) {
