@@ -10,7 +10,7 @@ public class Card implements Comparable<Card> {
         this.suit = suit;
         this.rank = rank;
     }
-    
+
     public Suit getSuit() {
         return suit;
     }
@@ -35,7 +35,7 @@ public class Card implements Comparable<Card> {
     public int compareTo(Card card) {
         int rankDiff = rank.compareTo(card.getRank());
         int suitDiff = suit.compareTo(card.getSuit());
-        
+
         if (sortRankFirst) {
             if (rankDiff != 0) {
                 return rankDiff;
@@ -64,5 +64,20 @@ public class Card implements Comparable<Card> {
         return suit.equals(card.getSuit()) && rank.equals(card.getRank());
     }
 
+    public boolean suitIs(Suit suit) {
+        return this.suit.equals(suit);
+    }
+
+    public boolean suitIsNot(Suit suit) {
+        return !(this.suit.equals(suit));
+    }
+
+    public boolean rankIs(Rank rank) {
+        return this.rank.equals(rank);
+    }
+
+    public boolean rankIsNot(Rank rank) {
+        return !(this.rank.equals(rank));
+    }
 
 }

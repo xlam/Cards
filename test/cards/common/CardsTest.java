@@ -131,4 +131,18 @@ public class CardsTest {
         assertTrue(cards.isEmpty());
     }
 
+    @Test
+    public void testCardsSuitIsAndSuitIsNot() {
+        Card card = new Card(Suit.CLUBS, Rank.SIX);
+        assertTrue(card.suitIs(Suit.CLUBS));
+        assertTrue(card.suitIsNot(Suit.DIAMONDS));
+    }
+
+    @Test
+    public void testCardsRankIsAndSuitIsNot() {
+        Card card = new Card(Suit.CLUBS, Rank.SIX);
+        assertTrue(card.rankIs(Rank.SIX));
+        assertTrue(card.rankIsNot(Rank.SEVEN));
+    }
+
 }
