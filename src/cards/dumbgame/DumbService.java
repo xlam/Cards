@@ -4,6 +4,7 @@ import cards.common.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -13,6 +14,8 @@ public class DumbService {
 
     private final HashMap<Rank, Integer> VALUES;
     private final int TRUMP_VALUE_DELTA;
+    private final int VALUE_MIN;
+    private final int VALUE_MAX;
 
     public DumbService() {
         VALUES = new HashMap();
@@ -26,6 +29,8 @@ public class DumbService {
         VALUES.put(Rank.KING,   8);
         VALUES.put(Rank.ACE,    9);
         TRUMP_VALUE_DELTA = VALUES.size();
+        VALUE_MIN = 1;
+        VALUE_MAX = VALUES.size() + TRUMP_VALUE_DELTA;
     }
 
     public int getValueOf(Card card, Suit trump) {
@@ -83,6 +88,11 @@ public class DumbService {
 
     protected int compareHands(DumbHand hand1, DumbHand hand2, Suit trumpSuit) {
         return (hand1.compareTo(hand2, trumpSuit));
+    }
+
+    public float getRandomValue() {
+        Random rand = new Random();
+        return VALUE_MIN + rand.nextInt(VALUE_MAX) + rand.nextFloat();
     }
 
 }

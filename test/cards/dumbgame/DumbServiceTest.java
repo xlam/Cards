@@ -108,4 +108,10 @@ public class DumbServiceTest {
         assertEquals(8.83f, service.getValueOf(hand, trump), delta);
     }
 
+    @Test
+    public void testRandomValue() {
+        float value = service.getRandomValue();
+        assertTrue(value > 1 && value < 18);
+    }
+
 }
