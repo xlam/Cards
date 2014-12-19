@@ -95,4 +95,9 @@ public class DumbService {
         return VALUE_MIN + rand.nextInt(VALUE_MAX) + rand.nextFloat();
     }
 
+    public int getRandomCardValue() {
+        Random rand = new Random();
+        return VALUE_MIN + rand.nextInt(VALUE_MAX);
+    }
+
 }

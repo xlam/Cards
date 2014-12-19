@@ -109,6 +109,12 @@ public class DumbServiceTest {
     }
 
     @Test
+    public void testRandomCardValue() {
+        int value = service.getRandomCardValue();
+        assertTrue(value > 0 && value < 19);
+    }
+
+    @Test
     public void testRandomValue() {
         float value = service.getRandomValue();
         assertTrue(value > 1 && value < 18);
