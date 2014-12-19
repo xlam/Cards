@@ -120,4 +120,9 @@ public class DumbServiceTest {
         assertTrue(value > 1 && value < 18);
     }
 
+    @Test
+    public void testGetRandomCard() {
+        assertTrue(service.getRandomCard() instanceof Card);
+    }
+
 }

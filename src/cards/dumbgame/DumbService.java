@@ -100,4 +100,12 @@ public class DumbService {
         return VALUE_MIN + rand.nextInt(VALUE_MAX);
     }
 
+    public Card getRandomCard() {
+        Random rand = new Random();
+        return new Card(
+                (Suit)(Suit.VALUES.get(rand.nextInt(4))),
+                (Rank)(Rank.VALUES_ACE_HIGH.get(4 + rand.nextInt(9)))
+        );
+    }
+
 }

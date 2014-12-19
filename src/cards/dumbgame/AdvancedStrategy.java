@@ -16,24 +16,27 @@ public class AdvancedStrategy extends AbstractStrategy {
         DumbService s = new DumbService();
         List<Card> validCards = s.getValidCardsToMove(hand, cardsInAction);
         float value = s.getValueOf(hand, trump);
-        System.out.println("AS: hand [" + hand + "] value: " + value);
-        System.out.println("AS: valid cards to move: " + validCards);
         List handCards = hand.toList();
-        float nextCardValue = s.getRandomCardValue();
-        System.out.println("AS: next card value(random): " + nextCardValue);
+        Card nextRandomCard = s.getRandomCard();
+        handCards.add(nextRandomCard);
+        System.out.println("AS: next card (random): " + nextRandomCard);
+        System.out.println("AS: hand [" + hand + "] value: " + value);
+        System.out.print("AS: new hand values: [");
         for (Card c: validCards) {
             handCards.remove(c);
             float newValue = s.getValueOf(handCards, trump);
-            newValue += nextCardValue / hand.size();
-            System.out.println("AS: value without " + c + ": " + newValue);
+            System.out.print(c.getSymbol() + "/" + newValue + " ");
             if (newValue > value) {
-                if (newValue - value > 0.3) {
+                if (newValue - value > 0.35) {
                     moveCard = c;
                     value = newValue;
                 }
             }
             handCards.add(c);
         }
+        System.out.println("]");
+        if (moveCard == null && cardsInAction.isEmpty())
+            moveCard = ((DumbHand)hand).getLowestCard(trump);
         return moveCard;
     }
 
