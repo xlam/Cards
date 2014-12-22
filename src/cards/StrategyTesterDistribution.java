@@ -19,7 +19,7 @@ public class StrategyTesterDistribution {
 
         Set<Map.Entry<DumbPlayer, Integer>> playersSet = players.entrySet();
 
-        int iterations = 5;
+        int iterations = 100;
         int playersCount = players.size();
 
         int dist[][] = new int[iterations][playersCount];
@@ -48,15 +48,15 @@ public class StrategyTesterDistribution {
             int k = 0;
             for (Map.Entry<DumbPlayer, Integer> entry: playersSet) {
                 dist[j][k++] = entry.getValue();
-//                System.out.println(entry);
+                System.out.println(entry);
             }
 
         }
 
         for (int j = 0; j < iterations; j++) {
-            System.out.print("Iteration " + j + ":");
+            System.out.print(j);
             for (int i = 0; i < playersCount; i++)
-                System.out.print(" " + i + "/" + dist[j][i]);
+                System.out.print(";" + dist[j][i]);
             System.out.println("");
         }
     }
