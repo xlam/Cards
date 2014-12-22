@@ -17,17 +17,15 @@ public class StrategyTesterDistribution {
         players.put(new AIDumbPlayer("Petya", new AdvancedStrategy()), 0);
         players.put(new AIDumbPlayer("Gosha", new MemoryStrategy()), 0);
 
-        String[] names = new String[4];
-        names[0] = "Vasya";
-        names[0] = "Jenya";
-        names[0] = "Petya";
-        names[0] = "Gosha";
-
         Set<Map.Entry<DumbPlayer, Integer>> playersSet = players.entrySet();
 
-        int dist[][] = new int[100][4];
+        int iterations = 5;
+        int playersCount = players.size();
 
-        for (int j = 0; j < 100; j++) {
+        int dist[][] = new int[iterations][playersCount];
+
+        for (int j = 0; j < iterations; j++) {
+            System.out.println("Playing iteration " + j + "...");
             DumbGame game = new DumbGame();
             Supervisor supervisor = Supervisor.getInstance();
             supervisor.setGame(game);
@@ -47,14 +45,19 @@ public class StrategyTesterDistribution {
 
             }
 
+            int k = 0;
             for (Map.Entry<DumbPlayer, Integer> entry: playersSet) {
-                int k = 0;
-                dist[j][k] = entry.getValue();
-                System.out.print(entry.getKey() + " looses: " + entry.getValue());
-                System.out.println(" (" + entry.getKey().getStrategy() + ")");
+                dist[j][k++] = entry.getValue();
+//                System.out.println(entry);
             }
 
         }
-        System.out.println(dist);
+
+        for (int j = 0; j < iterations; j++) {
+            System.out.print("Iteration " + j + ":");
+            for (int i = 0; i < playersCount; i++)
+                System.out.print(" " + i + "/" + dist[j][i]);
+            System.out.println("");
+        }
     }
 }
