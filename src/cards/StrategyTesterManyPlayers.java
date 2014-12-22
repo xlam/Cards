@@ -9,7 +9,7 @@ public class StrategyTesterManyPlayers {
 
     public static void main(String[] args) {
         System.out.println("Cards v" + Version.getVersion());
-
+        Logger.enable(true);
         HashMap<DumbPlayer, Integer> players = new HashMap<>();
 
         players.put(new AIDumbPlayer("Vasya", new SimpleStrategy()), 0);
