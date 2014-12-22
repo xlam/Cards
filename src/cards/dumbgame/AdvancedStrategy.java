@@ -1,5 +1,6 @@
 package cards.dumbgame;
 
+import cards.Logger;
 import cards.common.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,13 @@ public class AdvancedStrategy extends AbstractStrategy {
         List handCards = hand.toList();
         Card nextRandomCard = s.getRandomCard();
         handCards.add(nextRandomCard);
-        System.out.println("AS: next card (random): " + nextRandomCard);
-        System.out.println("AS: hand [" + hand + "] value: " + value);
-        System.out.print("AS: new hand values: [");
+        Logger.log("AS: next card (random): " + nextRandomCard);
+        Logger.log("AS: hand [" + hand + "] value: " + value);
+        String values = "AS: new hand values: [";
         for (Card c: validCards) {
             handCards.remove(c);
             float newValue = s.getValueOf(handCards, trump);
-            System.out.print(c.getSymbol() + "/" + newValue + " ");
+            values += c.getSymbol() + "/" + newValue + " ";
             if (newValue > value) {
                 if (newValue - value > 0.35) {
                     moveCard = c;
@@ -34,7 +35,7 @@ public class AdvancedStrategy extends AbstractStrategy {
             }
             handCards.add(c);
         }
-        System.out.println("]");
+        Logger.log(values + "]");
         if (moveCard == null && cardsInAction.isEmpty())
             moveCard = ((DumbHand)hand).getLowestCard(trump);
         return moveCard;

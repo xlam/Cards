@@ -1,5 +1,6 @@
 package cards.dumbgame;
 
+import cards.Logger;
 import cards.common.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class DumbGame implements Game {
     }
 
     private void playRound() {
-        System.out.println("Round begins!");
+        Logger.log("Round begins!");
         boolean shakerDoesNotTake = true;
         cardsInAction.clear();
         shaker = findShakerNextTo(mover);
@@ -62,10 +63,10 @@ public class DumbGame implements Game {
             if (moverCard == null)
                 break;
             cardsInAction.add(moverCard);
-            System.out.println(mover + " move: " + moverCard.getSymbol() + "\tHand:" + mover.getHand());
+            Logger.log(mover + " move: " + moverCard.getSymbol() + "\tHand:" + mover.getHand());
         }
         while (shakerDoesNotTake = shakerBeat(moverCard) && !(shaker.isEmpty()));
-        System.out.println("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
+        Logger.log("Round end! Cards left in deck: " + deck.getCardsRemaining() + " trump: " + trumpCard);
         dealCardsStartingFrom(mover);
         markWinners();
         mover = nextMover(shakerDoesNotTake);
@@ -82,13 +83,13 @@ public class DumbGame implements Game {
     }
 
     private void printStartGameInfo() {
-        System.out.println("New Game Started!");
-        System.out.println("Deck:" + deck);
-        System.out.println("Cards left in deck: " + deck.getCardsRemaining());
+        Logger.log("New Game Started!");
+        Logger.log("Deck:" + deck);
+        Logger.log("Cards left in deck: " + deck.getCardsRemaining());
         for (Player p: players)
-            System.out.println(p + " hand:" + p.getHand());
-        System.out.println("Trump: " + trumpCard);
-        System.out.println(mover + " moves first");
+            Logger.log(p + " hand:" + p.getHand());
+        Logger.log("Trump: " + trumpCard);
+        Logger.log(mover + " moves first");
     }
 
     @Override
@@ -130,11 +131,11 @@ public class DumbGame implements Game {
     private boolean shakerBeat(Card moverCard) {
         Card shakerCard = shaker.beat(moverCard, trumpSuit);
         if (shakerCard == null) {
-            System.out.println(shaker + " take: " + moverCard.getSymbol() + "\tHand:" + shaker.getHand());
+            Logger.log(shaker + " take: " + moverCard.getSymbol() + "\tHand:" + shaker.getHand());
             shaker.addCard(cardsInAction);
             return false;
         } else {
-            System.out.println(shaker + " beat: " + shakerCard.getSymbol() + "\tHand:" + shaker.getHand());
+            Logger.log(shaker + " beat: " + shakerCard.getSymbol() + "\tHand:" + shaker.getHand());
             cardsInAction.add(shakerCard);
             return true;
         }
@@ -199,11 +200,11 @@ public class DumbGame implements Game {
     }
 
     private void printGameOverInfo() {
-        System.out.println("Game Over!");
+        Logger.log("Game Over!");
         if (looser == null)
-            System.out.println("Game Draw!");
+            Logger.log("Game Draw!");
         else
-            System.out.println("Looser: " + looser + " " + looser.getHand());
+            Logger.log("Looser: " + looser + " " + looser.getHand());
     }
 
     public DumbPlayer getLastLooser() {

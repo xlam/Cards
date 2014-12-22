@@ -1,11 +1,11 @@
 package cards.dumbgame;
 
+import cards.Logger;
 import cards.common.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,11 +36,11 @@ public class HumanDumbPlayer extends DumbPlayer {
             return null;
         Card c;
         do {
-            System.out.println("Your hand is" + hand);
-            System.out.println("Cards in action: " + cardsInAction);
+            Logger.log("Your hand is" + hand);
+            Logger.log("Cards in action: " + cardsInAction);
             System.out.print("Input card to move: ");
             c = getInputCardMatched(validCards);
-            System.out.println("Card selected to move: " + c);
+            Logger.log("Card selected to move: " + c);
         }
         while (cardsInAction.isEmpty() && c == null);
         if (c != null)
@@ -50,7 +50,7 @@ public class HumanDumbPlayer extends DumbPlayer {
 
     @Override
     public Card beat(Card card, Suit trump) {
-        System.out.println("Your hand is" + hand);
+        Logger.log("Your hand is" + hand);
         System.out.print("Input card to beat " + card.getSymbol() + ": ");
         String input = readInput();
         Card c = getCardMatchedInput(input); // TODO do card verification
