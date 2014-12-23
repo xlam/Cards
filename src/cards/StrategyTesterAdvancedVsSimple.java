@@ -5,24 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class StrategyTesterManyPlayers {
+public class StrategyTesterAdvancedVsSimple {
 
     public static void main(String[] args) {
         System.out.println("Cards v" + Version.getVersion());
-        Logger.enable(true);
+
         HashMap<DumbPlayer, Integer> players = new HashMap<>();
 
-        players.put(new AIDumbPlayer("Vasya", new SimpleStrategy()), 0);
-        players.put(new AIDumbPlayer("Jenya", new SimpleStrategy()), 0);
         players.put(new AIDumbPlayer("Petya", new AdvancedStrategy()), 0);
-        players.put(new AIDumbPlayer("Gosha", new MemoryStrategy()), 0);
+        players.put(new AIDumbPlayer("Vasya", new SimpleStrategy()), 0);
 
         DumbGame game = new DumbGame();
         Supervisor supervisor = Supervisor.getInstance();
         supervisor.setGame(game);
 
-        Set<Map.Entry<DumbPlayer, Integer>> playersSet = players.entrySet();
-        for (Map.Entry<DumbPlayer, Integer> entry: playersSet)
+        for (Map.Entry<DumbPlayer, Integer> entry: players.entrySet())
             game.addPlayer(entry.getKey());
 
         for (int i = 0; i < 100; i++) {
@@ -33,7 +30,7 @@ public class StrategyTesterManyPlayers {
             game.reset();
         }
 
-        for (Map.Entry<DumbPlayer, Integer> entry: playersSet) {
+        for (Map.Entry<DumbPlayer, Integer> entry: players.entrySet()) {
             System.out.print(entry.getKey() + " looses: " + entry.getValue());
             System.out.println(" (" + entry.getKey().getStrategy() + ")");
         }

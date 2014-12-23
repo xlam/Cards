@@ -71,7 +71,7 @@ public class Hand {
      * @param suit Suit to compare to
      * @return Sorted list of cards of Suit presented in hand
      */
-    public List getAllBySuit(Suit suit) {
+    public List getAllBySuitSorted(Suit suit) {
         List cards = new ArrayList();
         for (Object c : hand) {
             Card card = (Card) c;

@@ -30,16 +30,18 @@ public class MemoryStrategy extends AbstractStrategy {
 
     @Override
     public Card move(Hand hand, List<Card> cardsInAction, Suit trump) {
-        updateKnownCards("move", hand);
+        // TODO: looks like needs refactoring...
+        // huge perfomance impact here
+        //updateKnownCards("move", hand);
         DumbHand dumbHand = (DumbHand) hand;
-        if (dumbHand.isEmpty()) return null;
+        if (hand.isEmpty())
+            return null;
         Card moveCard = null;
         if (cardsInAction.isEmpty()) {
-            moveCard = dumbHand.getLowest(trump);
+            moveCard = dumbHand.getLowestCard(trump);
         } else {
             for (Card card : cardsInAction) {
-                for (int i = 0; i < dumbHand.size(); i++) {
-                    Card c = (Card) dumbHand.getCard(i);
+                for (Card c: dumbHand.toList()) {
                     if (c.getRank().equals(card.getRank())
                             && !(c.getSuit().equals(trump))
                             && c.getRank().compareTo(Rank.JACK) < 0) moveCard = c;
@@ -54,31 +56,23 @@ public class MemoryStrategy extends AbstractStrategy {
 
     @Override
     public Card beat(Card card, Hand hand, Suit trump) {
-        updateKnownCards("beat", hand);
-        DumbHand dumbHand = (DumbHand) hand;
-        Card beatCard = null;
-
-        List<Card> cards = dumbHand.getAllBySuit(card.getSuit());
-        if (!cards.isEmpty()) {
-            for (Card c : cards) {
-                if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
-            }
-        } else {
-            cards = dumbHand.getAllBySuit(trump);
-            if (!cards.isEmpty()) {
-                if (card.getSuit().equals(trump)) {
-                    for (Card c : cards) {
-                        if (c.getRank().compareTo(card.getRank()) > 0) beatCard = c;
-                    }
-                } else {
-                    beatCard = cards.get(0);
-                }
-            }
-        }
+        // huge perfomance impact here
+        //updateKnownCards("beat", hand);
+        Card beatCard = findBeatCardOfSameSuit(card, hand);
+        if (beatCard == null && card.suitIsNot(trump))
+            beatCard = ((DumbHand)hand).getLowestTrump(trump);
         lastCardsInAction.clear();
         lastCardsInAction = getSupervisor().getCardsInAction();
         lastAction = "beat";
         return beatCard;
+    }
+
+    private Card findBeatCardOfSameSuit(Card card, Hand hand) {
+        List<Card> cards = hand.getAllBySuitSorted(card.getSuit());
+        for (Card c : cards)
+            if (c.getRank().compareTo(card.getRank()) > 0)
+                return c;
+        return null;
     }
 
     protected void updateKnownCards(String action, Hand hand) {

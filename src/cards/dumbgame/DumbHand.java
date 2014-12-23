@@ -34,43 +34,41 @@ public class DumbHand extends Hand {
      * @param trumpSuit Suit of trump
      * @return Card if one is found, null otherwise
      */
-    public Card getLowest(Suit trumpSuit) {
-        Rank.setAceHigh();
-        Card.setSortRankFirst();
-        Collections.sort(hand);
-        if (allSuit(trumpSuit)) return (Card) hand.get(0);
-        for (Object c : hand) {
-            Card card = (Card) c;
-            if (!(card.getSuit().equals(trumpSuit))) return card;
+    public Card getLowestCard(Suit trumpSuit) {
+        if (hand.isEmpty())
+            return null;
+        Card card = (Card) hand.get(0);
+        DumbService s = new DumbService();
+        for (Object o : hand) {
+            Card c = (Card) o;
+            if (s.getValueOf(c, trumpSuit) < s.getValueOf(card, trumpSuit))
+                card = c;
         }
-        return null;
+        return card;
     }
 
     public Card getHighestCard(Suit trumpSuit) {
-        Rank.setAceHigh();
-        List cards = getTrumps(trumpSuit);
+        if (hand.isEmpty())
+            return null;
+        Card card = (Card) hand.get(0);
+        DumbService s = new DumbService();
+        for (Object o : hand) {
+            Card c = (Card) o;
+            if (s.getValueOf(c, trumpSuit) > s.getValueOf(card, trumpSuit))
+                card = c;
+        }
+        return card;
+    }
+
+    public Card getLowestTrump(Suit trump) {
+        List<Card> cards = getAllBySuitSorted(trump);
         if (cards.isEmpty())
-            cards = hand;
-        Card result = (Card) cards.get(0);
-        for (Object o: cards) {
-            Card c = (Card) o;
-            if (c.getRank().compareTo(result.getRank()) > 0)
-                result = c;
-        }
-        return result;
+            return null;
+        Rank.setAceHigh();
+        Collections.sort(cards);
+        return cards.get(0);
     }
 
-    protected List getTrumps(Suit trump) {
-        ArrayList<Card> trumps = new ArrayList<>();
-        for (Object o: hand) {
-            Card c = (Card) o;
-            if (c.getSuit().compareTo(trump) == 0)
-                trumps.add(c);
-        }
-        return trumps;
-    }
-
-    // TODO needs refactoring
     public int compareTo(DumbHand hand, Suit trump) {
         if (this.hand.isEmpty() && hand.isEmpty())
             return 0;
@@ -86,6 +84,7 @@ public class DumbHand extends Hand {
             suit2.equals(trump) && !(suit1.equals(trump))) {
                 return suit1.equals(trump) ? 1 : -1;
         }
+        Rank.setAceHigh();
         return highestCardHand1.getRank().compareTo(highestCardHand2.getRank());
     }
 

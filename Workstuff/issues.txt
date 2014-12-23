@@ -1,0 +1,35 @@
+2014-12-16 20:53
+
+...
+Round begins!
+Vasya move: 7d(Seven of Diamonds) Hand: 8s Jd Qd 8c Qc 8d 9s 7h Kh Ks
+Jenya beat: Jc(Jack of Clubs) Hand: Ac Kc Ah
+Vasya move: Jd(Jack of Diamonds) Hand: 8s Qd 8c Qc 8d 9s 7h Kh Ks
+Jenya beat: Kc(King of Clubs) Hand: Ac Ah
+Vasya move: Ks(King of Spades) Hand: 8s Qd 8c Qc 8d 9s 7h Kh
+Jenya beat: Ac(Ace of Clubs) Hand: Ah
+Vasya move: Kh(King of Hearts) Hand: 8s Qd 8c Qc 8d 9s 7h
+Jenya beat: Ah(Ace of Hearts) Hand:
+Vasya move: 7h(Seven of Hearts) Hand: 8s Qd 8c Qc 8d 9s
+Jenya take: 7h(Seven of Hearts) Hand:                       <-------
+Round end! Cards left in deck: 0 trump: null
+...
+
+Jenya must not take because round was already finished when Jenya beat
+Kh with Ah. Ah was the last card in Janya's hand so round ends at this point.
+
+
+2014-12-19
+
+...
+AS: hand [ Jh Qc 10s Jc 8h] value: 9.0
+AS: valid cards to move: [Jack of Hearts, Queen of Clubs, Ten of Spades, Jack of Clubs, Eight of Hearts]
+AS: next card value(random): 1.0
+AS: value without Jack of Hearts: 9.95  <-- wrong! must be 8.0
+AS: value without Queen of Clubs: 7.45
+AS: value without Ten of Spades: 10.2
+AS: value without Jack of Clubs: 7.7
+AS: value without Eight of Hearts: 10.7
+Petya move: 8h	Hand: Jh Qc 10s Jc
+...
+
