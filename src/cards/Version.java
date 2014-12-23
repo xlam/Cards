@@ -12,11 +12,13 @@ public class Version {
     private static final String VERSION_STAGE = "dev";
 
     public static final String getVersion() {
-        return
+        String version =
             VERSION_MAJOR + "." +
             VERSION_MINOR + "." +
-            VERSION_BUILD + "-" +
-            VERSION_STAGE;
+            VERSION_BUILD;
+        if (!VERSION_STAGE.isEmpty())
+            version += "-" + VERSION_STAGE;
+        return version;
     }
 
 }
