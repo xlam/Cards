@@ -31,7 +31,8 @@ public class MemoryStrategy extends AbstractStrategy {
     @Override
     public Card move(Hand hand, List<Card> cardsInAction, Suit trump) {
         // TODO: looks like needs refactoring...
-        updateKnownCards("move", hand);
+        // huge perfomance impact here
+        //updateKnownCards("move", hand);
         DumbHand dumbHand = (DumbHand) hand;
         if (hand.isEmpty())
             return null;
@@ -55,7 +56,8 @@ public class MemoryStrategy extends AbstractStrategy {
 
     @Override
     public Card beat(Card card, Hand hand, Suit trump) {
-        updateKnownCards("beat", hand);
+        // huge perfomance impact here
+        //updateKnownCards("beat", hand);
         Card beatCard = findBeatCardOfSameSuit(card, hand);
         if (beatCard == null && card.suitIsNot(trump))
             beatCard = ((DumbHand)hand).getLowestTrump(trump);
