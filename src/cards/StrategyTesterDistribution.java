@@ -59,5 +59,22 @@ public class StrategyTesterDistribution {
                 System.out.print(";" + dist[j][i]);
             System.out.println("");
         }
+
+        for (int i = 0; i < playersCount; i++) {
+            HashMap<Integer, Integer> d = new HashMap();
+            for (int j = 0; j < iterations; j++) {
+                if (d.containsKey(dist[j][i])) {
+                    d.put(dist[j][i], d.get(dist[j][i]) + 1);
+                }
+                else {
+                    d.put(dist[j][i], 1);
+                }
+            }
+            System.out.println("Distrubution for player " + i + ":");
+            for (Map.Entry<Integer, Integer> entry: d.entrySet()) {
+                System.out.println(entry.getKey() + ";" + entry.getValue());
+            }
+        }
     }
+
 }
